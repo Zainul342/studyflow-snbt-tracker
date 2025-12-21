@@ -1,5 +1,5 @@
-import OsmoHero from "@/components/landing/osmo-hero";
+import StudyFlowLanding from "@/components/landing/studyflow-landing";
 
 export default function Home() {
-  return <OsmoHero />;
+  return <StudyFlowLanding />;
 }
