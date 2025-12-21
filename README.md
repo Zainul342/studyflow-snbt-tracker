@@ -1,4 +1,23 @@
+# 🎓 Study Flow Workspace
+
+Selamat datang di Sentral Kontrol **Study Flow**! Folder ini sekarang berisi semua komponen projek kamu:
+
+- 📂 `/src`: Kode utama aplikasi Next.js.
+- 📂 `/plan`: Dokumen strategi dan rencana belajar harian.
+- 📂 `/spreadsheet`: Data mentah, kurikulum, dan perhitungan skor.
+- 📄 `WORKSPACE_DASHBOARD.html`: Tampilan visual untuk memantau projek.
+
+---
+
+## 🚀 Perintah Cepat
+- **Jalankan Aplikasi**: `npm run dev`
+- **Lihat Rencana**: Buka folder `/plan`
+
+---
+
+# Original Next.js README
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
 
 ## Getting Started
 
