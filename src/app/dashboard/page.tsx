@@ -1,7 +1,7 @@
 "use client";
 
 import { ProgressOverview } from "@/components/dashboard/progress-overview";
-import { BookOpen, Trophy } from "lucide-react";
+import { BookOpen, Trophy, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
