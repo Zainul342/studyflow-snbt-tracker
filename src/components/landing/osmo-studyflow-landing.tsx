@@ -121,43 +121,39 @@ function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (op
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-4"
+            className="fixed top-4 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
         >
-            <div className="glass max-w-7xl mx-auto rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between">
+            <div className="pointer-events-auto glass-dark w-[90vw] sm:w-[500px] rounded-sm px-4 py-2 flex items-center justify-between border border-white/10 bg-[#0A0A0A]/80 backdrop-blur-xl shadow-2xl shadow-black/50">
+                {/* Menu Trigger */}
+                <button
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group"
+                >
+                    <Menu className="w-4 h-4 group-hover:text-[#BFFF0B] transition-colors" />
+                    <span className="text-xs font-bold uppercase tracking-wider hidden sm:inline">Menu</span>
+                </button>
+
                 {/* Logo */}
-                <div className="flex items-center gap-3">
-                    <button
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-                    >
-                        <Menu className="w-5 h-5" />
-                        <span className="text-sm font-medium hidden sm:inline">Menu</span>
-                    </button>
-
-                    <div className="w-px h-6 bg-white/10 hidden sm:block" />
-
-                    <Link href="/" className="flex items-center gap-2">
-                        <div className="text-2xl font-bold tracking-tight">
-                            STUDYFLOW
-                        </div>
-                    </Link>
-                </div>
+                <Link href="/" className="flex items-center gap-2 group absolute left-1/2 -translate-x-1/2">
+                    <div className="w-6 h-6 rounded-sm bg-gradient-to-br from-[#6B4FFF] to-[#5a3ee0] flex items-center justify-center">
+                        <BookOpen size={12} className="text-white" />
+                    </div>
+                    <div className="text-sm font-black tracking-tight text-white group-hover:text-[#BFFF0B] transition-colors">
+                        STUDYFLOW
+                    </div>
+                </Link>
 
                 {/* Actions */}
-                <div className="flex items-center gap-2 sm:gap-3">
-                    <Link href="/login">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-white/60 hover:text-white hover:bg-white/5 rounded-xl"
-                        >
+                <div className="flex items-center gap-3">
+                    <Link href="/login" className="hidden sm:block">
+                        <span className="text-xs font-bold text-zinc-400 hover:text-white transition-colors cursor-pointer">
                             Login
-                        </Button>
+                        </span>
                     </Link>
                     <Link href="/onboarding">
                         <Button
                             size="sm"
-                            className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-xl"
+                            className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black text-xs font-black rounded-sm h-8 px-5"
                         >
                             Join
                         </Button>
@@ -171,14 +167,16 @@ function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (op
 // Marquee Banner
 function MarqueeBanner() {
     return (
-        <div className="fixed top-[72px] left-0 right-0 z-40 bg-[#BFFF0B] py-2 overflow-hidden">
-            <div className="flex whitespace-nowrap animate-[marquee_20s_linear_infinite]">
-                {[...Array(10)].map((_, i) => (
-                    <div key={i} className="flex items-center gap-4 px-4">
-                        <span className="text-black font-bold text-sm">EXPLORE THE STUDYFLOW SHOWCASE</span>
-                        <Star className="w-4 h-4 text-black fill-black" />
-                    </div>
-                ))}
+        <div className="fixed top-[70px] left-0 right-0 z-40 pointer-events-none flex justify-center">
+            <div className="bg-[#BFFF0B] py-1.5 px-4 rounded-sm overflow-hidden flex items-center justify-center gap-4 w-[90vw] sm:w-[500px] shadow-xl shadow-black/20 border border-[#BFFF0B]/50">
+                <div className="flex whitespace-nowrap animate-[marquee_20s_linear_infinite]">
+                    {[...Array(10)].map((_, i) => (
+                        <div key={i} className="flex items-center gap-4 px-4 h-full">
+                            <span className="text-black font-bold text-[10px] tracking-wider leading-none">EXPLORE THE STUDYFLOW SHOWCASE</span>
+                            <Star className="w-3 h-3 text-black fill-black" />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -190,7 +188,7 @@ function HeroSection() {
         <section className="relative min-h-screen flex flex-col items-center justify-center pt-40 pb-20 px-4 overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-sm blur-[120px] pointer-events-none" />
 
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -203,11 +201,11 @@ function HeroSection() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
-                    className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-full px-4 py-2 mb-8"
+                    className="inline-flex items-center gap-2 bg-purple-500/10 border border-purple-500/20 rounded-sm px-4 py-2 mb-8"
                 >
                     <div className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#BFFF0B] opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#BFFF0B]"></span>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-sm bg-[#BFFF0B] opacity-75"></span>
+                        <span className="relative inline-flex rounded-sm h-2 w-2 bg-[#BFFF0B]"></span>
                     </div>
                     <span className="text-[#BFFF0B] text-sm font-bold">SNBT 2026 • 106 HARI LAGI</span>
                 </motion.div>
@@ -251,7 +249,7 @@ function ShowcaseSection() {
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1, duration: 0.6 }}
                             whileHover={{ scale: 1.05, rotateY: 5 }}
-                            className="group relative aspect-[4/5] rounded-3xl overflow-hidden cursor-pointer"
+                            className="group relative aspect-[4/5] rounded-sm overflow-hidden cursor-pointer"
                             style={{ transformStyle: "preserve-3d" }}
                         >
                             <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-80`} />
@@ -295,12 +293,12 @@ function VideoSection() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="relative aspect-video rounded-3xl overflow-hidden glass-light"
+                    className="relative aspect-video rounded-sm overflow-hidden glass-light"
                 >
                     <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900/50 to-blue-900/50">
                         <button
                             onClick={() => setIsPlaying(!isPlaying)}
-                            className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:scale-110 transition-transform"
+                            className="w-20 h-20 rounded-sm bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:scale-110 transition-transform"
                         >
                             <Play className="w-8 h-8 text-white fill-white ml-1" />
                         </button>
@@ -317,7 +315,7 @@ function VideoSection() {
                         {[1, 2, 3, 4].map((i) => (
                             <div
                                 key={i}
-                                className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-[#0A0A0A]"
+                                className="w-12 h-12 rounded-sm bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-[#0A0A0A]"
                             />
                         ))}
                     </div>
@@ -344,7 +342,7 @@ function CreatorsSection() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-12 mb-8">
                         <div className="text-center">
-                            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 mx-auto mb-4" />
+                            <div className="w-32 h-32 rounded-sm bg-gradient-to-br from-purple-500 to-pink-500 mx-auto mb-4" />
                             <h3 className="text-3xl font-black">Zain</h3>
                             <p className="text-white/60">Ardiansyah</p>
                         </div>
@@ -395,16 +393,16 @@ function UpdatesSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="glass-light rounded-3xl p-6 hover:border-white/20 transition-all cursor-pointer group"
+                            className="glass-light rounded-sm p-6 hover:border-white/20 transition-all cursor-pointer group"
                         >
                             <div className="flex items-center gap-2 mb-4">
-                                <span className="text-xs bg-[#BFFF0B]/20 text-[#BFFF0B] px-3 py-1 rounded-full font-bold">
+                                <span className="text-xs bg-[#BFFF0B]/20 text-[#BFFF0B] px-3 py-1 rounded-sm font-bold">
                                     {update.tag}
                                 </span>
                                 <span className="text-white/40 text-xs">{update.time}</span>
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-4">{update.title}</h3>
-                            <div className={`aspect-video rounded-2xl ${update.color} opacity-50 group-hover:opacity-70 transition-opacity`} />
+                            <div className={`aspect-video rounded-sm ${update.color} opacity-50 group-hover:opacity-70 transition-opacity`} />
                         </motion.div>
                     ))}
                 </div>
@@ -433,7 +431,7 @@ function PlatformSection() {
                             analytics, and study techniques. Track, analyze, and dominate.
                         </p>
                         <Link href="/dashboard">
-                            <Button className="bg-purple-500 hover:bg-purple-600 text-white rounded-xl px-6 py-6 font-bold group">
+                            <Button className="bg-purple-500 hover:bg-purple-600 text-white rounded-sm px-6 py-6 font-bold group">
                                 About the Dashboard
                                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </Button>
@@ -444,7 +442,7 @@ function PlatformSection() {
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="relative aspect-[4/3] rounded-3xl overflow-hidden glass-light"
+                        className="relative aspect-[4/3] rounded-sm overflow-hidden glass-light"
                     >
                         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 to-blue-900/50" />
                     </motion.div>
@@ -489,10 +487,10 @@ function ProductsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="glass-light rounded-3xl p-8 hover:border-white/20 transition-all group cursor-pointer"
+                            className="glass-light rounded-sm p-8 hover:border-white/20 transition-all group cursor-pointer"
                         >
-                            <div className={`aspect-video rounded-2xl bg-gradient-to-br ${product.color} mb-6 opacity-50 group-hover:opacity-70 transition-opacity`} />
-                            <span className="text-xs bg-[#BFFF0B]/20 text-[#BFFF0B] px-3 py-1 rounded-full font-bold">
+                            <div className={`aspect-video rounded-sm bg-gradient-to-br ${product.color} mb-6 opacity-50 group-hover:opacity-70 transition-opacity`} />
+                            <span className="text-xs bg-[#BFFF0B]/20 text-[#BFFF0B] px-3 py-1 rounded-sm font-bold">
                                 {product.status}
                             </span>
                             <h3 className="text-2xl font-bold text-white mt-4">{product.name}</h3>
@@ -598,10 +596,10 @@ function TestimonialsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="glass-light rounded-3xl p-8"
+                            className="glass-light rounded-sm p-8"
                         >
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
+                                <div className="w-16 h-16 rounded-sm bg-gradient-to-br from-purple-500 to-pink-500" />
                                 <div>
                                     <h4 className="font-bold text-white">{testimonial.name}</h4>
                                     <p className="text-white/60 text-sm">{testimonial.role}</p>
@@ -639,9 +637,9 @@ function PricingSection() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="glass-light rounded-3xl p-12 max-w-md mx-auto"
+                    className="glass-light rounded-sm p-12 max-w-md mx-auto"
                 >
-                    <span className="text-xs bg-[#BFFF0B]/20 text-[#BFFF0B] px-3 py-1 rounded-full font-bold">
+                    <span className="text-xs bg-[#BFFF0B]/20 text-[#BFFF0B] px-3 py-1 rounded-sm font-bold">
                         BEST VALUE
                     </span>
                     <h3 className="text-4xl font-black text-white mt-6 mb-2">Free Forever</h3>
@@ -649,7 +647,7 @@ function PricingSection() {
                         All features included. No credit card required.
                     </p>
                     <Link href="/onboarding">
-                        <Button className="w-full bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-xl py-6">
+                        <Button className="w-full bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-sm py-6">
                             Get Started
                         </Button>
                     </Link>
@@ -693,9 +691,9 @@ function ShowcaseGallery() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="glass-light rounded-3xl p-6 hover:border-white/20 transition-all group cursor-pointer"
+                            className="glass-light rounded-sm p-6 hover:border-white/20 transition-all group cursor-pointer"
                         >
-                            <div className="aspect-video rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 opacity-50 group-hover:opacity-70 transition-opacity mb-4" />
+                            <div className="aspect-video rounded-sm bg-gradient-to-br from-purple-500 to-pink-500 opacity-50 group-hover:opacity-70 transition-opacity mb-4" />
                             <h3 className="text-xl font-bold text-white mb-2">Success Story #{i}</h3>
                             <p className="text-white/60 text-sm">Student achieved their dream university</p>
                         </motion.div>
@@ -721,7 +719,7 @@ function FinalCTA() {
                             {[1, 2, 3, 4].map((i) => (
                                 <div
                                     key={i}
-                                    className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-[#0A0A0A]"
+                                    className="w-12 h-12 rounded-sm bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-[#0A0A0A]"
                                 />
                             ))}
                         </div>
@@ -740,12 +738,12 @@ function FinalCTA() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link href="/onboarding">
-                            <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-xl px-8 py-6 text-lg">
+                            <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-sm px-8 py-6 text-lg">
                                 Become a member
                             </Button>
                         </Link>
                         <Link href="/faq">
-                            <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 rounded-xl px-8 py-6 text-lg">
+                            <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 rounded-sm px-8 py-6 text-lg">
                                 FAQs
                             </Button>
                         </Link>
@@ -790,9 +788,9 @@ function Footer() {
                             <input
                                 type="email"
                                 placeholder="your@email.com"
-                                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white placeholder:text-white/40 focus:outline-none focus:border-purple-500"
+                                className="flex-1 bg-white/5 border border-white/10 rounded-sm px-4 py-2 text-white placeholder:text-white/40 focus:outline-none focus:border-purple-500"
                             />
-                            <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-xl">
+                            <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-sm">
                                 →
                             </Button>
                         </div>
