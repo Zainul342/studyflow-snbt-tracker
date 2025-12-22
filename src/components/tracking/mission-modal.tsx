@@ -1,22 +1,134 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Youtube, FileText, MessageCircle, Globe, CheckCircle2, Calendar } from "lucide-react";
+import { X, Youtube, FileText, MessageCircle, Globe, CheckCircle2, Calendar, ExternalLink, ChevronRight, Check } from "lucide-react";
 import { DailyMission, Resource } from "@/lib/data/resource-db";
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import { mockDB } from "@/lib/data/mock-db";
 
 interface MissionModalProps {
     mission: DailyMission | null;
     isOpen: boolean;
     onClose: () => void;
+    initialResource?: Resource | null;
 }
 
-export function MissionModal({ mission, isOpen, onClose }: MissionModalProps) {
+export function MissionModal({ mission, isOpen, onClose, initialResource }: MissionModalProps) {
+    const [activeResource, setActiveResource] = useState<Resource | null>(null);
+    const [isCompleted, setIsCompleted] = useState(false);
+
+    useEffect(() => {
+        if (mission) {
+            const progress = mockDB.getMissionProgress();
+            setIsCompleted(!!progress[mission.day]);
+
+            if (mission.resources.length > 0) {
+                if (initialResource) {
+                    setActiveResource(initialResource);
+                } else {
+                    const firstVideo = mission.resources.find(r => r.type === 'video');
+                    setActiveResource(firstVideo || mission.resources[0]);
+                }
+            } else {
+                setActiveResource(null);
+            }
+        }
+    }, [mission, initialResource]);
+
+    const handleComplete = () => {
+        if (!mission) return;
+        const newState = !isCompleted;
+        mockDB.updateMissionProgress(mission.day, newState);
+        setIsCompleted(newState);
+    };
+
     if (!mission) return null;
 
-    // Helper to get first video for embed
-    const firstVideo = mission.resources.find(r => r.type === 'video');
-    const embedUrl = firstVideo ? firstVideo.url.replace("youtu.be/", "www.youtube.com/embed/").replace("watch?v=", "embed/") : null;
+    const renderPlayer = () => {
+        if (!activeResource) return (
+            <div className="text-center p-8">
+                <div className="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center mx-auto mb-4">
+                    <FileText className="w-8 h-8 text-zinc-500" />
+                </div>
+                <h3 className="text-xl font-bold text-zinc-300">Pilih materi untuk memulai</h3>
+            </div>
+        );
+
+        let embedUrl = activeResource.url;
+
+        // Platform specific embed logic
+        if (activeResource.platform === 'youtube') {
+            embedUrl = activeResource.url.replace("youtu.be/", "www.youtube.com/embed/").replace("watch?v=", "embed/");
+            return (
+                <iframe
+                    src={embedUrl}
+                    title={activeResource.title}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                />
+            );
+        }
+
+        if (activeResource.platform === 'drive') {
+            // Convert /view or /edit to /preview for embedding
+            embedUrl = activeResource.url.replace(/\/view(\?.*)?$/, "/preview").replace(/\/edit(\?.*)?$/, "/preview");
+            return (
+                <iframe
+                    src={embedUrl}
+                    className="w-full h-full bg-white"
+                    allow="autoplay"
+                />
+            );
+        }
+
+        if (activeResource.platform === 'twitter') {
+            // Twitter threads are hard to iframe directly due to CSP. 
+            // We'll show a "Focus View" placeholder with a button to open in new tab if iframe fails,
+            // but first let's try a standard intent or embed.
+            return (
+                <div className="flex flex-col items-center justify-center h-full p-12 text-center">
+                    <div className="w-20 h-20 rounded-full bg-sky-500/10 flex items-center justify-center mb-6">
+                        <MessageCircle className="w-10 h-10 text-sky-500" />
+                    </div>
+                    <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter italic">Twitter / X Thread</h3>
+                    <p className="text-zinc-400 max-w-sm mb-8">
+                        Thread Twitter berisi rangkuman materi dan latihan soal interaktif dari komunitas.
+                    </p>
+                    <a
+                        href={activeResource.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-8 py-4 rounded-full bg-white text-black font-black hover:bg-sky-400 transition-all group"
+                    >
+                        BACA THREAD SEKARANG
+                        <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                </div>
+            );
+        }
+
+        // Default or Web
+        return (
+            <div className="flex flex-col items-center justify-center h-full p-12 text-center bg-zinc-900/20">
+                <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center mb-6">
+                    <Globe className="w-10 h-10 text-zinc-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white mb-2">{activeResource.title}</h2>
+                <p className="text-zinc-500 mb-8 max-w-sm">Materi ini tersedia di platform eksternal resmi.</p>
+                <a
+                    href={activeResource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-8 py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold transition-all"
+                >
+                    BUKA DI TAB BARU
+                    <ExternalLink className="w-4 h-4" />
+                </a>
+            </div>
+        );
+    };
 
     return (
         <AnimatePresence>
@@ -28,137 +140,144 @@ export function MissionModal({ mission, isOpen, onClose }: MissionModalProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                        className="absolute inset-0 bg-black/90 backdrop-blur-md"
                     />
 
                     {/* Modal Content */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        initial={{ opacity: 0, scale: 0.98, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="relative w-full max-w-5xl h-[85vh] bg-[#0A0A0A] border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row"
+                        exit={{ opacity: 0, scale: 0.98, y: 10 }}
+                        className="relative w-full max-w-[95vw] h-[90vh] bg-[#0A0A0A] border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)] flex flex-col md:flex-row"
                     >
                         {/* Close Button */}
                         <button
                             onClick={onClose}
-                            className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
+                            className="absolute top-6 right-6 z-[60] p-2.5 rounded-full bg-white/5 hover:bg-white/20 text-zinc-400 hover:text-white transition-all backdrop-blur-xl border border-white/10 shadow-xl"
                         >
                             <X className="w-5 h-5" />
                         </button>
 
-                        {/* LEFT COLUMN: Main Content (Video/Study) */}
-                        <div className="flex-1 flex flex-col border-r border-zinc-800 bg-black">
-                            <div className="flex-1 relative flex items-center justify-center bg-zinc-900/50">
-                                {embedUrl ? (
-                                    <iframe
-                                        src={embedUrl}
-                                        title={firstVideo?.title}
-                                        className="w-full h-full absolute inset-0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    />
-                                ) : (
-                                    <div className="text-center p-8">
-                                        <div className="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center mx-auto mb-4">
-                                            <FileText className="w-8 h-8 text-zinc-500" />
-                                        </div>
-                                        <h3 className="text-xl font-bold text-zinc-300">Tidak ada video utama</h3>
-                                        <p className="text-zinc-500 mt-2">Silakan pelajari materi dari resource yang tersedia.</p>
-                                    </div>
-                                )}
+                        {/* LEFT COLUMN: Main Content (Player) */}
+                        <div className="flex-1 flex flex-col border-r border-white/5 bg-black relative min-h-0">
+                            <div className="flex-1 relative bg-[#050505] overflow-hidden">
+                                {renderPlayer()}
                             </div>
 
-                            {/* Player Controls / Meta */}
-                            <div className="h-16 border-t border-zinc-800 flex items-center justify-between px-6 bg-[#0A0A0A]">
-                                <div className="flex items-center gap-3">
-                                    <div className="h-8 w-8 rounded bg-[#BFFF0B]/10 flex items-center justify-center text-[#BFFF0B] font-bold text-xs">
+                            {/* Mission Info Bar */}
+                            <div className="h-20 border-t border-white/5 flex items-center justify-between px-8 bg-[#0A0A0A]/80 backdrop-blur-xl">
+                                <div className="flex items-center gap-4">
+                                    <div className="h-10 w-10 rounded-xl bg-[#BFFF0B] flex items-center justify-center text-black font-black text-sm shadow-[0_0_20px_rgba(191,255,11,0.2)]">
                                         D{mission.day}
                                     </div>
-                                    <span className="text-sm font-semibold text-white truncate max-w-[300px]">
-                                        {mission.topic}
-                                    </span>
+                                    <div>
+                                        <h3 className="text-sm font-bold text-white tracking-tight">
+                                            {mission.topic}
+                                        </h3>
+                                        <p className="text-[10px] text-zinc-500 font-medium uppercase tracking-widest mt-0.5">
+                                            {activeResource?.title || "Misi Sedang Berjalan"}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    {/* Placeholder for future timer/controls */}
-                                </div>
+
+                                <button
+                                    onClick={handleComplete}
+                                    className={cn(
+                                        "hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full font-black text-xs transition-all shadow-lg hover:scale-105 active:scale-95",
+                                        isCompleted
+                                            ? "bg-zinc-800 text-[#BFFF0B] border border-[#BFFF0B]/20"
+                                            : "bg-[#BFFF0B] text-black"
+                                    )}
+                                >
+                                    {isCompleted ? <Check className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />}
+                                    {isCompleted ? "MISI SELESAI" : "SELESAIKAN MISI"}
+                                </button>
                             </div>
                         </div>
 
-                        {/* RIGHT COLUMN: Resources & Checklist */}
-                        <div className="w-full md:w-[350px] flex flex-col bg-[#0F0F0F]">
+                        {/* RIGHT COLUMN: Resources & Timeline */}
+                        <div className="w-full md:w-[400px] flex flex-col bg-[#0A0A0A] min-h-0">
 
                             {/* Header */}
-                            <div className="p-6 border-b border-zinc-800">
-                                <h3 className="text-lg font-black text-white tracking-tight flex items-center gap-2">
-                                    <CheckCircle2 className="w-5 h-5 text-[#BFFF0B]" />
-                                    MISI HARIAN
-                                </h3>
-                                <p className="text-xs text-zinc-500 mt-1 flex items-center gap-1">
-                                    <Calendar className="w-3 h-3" />
-                                    {mission.date}
-                                </p>
+                            <div className="p-8 pb-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="text-xs font-black text-[#BFFF0B] tracking-[0.2em] uppercase">
+                                        Content Navigation
+                                    </h3>
+                                    <div className="flex items-center gap-1.5 text-[10px] text-zinc-500 font-mono">
+                                        <Calendar className="w-3 h-3" />
+                                        {mission.date}
+                                    </div>
+                                </div>
+                                <h1 className="text-2xl font-black text-white leading-tight">
+                                    {mission.topic}
+                                </h1>
                             </div>
 
                             {/* Scrollable Content */}
-                            <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                            <div className="flex-1 overflow-y-auto px-6 pb-8 space-y-8 scrollbar-hide">
 
                                 {/* Description */}
-                                <div className="bg-zinc-900/50 p-4 rounded-lg border border-zinc-800">
-                                    <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">Instruksi</h4>
-                                    <p className="text-sm text-zinc-300 leading-relaxed">
+                                <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/5">
+                                    <p className="text-sm text-zinc-400 leading-relaxed">
                                         {mission.description}
                                     </p>
                                 </div>
 
-                                {/* Resource List */}
-                                <div>
-                                    <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3 px-1">
-                                        Resources ({mission.resources.length})
-                                    </h4>
-                                    <div className="space-y-2">
-                                        {mission.resources.map((res) => (
-                                            <a
-                                                key={res.id}
-                                                href={res.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={cn(
-                                                    "flex items-center gap-3 p-3 rounded-lg border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/50 transition-all group",
-                                                    res.type === 'video' && embedUrl && res.url.includes(embedUrl.split('?')[0]) ? "bg-zinc-800 border-[#BFFF0B]/30" : "bg-transparent"
-                                                )}
-                                            >
-                                                <div className={cn(
-                                                    "w-8 h-8 rounded flex items-center justify-center shrink-0",
-                                                    res.type === 'video' && "bg-red-500/10 text-red-500",
-                                                    res.type === 'pdf' && "bg-blue-500/10 text-blue-500",
-                                                    res.type === 'thread' && "bg-sky-500/10 text-sky-500",
-                                                    res.type === 'web' && "bg-zinc-500/10 text-zinc-400",
-                                                )}>
-                                                    {res.type === 'video' && <Youtube className="w-4 h-4" />}
-                                                    {res.type === 'pdf' && <FileText className="w-4 h-4" />}
-                                                    {res.type === 'thread' && <MessageCircle className="w-4 h-4" />}
-                                                    {res.type === 'web' && <Globe className="w-4 h-4" />}
-                                                </div>
-                                                <div className="overflow-hidden text-left">
-                                                    <p className="text-xs font-medium text-zinc-200 group-hover:text-white truncate">
-                                                        {res.title}
-                                                    </p>
-                                                    <p className="text-[10px] text-zinc-500 uppercase">
-                                                        {res.platform}
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
+                                {/* Resource List - Split by Category */}
+                                <div className="space-y-8">
 
-                            {/* Footer Action */}
-                            <div className="p-4 border-t border-zinc-800 bg-[#0A0A0A]">
-                                <button onClick={() => alert("Mark as Complete (Logic Coming Soon)")} className="w-full py-2.5 rounded-lg bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold text-sm transition-colors flex items-center justify-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4" />
-                                    Selesai Misi Ini
-                                </button>
+                                    {/* Zona Belajar (Materi) */}
+                                    <div>
+                                        <div className="flex items-center justify-between mb-4 px-1">
+                                            <h4 className="text-[10px] font-black text-white/40 uppercase tracking-[0.1em]">
+                                                📚 Zona Belajar (Materi)
+                                            </h4>
+                                            <span className="text-[10px] text-white/20 font-mono">
+                                                {mission.resources.filter(r => r.category === 'materi').length} Items
+                                            </span>
+                                        </div>
+                                        <div className="space-y-3">
+                                            {mission.resources.filter(r => r.category === 'materi').map((res) => (
+                                                <ResourceItem
+                                                    key={res.id}
+                                                    res={res}
+                                                    isActive={activeResource?.id === res.id}
+                                                    onSelect={() => setActiveResource(res)}
+                                                />
+                                            ))}
+                                            {mission.resources.filter(r => r.category === 'materi').length === 0 && (
+                                                <p className="text-xs text-zinc-600 italic px-4 py-2 bg-white/5 rounded-xl">Tidak ada materi khusus hari ini.</p>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Zona Latihan (Latsol) */}
+                                    <div>
+                                        <div className="flex items-center justify-between mb-4 px-1">
+                                            <h4 className="text-[10px] font-black text-white/40 uppercase tracking-[0.1em]">
+                                                ✍️ Zona Latihan (Soal)
+                                            </h4>
+                                            <span className="text-[10px] text-white/20 font-mono">
+                                                {mission.resources.filter(r => r.category === 'latsol').length} Items
+                                            </span>
+                                        </div>
+                                        <div className="space-y-3">
+                                            {mission.resources.filter(r => r.category === 'latsol').map((res) => (
+                                                <ResourceItem
+                                                    key={res.id}
+                                                    res={res}
+                                                    isActive={activeResource?.id === res.id}
+                                                    onSelect={() => setActiveResource(res)}
+                                                />
+                                            ))}
+                                            {mission.resources.filter(r => r.category === 'latsol').length === 0 && (
+                                                <p className="text-xs text-zinc-600 italic px-4 py-2 bg-white/5 rounded-xl">Gunakan materi di atas untuk pemahaman.</p>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
 
                         </div>
@@ -166,5 +285,55 @@ export function MissionModal({ mission, isOpen, onClose }: MissionModalProps) {
                 </div>
             )}
         </AnimatePresence>
+    );
+}
+
+// Extracted Component for cleaner code
+function ResourceItem({ res, isActive, onSelect }: { res: Resource, isActive: boolean, onSelect: () => void }) {
+    return (
+        <button
+            onClick={onSelect}
+            className={cn(
+                "w-full flex items-center gap-4 p-4 rounded-2xl border transition-all duration-300 group relative overflow-hidden",
+                isActive
+                    ? "bg-[#BFFF0B] border-[#BFFF0B] text-black shadow-[0_10px_30px_rgba(191,255,11,0.2)]"
+                    : "bg-white/5 border-white/5 text-zinc-400 hover:border-white/10 hover:bg-white/10"
+            )}
+        >
+            <div className={cn(
+                "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                isActive
+                    ? "bg-black/10 text-black"
+                    : cn(
+                        "bg-zinc-900",
+                        res.type === 'video' && "text-red-500",
+                        res.type === 'pdf' && "text-blue-500",
+                        res.type === 'thread' && "text-sky-500",
+                        res.type === 'web' && "text-zinc-400",
+                    )
+            )}>
+                {res.type === 'video' && <Youtube className="w-5 h-5" />}
+                {res.type === 'pdf' && <FileText className="w-5 h-5" />}
+                {res.type === 'thread' && <MessageCircle className="w-5 h-5" />}
+                {res.type === 'web' && <Globe className="w-5 h-5" />}
+            </div>
+            <div className="overflow-hidden text-left flex-1">
+                <p className={cn(
+                    "text-xs font-black truncate leading-tight uppercase tracking-tight",
+                    isActive ? "text-black" : "text-zinc-200 group-hover:text-white"
+                )}>
+                    {res.title}
+                </p>
+                <p className={cn(
+                    "text-[9px] font-bold uppercase mt-1 tracking-widest",
+                    isActive ? "text-black/50" : "text-zinc-500"
+                )}>
+                    {res.platform}
+                </p>
+            </div>
+
+            {!isActive && <ChevronRight className="w-4 h-4 text-zinc-700 group-hover:text-zinc-400 transition-colors" />}
+            {isActive && <motion.div layoutId="activeResource" className="absolute left-0 w-1 h-6 bg-black rounded-r-full" />}
+        </button>
     );
 }

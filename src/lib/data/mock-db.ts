@@ -26,11 +26,29 @@ export type UserProfile = {
 const STORAGE_KEYS = {
     PROGRESS: "studyflow_progress",
     PROFILE: "studyflow_profile",
-    SETTINGS: "studyflow_settings"
+    SETTINGS: "studyflow_settings",
+    MISSIONS: "studyflow_missions"
 };
 
 // Mock Database Service
 export const mockDB = {
+    // === Mission Progress ===
+    getMissionProgress: (): Record<number, boolean> => {
+        if (typeof window === "undefined") return {};
+        const data = localStorage.getItem(STORAGE_KEYS.MISSIONS);
+        return data ? JSON.parse(data) : {};
+    },
+
+    updateMissionProgress: (day: number, completed: boolean): Record<number, boolean> => {
+        const progress = mockDB.getMissionProgress();
+        progress[day] = completed;
+        localStorage.setItem(STORAGE_KEYS.MISSIONS, JSON.stringify(progress));
+
+        if (typeof window !== "undefined") {
+            window.dispatchEvent(new CustomEvent("mission-updated", { detail: { day, completed } }));
+        }
+        return progress;
+    },
     // === Profile Methods ===
     getProfile: (): UserProfile | null => {
         if (typeof window === "undefined") return null;

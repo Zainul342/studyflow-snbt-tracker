@@ -37,22 +37,30 @@
 ## 🖼️ Phase 2: UI Pages - Dummy Data (Week 2)
 > Tujuan: Bangun semua halaman UI tanpa backend dulu (Lesson 3 & 4)
 
-- [ ] **Dashboard Page**
+- [x] **Dashboard Page**
   - [x] Progress overview cards
   - [x] Stats grid (dummy data)
   - [x] Today's agenda widget
   - [x] Navigation sidebar
 
-- [ ] **Tracking Page**
+- [x] **Tracking Page**
   - [x] Hierarchy tree: Subtes → Materi → Submateri
   - [x] Checkbox system (Belajar/Latsol/Review)
   - [x] Progress bar per section
   - [ ] **Unified Mission Dashboard** (Phase 2 Extension)
     - [x] **Data Engine**: Parse CSV to `resource-db.ts`
-    - [x] **Mission UI**: Agenda Harian Page created (Moved from Hierarchy)
-    - [x] **Focus Overlay**: Modal untuk "Deep Dive" learning (Youtube Embed, etc)
-    - [ ] **Smart Players**: Support Youtube, Drive PDF, Twitter rendering
-  - [ ] Menggunakan data dari `materi-structure.ts`
+    - [x] **Mission UI**: Agenda Harian Page (Timeline View)
+    - [x] **Focus Overlay**: Mission Modal (Youtube Embed, Resource List)
+    - [x] **Categorization**: 'Materi' vs 'Soal' badges & grouping
+    - [x] **Smart Players**: Support Youtube, Drive PDF, Twitter rendering (Fully Integrated)
+    - [x] **Persistence**: 'Mark as Complete' logic with localStorage
+    - [x] **Dynamic Context**: Automated 'Today' highlighting and progress checkmarks
+  - [x] Menggunakan data dari `materi-structure.ts`
+
+- [x] **UI/UX Polish (Agenda)**
+  - [x] **Visual Overhaul**: Added ambient gradients, stats hero, and premium glass cards
+  - [x] **Color Harmony**: Tuned neon glows and dark contrasts
+  - [x] **Interactive Elements**: Implemented hover lifts and smooth transitions
 
 - [ ] **Profile/Settings Page**
   - [ ] User info display
@@ -98,7 +106,7 @@
 
 ---
 
-## 🚀 Phase 6: Polish & Deploy (Week 6)
+## 避 Phase 6: Polish & Deploy (Week 6)
 > Tujuan: Final polish dan deploy ke Vercel
 
 - [ ] Performance optimization
@@ -120,4 +128,4 @@
 6. ✅ **Backend is King**: Don't over-optimize local storage
 
 ### Current Focus:
-**Phase 1: Landing Page MVP** - Membuat landing page yang stunning dan siap untuk review.
+**Phase 2: Unified Mission Dashboard** - Menyempurnakan integrasi materi harian dan Smart Players (Youtube/PDF/Twitter) di dalam app.
