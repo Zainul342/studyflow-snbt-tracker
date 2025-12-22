@@ -100,17 +100,19 @@ export function HierarchyTree() {
                                 </div>
                             </div>
 
-                            {/* Progress Bar */}
-                            <div className="hidden md:flex items-center gap-3 w-48">
-                                <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                                    <motion.div
-                                        className="h-full bg-[#BFFF0B] rounded-full"
-                                        initial={{ width: 0 }}
-                                        animate={{ width: `${stats.percentage}%` }}
-                                        transition={{ duration: 0.5, ease: "easeOut" }}
-                                    />
+                            <div className="flex items-center gap-4">
+                                {/* Progress Bar */}
+                                <div className="hidden md:flex items-center gap-3 w-48">
+                                    <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                                        <motion.div
+                                            className="h-full bg-[#BFFF0B] rounded-full"
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${stats.percentage}%` }}
+                                            transition={{ duration: 0.5, ease: "easeOut" }}
+                                        />
+                                    </div>
+                                    <span className="text-[10px] font-mono text-zinc-500 w-8 text-right">{stats.percentage}%</span>
                                 </div>
-                                <span className="text-[10px] font-mono text-zinc-500 w-8 text-right">{stats.percentage}%</span>
                             </div>
                         </button>
 

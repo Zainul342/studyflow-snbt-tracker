@@ -47,7 +47,11 @@
   - [x] Hierarchy tree: Subtes → Materi → Submateri
   - [x] Checkbox system (Belajar/Latsol/Review)
   - [x] Progress bar per section
-  - [ ] **Resource View**: Integrasi data `grup-channel-wa.csv` (Expandable details)
+  - [ ] **Unified Mission Dashboard** (Phase 2 Extension)
+    - [x] **Data Engine**: Parse CSV to `resource-db.ts`
+    - [x] **Mission UI**: Agenda Harian Page created (Moved from Hierarchy)
+    - [ ] **Focus Overlay**: Modal untuk "Deep Dive" learning (Youtube Embed, etc)
+    - [ ] **Smart Players**: Support Youtube, Drive PDF, Twitter rendering
   - [ ] Menggunakan data dari `materi-structure.ts`
 
 - [ ] **Profile/Settings Page**
