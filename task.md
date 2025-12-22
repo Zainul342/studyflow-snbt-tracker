@@ -38,7 +38,7 @@
 > Tujuan: Bangun semua halaman UI tanpa backend dulu (Lesson 3 & 4)
 
 - [ ] **Dashboard Page**
-  - [ ] Progress overview cards
+  - [x] Progress overview cards
   - [ ] Stats grid (dummy data)
   - [ ] Today's agenda widget
   - [ ] Navigation sidebar
