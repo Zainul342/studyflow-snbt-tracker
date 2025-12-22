@@ -8,25 +8,35 @@
 /* Osmo-inspired Design Tokens */
 :root {
   /* Brand Colors - Osmo Style */
-  --color-osmo-purple: 107 79 255; /* #6B4FFF */
-  --color-osmo-green: 191 255 11; /* #BFFF0B */
-  --color-osmo-dark: 10 10 10; /* #0A0A0A */
-  --color-osmo-card: 26 26 26; /* #1A1A1A */
-  --color-osmo-light: 245 245 245; /* #F5F5F5 */
-  
+  --color-osmo-purple: 107 79 255;
+  /* #6B4FFF */
+  --color-osmo-green: 191 255 11;
+  /* #BFFF0B */
+  --color-osmo-dark: 10 10 10;
+  /* #0A0A0A */
+  --color-osmo-card: 26 26 26;
+  /* #1A1A1A */
+  --color-osmo-light: 245 245 245;
+  /* #F5F5F5 */
+
   /* Adapted for StudyFlow */
-  --color-primary-purple: 124 58 237; /* #7C3AED - vibrant purple */
-  --color-accent-green: 16 185 129; /* #10B981 - emerald */
-  --color-neon-green: 191 255 11; /* #BFFF0B */
-  
+  --color-primary-purple: 124 58 237;
+  /* #7C3AED - vibrant purple */
+  --color-accent-green: 16 185 129;
+  /* #10B981 - emerald */
+  --color-neon-green: 191 255 11;
+  /* #BFFF0B */
+
   /* Backgrounds */
-  --background: 10 10 10; /* Dark */
-  --foreground: 245 245 245; /* Light text */
+  --background: 10 10 10;
+  /* Dark */
+  --foreground: 245 245 245;
+  /* Light text */
   --card: 26 26 26;
   --card-foreground: 245 245 245;
   --popover: 26 26 26;
   --popover-foreground: 245 245 245;
-  
+
   /* UI Colors */
   --primary: 107 79 255;
   --primary-foreground: 245 245 245;
@@ -42,15 +52,15 @@
   --input: 39 39 42;
   --ring: 107 79 255;
   --radius: 1rem;
-  
+
   /* Typography */
-  --font-heading: 'Space Grotesk', sans-serif;
+  --font-heading: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
-  
+
   /* Spacing */
   --section-padding: 8rem;
   --container-max: 1440px;
-  
+
   /* Animations */
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -104,7 +114,7 @@
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
   --radius-xl: calc(var(--radius) + 8px);
-  
+
   /* Osmo-specific colors */
   --color-osmo-purple: 107 79 255;
   --color-osmo-green: 191 255 11;
@@ -117,16 +127,27 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body), system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading), sans-serif;
-    font-weight: 700;
+    font-weight: 900;
+    /* Inter Black */
+    letter-spacing: -0.06em;
+    /* Tight editorial spacing */
+    line-height: 0.9;
+    text-transform: none;
+    /* Force HMR: update-3 */
   }
 }
 
@@ -191,24 +212,31 @@
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }

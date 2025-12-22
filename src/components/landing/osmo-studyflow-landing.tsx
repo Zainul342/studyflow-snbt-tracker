@@ -32,7 +32,7 @@ if (typeof window !== "undefined") {
 export default function OsmoStudyFlowLanding() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [menuOpen, setMenuOpen] = useState(false);
-    
+
     // Smooth scroll setup
     useEffect(() => {
         const lenis = new Lenis({
@@ -50,7 +50,7 @@ export default function OsmoStudyFlowLanding() {
 
         // Connect Lenis with GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
-        
+
         gsap.ticker.add((time) => {
             lenis.raf(time * 1000);
         });
@@ -59,55 +59,55 @@ export default function OsmoStudyFlowLanding() {
 
         return () => {
             lenis.destroy();
-            gsap.ticker.remove(() => {});
+            gsap.ticker.remove(() => { });
         };
     }, []);
 
     return (
         <div ref={containerRef} className="relative bg-[#0A0A0A] text-white overflow-x-hidden">
-            
+
             {/* HEADER */}
             <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-            
+
             {/* MARQUEE BANNER */}
             <MarqueeBanner />
-            
+
             {/* HERO SECTION */}
             <HeroSection />
-            
+
             {/* ANIMATED CARDS SHOWCASE */}
             <ShowcaseSection />
-            
+
             {/* VIDEO SECTION */}
             <VideoSection />
-            
+
             {/* CREATORS SECTION */}
             <CreatorsSection />
-            
+
             {/* UPDATES FEED */}
             <UpdatesSection />
-            
+
             {/* PLATFORM OVERVIEW */}
             <PlatformSection />
-            
+
             {/* PRODUCTS CAROUSEL */}
             <ProductsSection />
-            
+
             {/* BENEFITS */}
             <BenefitsSection />
-            
+
             {/* TESTIMONIALS */}
             <TestimonialsSection />
-            
+
             {/* PRICING */}
             <PricingSection />
-            
+
             {/* SHOWCASE GALLERY */}
             <ShowcaseGallery />
-            
+
             {/* FINAL CTA */}
             <FinalCTA />
-            
+
             {/* FOOTER */}
             <Footer />
         </div>
@@ -117,7 +117,7 @@ export default function OsmoStudyFlowLanding() {
 // Header Component
 function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (open: boolean) => void }) {
     return (
-        <motion.header 
+        <motion.header
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -126,28 +126,28 @@ function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (op
             <div className="glass max-w-7xl mx-auto rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between">
                 {/* Logo */}
                 <div className="flex items-center gap-3">
-                    <button 
+                    <button
                         onClick={() => setMenuOpen(!menuOpen)}
                         className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
                     >
                         <Menu className="w-5 h-5" />
                         <span className="text-sm font-medium hidden sm:inline">Menu</span>
                     </button>
-                    
+
                     <div className="w-px h-6 bg-white/10 hidden sm:block" />
-                    
+
                     <Link href="/" className="flex items-center gap-2">
                         <div className="text-2xl font-bold tracking-tight">
                             STUDYFLOW
                         </div>
                     </Link>
                 </div>
-                
+
                 {/* Actions */}
                 <div className="flex items-center gap-2 sm:gap-3">
                     <Link href="/login">
-                        <Button 
-                            variant="ghost" 
+                        <Button
+                            variant="ghost"
                             size="sm"
                             className="text-white/60 hover:text-white hover:bg-white/5 rounded-xl"
                         >
@@ -155,7 +155,7 @@ function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (op
                         </Button>
                     </Link>
                     <Link href="/onboarding">
-                        <Button 
+                        <Button
                             size="sm"
                             className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-xl"
                         >
@@ -191,7 +191,7 @@ function HeroSection() {
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-transparent pointer-events-none" />
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
-            
+
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -211,15 +211,15 @@ function HeroSection() {
                     </div>
                     <span className="text-[#BFFF0B] text-sm font-bold">SNBT 2026 • 106 HARI LAGI</span>
                 </motion.div>
-                
+
                 {/* Main Headline */}
-                <h1 className="text-[clamp(3rem,10vw,7rem)] leading-[0.9] font-black tracking-tight mb-8">
+                <h1 className="text-[clamp(3.5rem,11vw,8rem)] leading-[0.85] mb-8 tracking-tighter">
                     Dev Toolkit{" "}
-                    <Star className="inline w-[0.6em] h-[0.6em] text-purple-500 fill-purple-500" />{" "}
+                    <Star className="inline w-[0.4em] h-[0.4em] text-purple-500 fill-purple-500 mb-4" />{" "}
                     <br />
-                    <span className="gradient-text-purple">Built to Flex</span>
+                    <span className="gradient-text-purple font-light tracking-tight">Built to Flex</span>
                 </h1>
-                
+
                 <p className="text-white/60 text-lg sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
                     Platform packed with <span className="text-white">SNBT resources</span>,{" "}
                     <span className="text-white">progress tracking</span>, and a{" "}
@@ -238,7 +238,7 @@ function ShowcaseSection() {
         { title: "Tryout System", image: "/api/placeholder/400/300", color: "from-pink-500 to-pink-600" },
         { title: "Study Streaks", image: "/api/placeholder/400/300", color: "from-orange-500 to-orange-600" },
     ];
-    
+
     return (
         <section className="py-20 px-4">
             <div className="max-w-7xl mx-auto">
@@ -270,7 +270,7 @@ function ShowcaseSection() {
 // Video Section
 function VideoSection() {
     const [isPlaying, setIsPlaying] = useState(false);
-    
+
     return (
         <section className="py-32 px-4">
             <div className="max-w-6xl mx-auto text-center">
@@ -289,7 +289,7 @@ function VideoSection() {
                         Get exclusive access to the tracking system, analytics, and study techniques behind top SNBT scorers.
                     </p>
                 </motion.div>
-                
+
                 {/* Video Player Mockup */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -310,7 +310,7 @@ function VideoSection() {
                         <span className="text-white/60">00:48</span>
                     </div>
                 </motion.div>
-                
+
                 {/* User Avatars */}
                 <div className="mt-12 flex items-center justify-center gap-4">
                     <div className="flex -space-x-3">
@@ -333,7 +333,7 @@ function CreatorsSection() {
     return (
         <section className="py-32 px-4 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-950/10 to-transparent pointer-events-none" />
-            
+
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
@@ -341,7 +341,7 @@ function CreatorsSection() {
                     viewport={{ once: true }}
                 >
                     <p className="text-[#BFFF0B] text-sm font-bold mb-4">Created by</p>
-                    
+
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-12 mb-8">
                         <div className="text-center">
                             <div className="w-32 h-32 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 mx-auto mb-4" />
@@ -349,7 +349,7 @@ function CreatorsSection() {
                             <p className="text-white/60">Ardiansyah</p>
                         </div>
                     </div>
-                    
+
                     <div className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors cursor-pointer group">
                         <span className="font-medium">About us</span>
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -367,7 +367,7 @@ function UpdatesSection() {
         { title: "Tryout Analytics", time: "6 days ago", tag: "Update", color: "bg-purple-500" },
         { title: "Study Streaks", time: "1 week ago", tag: "New Feature", color: "bg-pink-500" },
     ];
-    
+
     return (
         <section className="py-32 px-4">
             <div className="max-w-7xl mx-auto">
@@ -386,7 +386,7 @@ function UpdatesSection() {
                         New stuff is added every week!
                     </p>
                 </motion.div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {updates.map((update, i) => (
                         <motion.div
@@ -439,7 +439,7 @@ function PlatformSection() {
                             </Button>
                         </Link>
                     </motion.div>
-                    
+
                     <motion.div
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -461,7 +461,7 @@ function ProductsSection() {
         { name: "Tryout System", status: "Available", color: "from-purple-500 to-purple-600" },
         { name: "AI Analytics", status: "Coming Soon", color: "from-pink-500 to-pink-600" },
     ];
-    
+
     return (
         <section className="py-32 px-4">
             <div className="max-w-7xl mx-auto">
@@ -480,7 +480,7 @@ function ProductsSection() {
                         Access everything with a single account:
                     </p>
                 </motion.div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {products.map((product, i) => (
                         <motion.div
@@ -520,7 +520,7 @@ function BenefitsSection() {
             description: "We keep adding new features and improvements. Your toolkit never stops expanding.",
         },
     ];
-    
+
     return (
         <section className="py-32 px-4 bg-[#1A1A1A]/50">
             <div className="max-w-6xl mx-auto">
@@ -539,7 +539,7 @@ function BenefitsSection() {
                         as much as you do.
                     </h2>
                 </motion.div>
-                
+
                 <div className="grid md:grid-cols-3 gap-8">
                     {benefits.map((benefit, i) => (
                         <motion.div
@@ -573,7 +573,7 @@ function TestimonialsSection() {
             quote: "The analytics feature is a game-changer. I could see exactly where I needed to improve.",
         },
     ];
-    
+
     return (
         <section className="py-32 px-4">
             <div className="max-w-7xl mx-auto">
@@ -589,7 +589,7 @@ function TestimonialsSection() {
                         <span className="gradient-text-green">Community</span>
                     </h2>
                 </motion.div>
-                
+
                 <div className="grid md:grid-cols-2 gap-8">
                     {testimonials.map((testimonial, i) => (
                         <motion.div
@@ -634,7 +634,7 @@ function PricingSection() {
                     </h2>
                     <p className="text-white/60 text-lg">Choose the plan that fits you best.</p>
                 </motion.div>
-                
+
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -684,7 +684,7 @@ function ShowcaseGallery() {
                         <span className="gradient-text-purple">StudyFlow</span>
                     </h2>
                 </motion.div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {[1, 2].map((i) => (
                         <motion.div
@@ -727,17 +727,17 @@ function FinalCTA() {
                         </div>
                         <span className="text-white/80 font-medium">Join 500+ others</span>
                     </div>
-                    
+
                     <h2 className="text-[clamp(2.5rem,8vw,6rem)] font-black tracking-tight mb-6">
                         Ready to
                         <br />
                         <span className="gradient-text-green">level up?</span>
                     </h2>
-                    
+
                     <p className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">
                         Become a member to unlock the full StudyFlow toolkit today.
                     </p>
-                    
+
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link href="/onboarding">
                             <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-xl px-8 py-6 text-lg">
@@ -798,7 +798,7 @@ function Footer() {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10">
                     <div className="text-white/40 text-sm mb-4 md:mb-0">
                         © 2025 StudyFlow. Made with 💜 for SNBT warriors.
