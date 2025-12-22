@@ -46,7 +46,8 @@
 - [ ] **Tracking Page**
   - [x] Hierarchy tree: Subtes → Materi → Submateri
   - [x] Checkbox system (Belajar/Latsol/Review)
-  - [ ] Progress bar per section
+  - [x] Progress bar per section
+  - [ ] **Resource View**: Integrasi data `grup-channel-wa.csv` (Expandable details)
   - [ ] Menggunakan data dari `materi-structure.ts`
 
 - [ ] **Profile/Settings Page**

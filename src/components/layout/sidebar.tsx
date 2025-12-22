@@ -22,27 +22,27 @@ import { mockDB, UserProfile } from "@/lib/data/mock-db";
 
 const sidebarNavItems = [
     {
-        title: "Command Center",
+        title: "Dashboard",
         href: "/dashboard",
         icon: LayoutDashboard,
     },
     {
-        title: "Survival Kit",
+        title: "Materi Belajar",
         href: "/dashboard/study",
         icon: BookOpen,
     },
     {
-        title: "Target Tracker",
+        title: "Cek Progress",
         href: "/dashboard/progress",
         icon: Target,
     },
     {
-        title: "War Room Analytics",
+        title: "Analitik Progres",
         href: "/analytics",
         icon: BarChart2,
     },
     {
-        title: "Daily Tasks",
+        title: "Agenda Harian",
         href: "/tasks",
         icon: Zap,
     },

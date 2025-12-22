@@ -2,6 +2,8 @@
 
 import { HierarchyTree } from "@/components/tracking/hierarchy-tree";
 import { Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { mockDB } from "@/lib/data/mock-db";
 
 export default function TrackingPage() {
     return (
@@ -19,21 +21,58 @@ export default function TrackingPage() {
                 </div>
 
                 {/* Global Progress Summary Card */}
-                <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-4 flex items-center gap-6">
-                    <div>
-                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Total Progress</p>
-                        <p className="text-2xl font-black text-white">0<span className="text-zinc-600 text-lg">/93</span></p>
-                    </div>
-                    <div className="h-8 w-px bg-zinc-800" />
-                    <div>
-                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Mastered</p>
-                        <p className="text-2xl font-black text-[#BFFF0B]">0%</p>
-                    </div>
-                </div>
+                <GlobalStats />
             </div>
 
             {/* Tree View */}
             <HierarchyTree />
+        </div>
+    );
+}
+
+function GlobalStats() {
+    const [stats, setStats] = useState({
+        completedBelajar: 0,
+        completedLatsol: 0,
+        completedReview: 0,
+        totalItems: 93,
+        percentMastered: 0
+    });
+
+    useEffect(() => {
+        const updateStats = () => {
+            const newStats = mockDB.calculateStats();
+            setStats(newStats as any);
+        };
+
+        // Initial load
+        updateStats();
+
+        // Listen for updates
+        const handleUpdate = () => updateStats();
+        window.addEventListener("progress-updated" as any, handleUpdate);
+        return () => window.removeEventListener("progress-updated" as any, handleUpdate);
+    }, []);
+
+    const totalCompleted = stats.completedBelajar + stats.completedLatsol + stats.completedReview;
+    const maxPossible = stats.totalItems * 3;
+
+    return (
+        <div className="bg-zinc-900 border border-zinc-800 rounded-sm p-4 flex items-center gap-6 shadow-lg shadow-black/20">
+            <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Total Checkboxes</p>
+                <p className="text-2xl font-black text-white">
+                    {totalCompleted}
+                    <span className="text-zinc-600 text-lg">/{maxPossible}</span>
+                </p>
+            </div>
+            <div className="h-8 w-px bg-zinc-800" />
+            <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 w-32">Mastered (Review)</p>
+                <p className="text-2xl font-black text-[#BFFF0B]">
+                    {Math.round(stats.percentMastered)}%
+                </p>
+            </div>
         </div>
     );
 }
