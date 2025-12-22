@@ -12,10 +12,14 @@ export default function DashboardPage() {
         // Main container match landing page bg-[#09090b] and selection color
         <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-emerald-400 selection:text-black font-sans overflow-x-hidden relative">
 
-            {/* Background Effects (Matches Landing Page Hero) */}
+            {/* Osmo Ambient Background & Grid */}
             <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-transparent" />
-                <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-purple-500/10 rounded-full blur-3xl" />
+                <div className="absolute inset-0 bg-[#0A0A0A]" />
+                <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px]" />
+                {/* Ambient Glows matches Landing Page */}
+                <div className="absolute top-[-10%] right-[0%] w-[500px] h-[500px] bg-purple-900/20 blur-[120px] rounded-full mix-blend-screen" />
+                <div className="absolute bottom-[0%] left-[-10%] w-[600px] h-[600px] bg-blue-900/10 blur-[100px] rounded-full mix-blend-screen" />
+                <div className="absolute top-[20%] left-[20%] w-[300px] h-[300px] bg-white/5 blur-[80px] rounded-full mix-blend-overlay" />
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto p-6 md:p-8">

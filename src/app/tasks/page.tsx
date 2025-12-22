@@ -35,10 +35,16 @@ export default function TasksPage() {
     const progressPercent = Math.round((completedCount / totalMissions) * 100);
 
     return (
-        <div className="relative min-h-screen font-sans text-zinc-300 overflow-hidden bg-[#0A0A0A]">
-            {/* Osmo Background Texture */}
-            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A] pointer-events-none" />
+        <div className="relative min-h-screen font-sans text-white overflow-hidden bg-[#0A0A0A]">
+            {/* Osmo Ambient Background & Grid */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[#0A0A0A]" />
+                <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px]" />
+                {/* Ambient Glows matches Landing Page */}
+                <div className="absolute top-[-10%] right-[0%] w-[500px] h-[500px] bg-purple-900/20 blur-[120px] rounded-full mix-blend-screen" />
+                <div className="absolute bottom-[0%] left-[-10%] w-[600px] h-[600px] bg-blue-900/10 blur-[100px] rounded-full mix-blend-screen" />
+                <div className="absolute top-[20%] left-[20%] w-[300px] h-[300px] bg-white/5 blur-[80px] rounded-full mix-blend-overlay" />
+            </div>
 
             <div className="relative z-10 max-w-5xl mx-auto p-6 md:p-12 mb-20">
                 {/* Hero / Header Section */}
@@ -56,25 +62,25 @@ export default function TasksPage() {
                             </div>
                             <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-4 leading-[0.9]">
                                 MISSION<br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-800">DASHBOARD</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-700">DASHBOARD</span>
                             </h1>
                             <p className="text-zinc-500 text-sm max-w-md leading-relaxed border-l-2 border-zinc-800 pl-4">
                                 Fokus satu hari satu misi. Jadikan konsistensi sebagai senjata utamamu menaklukkan SNBT 2026.
                             </p>
                         </div>
 
-                        {/* Stats Card - OSMO SHARP STYLE */}
+                        {/* Stats Card - OSMO GLASS STYLE */}
                         <div className="flex gap-4">
-                            <div className="p-6 rounded-sm bg-[#1A1A1A] border border-white/5 min-w-[140px]">
+                            <div className="p-6 rounded-sm bg-white/[0.02] backdrop-blur-md border border-white/5 min-w-[140px] shadow-2xl">
                                 <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider mb-1 flex items-center gap-2">
                                     <Target className="w-3 h-3" /> Progress
                                 </div>
                                 <div className="text-3xl font-black text-white">{progressPercent}%</div>
-                                <div className="h-1 w-full bg-zinc-800 rounded-sm mt-3 overflow-hidden">
+                                <div className="h-1 w-full bg-zinc-800/50 rounded-sm mt-3 overflow-hidden">
                                     <div className="h-full bg-[#BFFF0B]" style={{ width: `${progressPercent}%` }} />
                                 </div>
                             </div>
-                            <div className="p-6 rounded-sm bg-[#1A1A1A] border border-white/5 min-w-[140px]">
+                            <div className="p-6 rounded-sm bg-white/[0.02] backdrop-blur-md border border-white/5 min-w-[140px] shadow-2xl">
                                 <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider mb-1 flex items-center gap-2">
                                     <Trophy className="w-3 h-3" /> Completed
                                 </div>
@@ -108,12 +114,12 @@ export default function TasksPage() {
 
                                 {/* Connector Node - SHARP */}
                                 <div className={cn(
-                                    "absolute left-0 top-8 w-6 h-6 rounded-sm border-[2px] flex items-center justify-center transition-all z-20 bg-[#0A0A0A]",
+                                    "absolute left-0 top-8 w-6 h-6 rounded-sm border-[2px] flex items-center justify-center transition-all z-20",
                                     isToday
-                                        ? "border-[#BFFF0B] text-[#BFFF0B] shadow-[0_0_20px_rgba(191,255,11,0.4)] scale-110"
+                                        ? "bg-[#0A0A0A] border-[#BFFF0B] text-[#BFFF0B] shadow-[0_0_20px_rgba(191,255,11,0.4)] scale-110"
                                         : isDone
-                                            ? "border-emerald-500 text-emerald-500 bg-emerald-500/10"
-                                            : "border-zinc-800 text-zinc-600 group-hover:border-zinc-600"
+                                            ? "bg-[#0A0A0A] border-emerald-500 text-emerald-500 bg-emerald-500/10"
+                                            : "bg-[#0A0A0A] border-zinc-800 text-zinc-600 group-hover:border-zinc-600"
                                 )}>
                                     {isToday ? (
                                         <div className="w-2 h-2 rounded-sm bg-current animate-pulse" />
@@ -122,12 +128,12 @@ export default function TasksPage() {
                                     ) : null}
                                 </div>
 
-                                {/* Card Content - OSMO BOX */}
+                                {/* Card Content - OSMO GLASS */}
                                 <div className={cn(
-                                    "relative rounded-sm border transition-all duration-300 overflow-hidden",
+                                    "relative rounded-sm border transition-all duration-500 overflow-hidden backdrop-blur-md",
                                     isToday
-                                        ? "bg-[#BFFF0B]/[0.02] border-[#BFFF0B]/50 shadow-[0_0_40px_rgba(191,255,11,0.05)]"
-                                        : "bg-[#1A1A1A] border-white/5 hover:border-white/20"
+                                        ? "bg-gradient-to-br from-[#BFFF0B]/10 to-transparent border-[#BFFF0B]/20 shadow-[0_0_30px_rgba(191,255,11,0.05)]"
+                                        : "bg-white/[0.02] border-white/5 hover:border-white/10 hover:bg-white/[0.04]"
                                 )}>
                                     <div className="p-6 md:p-8">
                                         {/* Header Row */}
@@ -156,7 +162,7 @@ export default function TasksPage() {
                                                     {mission.topic}
                                                 </h2>
                                                 <div className="flex items-center gap-2">
-                                                    <span className="text-xs font-bold text-zinc-500 px-2 py-1 bg-black/40 rounded-sm border border-white/5">
+                                                    <span className="text-xs font-bold text-zinc-500 px-2 py-1 bg-black/20 rounded-sm border border-white/5">
                                                         {mission.subtest}
                                                     </span>
                                                 </div>

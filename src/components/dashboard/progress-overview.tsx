@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { BookOpen, CheckCircle2, Target, TrendingUp } from "lucide-react";
 
 // Matches landing page "Features" card style exactly
-const cardStyle = "group bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 hover:border-white/10 transition-all duration-300";
-const iconBoxStyle = "w-12 h-12 rounded-sm flex items-center justify-center mb-4 transition-transform group-hover:scale-110";
+const cardStyle = "group bg-white/[0.02] backdrop-blur-md border border-white/5 rounded-sm p-6 hover:border-white/10 transition-all duration-300 shadow-xl";
+const iconBoxStyle = "w-12 h-12 rounded-sm flex items-center justify-center mb-4 transition-transform group-hover:scale-110 border border-white/5";
 
 const stats = [
     {
