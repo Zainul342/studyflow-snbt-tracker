@@ -143,17 +143,17 @@ export function MissionModal({ mission, isOpen, onClose, initialResource }: Miss
                         className="absolute inset-0 bg-black/90 backdrop-blur-md"
                     />
 
-                    {/* Modal Content */}
+                    {/* Modal Content - OSMO SHARP */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.98, y: 10 }}
-                        className="relative w-full max-w-[95vw] h-[90vh] bg-[#0A0A0A] border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)] flex flex-col md:flex-row"
+                        className="relative w-full max-w-[95vw] h-[90vh] bg-[#0A0A0A] border-[2px] border-white/10 rounded-sm overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)] flex flex-col md:flex-row"
                     >
-                        {/* Close Button */}
+                        {/* Close Button - Sharp */}
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 z-[60] p-2.5 rounded-full bg-white/5 hover:bg-white/20 text-zinc-400 hover:text-white transition-all backdrop-blur-xl border border-white/10 shadow-xl"
+                            className="absolute top-6 right-6 z-[60] p-2.5 rounded-sm bg-black border border-white/10 hover:bg-white/10 text-zinc-400 hover:text-white transition-all backdrop-blur-xl shadow-xl"
                         >
                             <X className="w-5 h-5" />
                         </button>
@@ -164,14 +164,14 @@ export function MissionModal({ mission, isOpen, onClose, initialResource }: Miss
                                 {renderPlayer()}
                             </div>
 
-                            {/* Mission Info Bar */}
+                            {/* Mission Info Bar - Sharp */}
                             <div className="h-20 border-t border-white/5 flex items-center justify-between px-8 bg-[#0A0A0A]/80 backdrop-blur-xl">
                                 <div className="flex items-center gap-4">
-                                    <div className="h-10 w-10 rounded-xl bg-[#BFFF0B] flex items-center justify-center text-black font-black text-sm shadow-[0_0_20px_rgba(191,255,11,0.2)]">
+                                    <div className="h-10 w-10 rounded-sm bg-[#BFFF0B] flex items-center justify-center text-black font-black text-sm shadow-[0_0_20px_rgba(191,255,11,0.2)]">
                                         D{mission.day}
                                     </div>
                                     <div>
-                                        <h3 className="text-sm font-bold text-white tracking-tight">
+                                        <h3 className="text-sm font-bold text-white tracking-tight uppercase">
                                             {mission.topic}
                                         </h3>
                                         <p className="text-[10px] text-zinc-500 font-medium uppercase tracking-widest mt-0.5">
@@ -183,10 +183,10 @@ export function MissionModal({ mission, isOpen, onClose, initialResource }: Miss
                                 <button
                                     onClick={handleComplete}
                                     className={cn(
-                                        "hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full font-black text-xs transition-all shadow-lg hover:scale-105 active:scale-95",
+                                        "hidden md:flex items-center gap-2 px-6 py-2.5 rounded-sm font-black text-xs transition-all shadow-lg hover:bg-opacity-90 active:scale-95 border",
                                         isCompleted
-                                            ? "bg-zinc-800 text-[#BFFF0B] border border-[#BFFF0B]/20"
-                                            : "bg-[#BFFF0B] text-black"
+                                            ? "bg-zinc-800 text-[#BFFF0B] border-[#BFFF0B]/20"
+                                            : "bg-[#BFFF0B] text-black border-[#BFFF0B]"
                                     )}
                                 >
                                     {isCompleted ? <Check className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />}
@@ -196,10 +196,12 @@ export function MissionModal({ mission, isOpen, onClose, initialResource }: Miss
                         </div>
 
                         {/* RIGHT COLUMN: Resources & Timeline */}
-                        <div className="w-full md:w-[400px] flex flex-col bg-[#0A0A0A] min-h-0">
+                        <div className="w-full md:w-[400px] flex flex-col bg-[#0A0A0A] min-h-0 relative">
+                            {/* Grid Texture */}
+                            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px] pointer-events-none opacity-50" />
 
                             {/* Header */}
-                            <div className="p-8 pb-6">
+                            <div className="p-8 pb-6 relative z-10">
                                 <div className="flex items-center justify-between mb-4">
                                     <h3 className="text-xs font-black text-[#BFFF0B] tracking-[0.2em] uppercase">
                                         Content Navigation
@@ -209,17 +211,17 @@ export function MissionModal({ mission, isOpen, onClose, initialResource }: Miss
                                         {mission.date}
                                     </div>
                                 </div>
-                                <h1 className="text-2xl font-black text-white leading-tight">
+                                <h1 className="text-xl font-black text-white leading-tight uppercase">
                                     {mission.topic}
                                 </h1>
                             </div>
 
                             {/* Scrollable Content */}
-                            <div className="flex-1 overflow-y-auto px-6 pb-8 space-y-8 scrollbar-hide">
+                            <div className="flex-1 overflow-y-auto px-6 pb-8 space-y-8 scrollbar-hide relative z-10">
 
-                                {/* Description */}
-                                <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/5">
-                                    <p className="text-sm text-zinc-400 leading-relaxed">
+                                {/* Description - Sharp */}
+                                <div className="p-5 rounded-sm bg-zinc-900/50 border border-white/5">
+                                    <p className="text-sm text-zinc-400 leading-relaxed border-l-2 border-[#6B4FFF] pl-3">
                                         {mission.description}
                                     </p>
                                 </div>
@@ -247,7 +249,7 @@ export function MissionModal({ mission, isOpen, onClose, initialResource }: Miss
                                                 />
                                             ))}
                                             {mission.resources.filter(r => r.category === 'materi').length === 0 && (
-                                                <p className="text-xs text-zinc-600 italic px-4 py-2 bg-white/5 rounded-xl">Tidak ada materi khusus hari ini.</p>
+                                                <p className="text-xs text-zinc-600 italic px-4 py-2 bg-white/5 rounded-sm border border-dashed border-zinc-800">Tidak ada materi khusus hari ini.</p>
                                             )}
                                         </div>
                                     </div>
@@ -272,7 +274,7 @@ export function MissionModal({ mission, isOpen, onClose, initialResource }: Miss
                                                 />
                                             ))}
                                             {mission.resources.filter(r => r.category === 'latsol').length === 0 && (
-                                                <p className="text-xs text-zinc-600 italic px-4 py-2 bg-white/5 rounded-xl">Gunakan materi di atas untuk pemahaman.</p>
+                                                <p className="text-xs text-zinc-600 italic px-4 py-2 bg-white/5 rounded-sm border border-dashed border-zinc-800">Gunakan materi di atas untuk pemahaman.</p>
                                             )}
                                         </div>
                                     </div>
@@ -294,18 +296,18 @@ function ResourceItem({ res, isActive, onSelect }: { res: Resource, isActive: bo
         <button
             onClick={onSelect}
             className={cn(
-                "w-full flex items-center gap-4 p-4 rounded-2xl border transition-all duration-300 group relative overflow-hidden",
+                "w-full flex items-center gap-4 p-4 rounded-sm border transition-all duration-300 group relative overflow-hidden",
                 isActive
                     ? "bg-[#BFFF0B] border-[#BFFF0B] text-black shadow-[0_10px_30px_rgba(191,255,11,0.2)]"
                     : "bg-white/5 border-white/5 text-zinc-400 hover:border-white/10 hover:bg-white/10"
             )}
         >
             <div className={cn(
-                "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                "w-10 h-10 rounded-sm flex items-center justify-center shrink-0 transition-colors",
                 isActive
-                    ? "bg-black/10 text-black"
+                    ? "bg-black/10 text-black border border-black/10"
                     : cn(
-                        "bg-zinc-900",
+                        "bg-zinc-900 border border-white/5",
                         res.type === 'video' && "text-red-500",
                         res.type === 'pdf' && "text-blue-500",
                         res.type === 'thread' && "text-sky-500",
@@ -333,7 +335,7 @@ function ResourceItem({ res, isActive, onSelect }: { res: Resource, isActive: bo
             </div>
 
             {!isActive && <ChevronRight className="w-4 h-4 text-zinc-700 group-hover:text-zinc-400 transition-colors" />}
-            {isActive && <motion.div layoutId="activeResource" className="absolute left-0 w-1 h-6 bg-black rounded-r-full" />}
+            {isActive && <motion.div layoutId="activeResource" className="absolute left-0 w-1 h-6 bg-black rounded-r-sm" />}
         </button>
     );
 }

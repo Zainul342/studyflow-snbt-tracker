@@ -35,13 +35,10 @@ export default function TasksPage() {
     const progressPercent = Math.round((completedCount / totalMissions) * 100);
 
     return (
-        <div className="relative min-h-screen font-sans text-zinc-300 overflow-hidden bg-[#050505]">
-            {/* Ambient Background */}
-            <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#BFFF0B]/10 blur-[120px] rounded-full" />
-                <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-sky-500/5 blur-[100px] rounded-full" />
-                <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-white/5 blur-[80px] rounded-full" />
-            </div>
+        <div className="relative min-h-screen font-sans text-zinc-300 overflow-hidden bg-[#0A0A0A]">
+            {/* Osmo Background Texture */}
+            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A] pointer-events-none" />
 
             <div className="relative z-10 max-w-5xl mx-auto p-6 md:p-12 mb-20">
                 {/* Hero / Header Section */}
@@ -49,10 +46,10 @@ export default function TasksPage() {
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
                         <div>
                             <div className="flex items-center gap-2 mb-3">
-                                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold tracking-widest uppercase text-zinc-400">
+                                <span className="px-3 py-1 rounded-sm bg-white/5 border border-white/10 text-[10px] font-bold tracking-widest uppercase text-zinc-400">
                                     Studyflow Tracker
                                 </span>
-                                <span className="px-3 py-1 rounded-full bg-[#BFFF0B]/10 border border-[#BFFF0B]/20 text-[10px] font-bold tracking-widest uppercase text-[#BFFF0B] flex items-center gap-1.5">
+                                <span className="px-3 py-1 rounded-sm bg-[#BFFF0B]/10 border border-[#BFFF0B]/20 text-[10px] font-bold tracking-widest uppercase text-[#BFFF0B] flex items-center gap-1.5">
                                     <Flame className="w-3 h-3" />
                                     On Streak
                                 </span>
@@ -66,18 +63,18 @@ export default function TasksPage() {
                             </p>
                         </div>
 
-                        {/* Stats Card */}
+                        {/* Stats Card - OSMO SHARP STYLE */}
                         <div className="flex gap-4">
-                            <div className="p-6 rounded-2xl bg-zinc-900/50 border border-white/5 backdrop-blur-sm min-w-[140px]">
+                            <div className="p-6 rounded-sm bg-[#1A1A1A] border border-white/5 min-w-[140px]">
                                 <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider mb-1 flex items-center gap-2">
                                     <Target className="w-3 h-3" /> Progress
                                 </div>
                                 <div className="text-3xl font-black text-white">{progressPercent}%</div>
-                                <div className="h-1 w-full bg-zinc-800 rounded-full mt-3 overflow-hidden">
+                                <div className="h-1 w-full bg-zinc-800 rounded-sm mt-3 overflow-hidden">
                                     <div className="h-full bg-[#BFFF0B]" style={{ width: `${progressPercent}%` }} />
                                 </div>
                             </div>
-                            <div className="p-6 rounded-2xl bg-zinc-900/50 border border-white/5 backdrop-blur-sm min-w-[140px]">
+                            <div className="p-6 rounded-sm bg-[#1A1A1A] border border-white/5 min-w-[140px]">
                                 <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-wider mb-1 flex items-center gap-2">
                                     <Trophy className="w-3 h-3" /> Completed
                                 </div>
@@ -89,7 +86,7 @@ export default function TasksPage() {
                     </div>
                 </header>
 
-                <div className="space-y-12">
+                <div className="space-y-8">
                     {MISSION_DATA.slice().reverse().map((mission, index) => {
                         const isToday = mission.date.includes("22") || mission.day === 22;
                         const isDone = missionProgress[mission.day];
@@ -106,12 +103,12 @@ export default function TasksPage() {
                                 <div className={cn(
                                     "absolute left-[11px] top-0 bottom-0 w-[2px]",
                                     index === MISSION_DATA.length - 1 ? "bg-gradient-to-b from-zinc-800 to-transparent" : "bg-zinc-800",
-                                    isToday && "bg-gradient-to-b from-[#BFFF0B] via-[#BFFF0B]/50 to-zinc-800"
+                                    isToday && "bg-[#BFFF0B]"
                                 )} />
 
-                                {/* Connector Node */}
+                                {/* Connector Node - SHARP */}
                                 <div className={cn(
-                                    "absolute left-0 top-8 w-6 h-6 rounded-full border-[3px] flex items-center justify-center transition-all z-20 bg-[#050505]",
+                                    "absolute left-0 top-8 w-6 h-6 rounded-sm border-[2px] flex items-center justify-center transition-all z-20 bg-[#0A0A0A]",
                                     isToday
                                         ? "border-[#BFFF0B] text-[#BFFF0B] shadow-[0_0_20px_rgba(191,255,11,0.4)] scale-110"
                                         : isDone
@@ -119,18 +116,18 @@ export default function TasksPage() {
                                             : "border-zinc-800 text-zinc-600 group-hover:border-zinc-600"
                                 )}>
                                     {isToday ? (
-                                        <div className="w-2 h-2 rounded-full bg-current animate-pulse" />
+                                        <div className="w-2 h-2 rounded-sm bg-current animate-pulse" />
                                     ) : isDone ? (
                                         <Check className="w-3 h-3" />
                                     ) : null}
                                 </div>
 
-                                {/* Card Content */}
+                                {/* Card Content - OSMO BOX */}
                                 <div className={cn(
-                                    "relative rounded-3xl border transition-all duration-300 overflow-hidden",
+                                    "relative rounded-sm border transition-all duration-300 overflow-hidden",
                                     isToday
-                                        ? "bg-gradient-to-b from-[#BFFF0B]/5 to-transparent border-[#BFFF0B]/30 shadow-[0_0_40px_rgba(191,255,11,0.05)]"
-                                        : "bg-zinc-900/30 border-white/5 hover:bg-zinc-900/50 hover:border-white/10"
+                                        ? "bg-[#BFFF0B]/[0.02] border-[#BFFF0B]/50 shadow-[0_0_40px_rgba(191,255,11,0.05)]"
+                                        : "bg-[#1A1A1A] border-white/5 hover:border-white/20"
                                 )}>
                                     <div className="p-6 md:p-8">
                                         {/* Header Row */}
@@ -138,12 +135,12 @@ export default function TasksPage() {
                                             <div>
                                                 <div className="flex items-center gap-3 mb-3">
                                                     <span className={cn(
-                                                        "text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full",
+                                                        "text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-sm border",
                                                         isToday
-                                                            ? "bg-[#BFFF0B] text-black shadow-lg shadow-[#BFFF0B]/20"
+                                                            ? "bg-[#BFFF0B] text-black border-[#BFFF0B]"
                                                             : isDone
-                                                                ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
-                                                                : "bg-white/5 text-zinc-400 border border-white/5"
+                                                                ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
+                                                                : "bg-white/5 text-zinc-400 border-white/5"
                                                     )}>
                                                         {isDone ? "Completed" : `Mission Day ${mission.day}`}
                                                     </span>
@@ -153,13 +150,13 @@ export default function TasksPage() {
                                                     </span>
                                                 </div>
                                                 <h2 className={cn(
-                                                    "text-2xl md:text-3xl font-black mb-2 transition-colors tracking-tight",
+                                                    "text-2xl md:text-3xl font-black mb-2 transition-colors tracking-tight uppercase",
                                                     isToday ? "text-white" : isDone ? "text-zinc-500" : "text-zinc-200"
                                                 )}>
                                                     {mission.topic}
                                                 </h2>
                                                 <div className="flex items-center gap-2">
-                                                    <span className="text-xs font-bold text-zinc-500 px-2 py-1 bg-black/40 rounded border border-white/5">
+                                                    <span className="text-xs font-bold text-zinc-500 px-2 py-1 bg-black/40 rounded-sm border border-white/5">
                                                         {mission.subtest}
                                                     </span>
                                                 </div>
@@ -168,38 +165,37 @@ export default function TasksPage() {
                                             <button
                                                 onClick={() => openMission(mission)}
                                                 className={cn(
-                                                    "group/btn relative flex items-center gap-3 px-6 py-3 rounded-full font-bold text-xs transition-all overflow-hidden",
+                                                    "group/btn relative flex items-center gap-3 px-6 py-3 rounded-sm font-bold text-xs transition-all overflow-hidden border",
                                                     isToday
-                                                        ? "bg-[#BFFF0B] text-black hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(191,255,11,0.3)]"
+                                                        ? "bg-[#BFFF0B] text-black border-[#BFFF0B] hover:bg-[#BFFF0B]/90"
                                                         : isDone
-                                                            ? "bg-zinc-800 text-[#BFFF0B] border border-[#BFFF0B]/20"
-                                                            : "bg-white/5 text-zinc-300 hover:bg-white/10 border border-white/5"
+                                                            ? "bg-zinc-800 text-[#BFFF0B] border-[#BFFF0B]/20"
+                                                            : "bg-white/5 text-zinc-300 border-white/10 hover:bg-white/10 hover:border-white/20"
                                                 )}
                                             >
-                                                {isToday && <div className="absolute inset-0 bg-white/40 blur-lg translate-y-full group-hover/btn:translate-y-[-150%] transition-transform duration-700" />}
                                                 {isDone ? <CheckCircle2 className="w-4 h-4" /> : <Rocket className="w-4 h-4" />}
-                                                <span className="relative">{isDone ? "Review Again" : "Start Mission"}</span>
+                                                <span className="uppercase tracking-wider">{isDone ? "Review Again" : "Start Mission"}</span>
                                             </button>
                                         </div>
 
-                                        <p className="text-sm text-zinc-400 mb-8 leading-relaxed max-w-2xl border-l border-white/5 pl-4 ml-1">
+                                        <p className="text-sm text-zinc-400 mb-8 leading-relaxed max-w-2xl border-l-2 border-white/5 pl-4 ml-1">
                                             {mission.description}
                                         </p>
 
-                                        {/* Resources Grid */}
+                                        {/* Resources Grid - SHARP */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                             {mission.resources.map((res) => (
                                                 <div
                                                     key={res.id}
                                                     onClick={() => openMission(mission, res)}
-                                                    className="relative flex items-center gap-4 p-4 rounded-xl bg-black/20 border border-white/5 hover:border-white/10 hover:bg-white/5 transition-all group/item cursor-pointer overflow-hidden"
+                                                    className="relative flex items-center gap-4 p-4 rounded-sm bg-black/20 border border-white/5 hover:border-white/20 hover:bg-white/5 transition-all group/item cursor-pointer overflow-hidden"
                                                 >
                                                     <div className={cn(
-                                                        "w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all",
-                                                        res.type === 'video' && "bg-red-500/10 text-red-500 group-hover/item:bg-red-500 group-hover/item:text-white",
-                                                        res.type === 'pdf' && "bg-blue-500/10 text-blue-500 group-hover/item:bg-blue-500 group-hover/item:text-white",
-                                                        res.type === 'thread' && "bg-sky-500/10 text-sky-500 group-hover/item:bg-sky-500 group-hover/item:text-white",
-                                                        res.type === 'web' && "bg-zinc-500/10 text-zinc-400 group-hover/item:bg-zinc-500 group-hover/item:text-white",
+                                                        "w-10 h-10 rounded-sm flex items-center justify-center shrink-0 transition-all border border-transparent",
+                                                        res.type === 'video' && "bg-red-500/10 text-red-500 group-hover/item:border-red-500/50",
+                                                        res.type === 'pdf' && "bg-blue-500/10 text-blue-500 group-hover/item:border-blue-500/50",
+                                                        res.type === 'thread' && "bg-sky-500/10 text-sky-500 group-hover/item:border-sky-500/50",
+                                                        res.type === 'web' && "bg-zinc-500/10 text-zinc-400 group-hover/item:border-zinc-500/50",
                                                     )}>
                                                         {res.type === 'video' && <Youtube className="w-5 h-5" />}
                                                         {res.type === 'pdf' && <FileText className="w-5 h-5" />}
@@ -225,7 +221,7 @@ export default function TasksPage() {
                                                 </div>
                                             ))}
                                             {mission.resources.length === 0 && (
-                                                <div className="col-span-full py-6 text-center text-xs text-zinc-700 bg-black/20 rounded-xl border border-white/5 font-mono uppercase tracking-widest">
+                                                <div className="col-span-full py-6 text-center text-xs text-zinc-700 bg-black/20 rounded-sm border border-dashed border-zinc-800 font-mono uppercase tracking-widest">
                                                     No Resources Yet
                                                 </div>
                                             )}
