@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Lenis from "lenis";
 import gsap from "gsap";
@@ -135,8 +136,8 @@ function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (op
 
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 group absolute left-1/2 -translate-x-1/2">
-                    <div className="w-6 h-6 rounded-sm bg-gradient-to-br from-[#6B4FFF] to-[#5a3ee0] flex items-center justify-center">
-                        <BookOpen size={12} className="text-white" />
+                    <div className="relative w-6 h-6 rounded-sm overflow-hidden border border-white/20">
+                        <Image src="/logo.png" alt="StudyFlow" fill className="object-cover" />
                     </div>
                     <div className="text-sm font-black tracking-tight text-white group-hover:text-[#BFFF0B] transition-colors">
                         STUDYFLOW

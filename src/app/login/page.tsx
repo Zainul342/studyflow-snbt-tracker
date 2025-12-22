@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Asterisk, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LoginPage() {
     return (
@@ -12,7 +13,9 @@ export default function LoginPage() {
             {/* Header / Logo */}
             <div className="absolute top-10 left-10 flex items-center gap-1.5 font-black text-xs uppercase tracking-widest text-zinc-400">
                 <Link href="/" className="flex items-center gap-1.5 hover:text-black transition-colors">
-                    <Asterisk size={14} className="text-zinc-300" />
+                    <div className="relative w-4 h-4">
+                        <Image src="/logo.png" alt="StudyFlow Logo" fill className="object-contain" />
+                    </div>
                     StudyFlow
                 </Link>
             </div>
@@ -66,8 +69,8 @@ export default function LoginPage() {
             >
                 <div className="bg-white rounded-[2.5rem] p-12 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] border border-white/20">
                     <div className="mb-10 text-center">
-                        <div className="w-12 h-12 bg-zinc-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                            <Asterisk size={24} className="text-[#6343e5]" />
+                        <div className="w-12 h-12 bg-zinc-100 rounded-2xl flex items-center justify-center mx-auto mb-6 relative overflow-hidden">
+                            <Image src="/logo.png" alt="StudyFlow Logo" fill className="object-contain p-2" />
                         </div>
                         <h1 className="text-3xl font-black tracking-tighter">Login to StudyFlow</h1>
                         <p className="text-zinc-400 text-sm font-medium mt-2">Welcome back to the vault.</p>

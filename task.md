@@ -41,7 +41,7 @@
   - [x] Progress overview cards
   - [x] Stats grid (dummy data)
   - [x] Today's agenda widget
-  - [ ] Navigation sidebar
+  - [x] Navigation sidebar
 
 - [ ] **Tracking Page**
   - [ ] Hierarchy tree: Subtes → Materi → Submateri
