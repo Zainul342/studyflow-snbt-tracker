@@ -100,7 +100,7 @@ export default function TasksPage() {
                                             href={res.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-start gap-3 p-3 rounded-lg bg-black/20 border border-white/5 hover:bg-white/5 hover:border-white/10 transition-all group/item"
+                                            className="flex items-start gap-3 p-3 rounded-lg bg-black/20 border border-white/5 hover:bg-white/5 hover:border-white/10 transition-all group/item cursor-pointer"
                                         >
                                             <div className={cn(
                                                 "mt-0.5 w-8 h-8 rounded-md flex items-center justify-center shrink-0",

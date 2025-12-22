@@ -50,7 +50,7 @@
   - [ ] **Unified Mission Dashboard** (Phase 2 Extension)
     - [x] **Data Engine**: Parse CSV to `resource-db.ts`
     - [x] **Mission UI**: Agenda Harian Page created (Moved from Hierarchy)
-    - [ ] **Focus Overlay**: Modal untuk "Deep Dive" learning (Youtube Embed, etc)
+    - [x] **Focus Overlay**: Modal untuk "Deep Dive" learning (Youtube Embed, etc)
     - [ ] **Smart Players**: Support Youtube, Drive PDF, Twitter rendering
   - [ ] Menggunakan data dari `materi-structure.ts`
 
