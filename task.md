@@ -43,11 +43,11 @@
   - [x] Today's agenda widget
   - [x] Navigation sidebar
 
-- [x] **Tracking Page**
+  - [x] **Tracking Page**
   - [x] Hierarchy tree: Subtes → Materi → Submateri
   - [x] Checkbox system (Belajar/Latsol/Review)
   - [x] Progress bar per section
-  - [ ] **Unified Mission Dashboard** (Phase 2 Extension)
+  - [x] **Unified Mission Dashboard** (Phase 2 Extension)
     - [x] **Data Engine**: Parse CSV to `resource-db.ts`
     - [x] **Mission UI**: Agenda Harian Page (Timeline View)
     - [x] **Focus Overlay**: Mission Modal (Youtube Embed, Resource List)
@@ -61,6 +61,7 @@
   - [x] **Visual Overhaul**: Added ambient gradients, stats hero, and premium glass cards
   - [x] **Color Harmony**: Tuned neon glows and dark contrasts
   - [x] **Interactive Elements**: Implemented hover lifts and smooth transitions
+  - [x] **Design System Harmonization**: Enforced `rounded-sm`, Grid Backgrounds, and Osmo Ambient Lighting across Dashboard & Agenda
 
 - [ ] **Profile/Settings Page**
   - [ ] User info display
@@ -126,6 +127,7 @@
 4. ✅ **GitHub as Insurance**: Commit frequently
 5. ✅ **Frontend First**: Complete UI before backend integration
 6. ✅ **Backend is King**: Don't over-optimize local storage
+7. ✅ **Consistency is Key**: Visual harmony (Lighting, Shapes) builds trust.
 
 ### Current Focus:
-**Phase 2: Unified Mission Dashboard** - Menyempurnakan integrasi materi harian dan Smart Players (Youtube/PDF/Twitter) di dalam app.
+**Phase 2: UI Pages** - Membangun halaman Profile/Settings dan Login/Register dengan desain Osmo yang konsisten.
