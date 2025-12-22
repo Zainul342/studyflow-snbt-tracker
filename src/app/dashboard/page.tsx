@@ -10,12 +10,12 @@ import { motion } from "framer-motion";
 export default function DashboardPage() {
     return (
         // Main container match landing page bg-[#09090b] and selection color
-        <div className="min-h-screen bg-[#09090b] text-white selection:bg-emerald-400 selection:text-black font-sans overflow-x-hidden relative">
+        <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-emerald-400 selection:text-black font-sans overflow-x-hidden relative">
 
             {/* Background Effects (Matches Landing Page Hero) */}
             <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/20 via-transparent to-transparent" />
-                <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-3xl" />
+                <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-transparent" />
+                <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-purple-500/10 rounded-full blur-3xl" />
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto p-6 md:p-8">
@@ -45,11 +45,11 @@ export default function DashboardPage() {
                         transition={{ delay: 0.2 }}
                         className="flex gap-3"
                     >
-                        <Link href="/materials" className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-zinc-800/50 border border-white/5 hover:bg-zinc-800 hover:border-white/10 transition-all text-zinc-300 hover:text-white text-sm font-bold">
+                        <Link href="/materials" className="flex items-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800 transition-all text-zinc-400 hover:text-white text-sm font-bold">
                             <BookOpen className="w-4 h-4" />
                             Materi
                         </Link>
-                        <button className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-black text-sm font-black shadow-lg shadow-emerald-400/20 transition-all group">
+                        <button className="flex items-center gap-2 px-5 py-2.5 rounded-sm bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black text-sm font-black shadow-lg shadow-[#BFFF0B]/20 transition-all group">
                             <Trophy className="w-4 h-4 ml-1" />
                             Lanjut Belajar
                         </button>

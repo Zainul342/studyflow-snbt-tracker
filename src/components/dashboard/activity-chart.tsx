@@ -20,12 +20,12 @@ export function ActivityChart() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="lg:col-span-2 group bg-zinc-800/50 border border-white/5 rounded-3xl p-8 hover:bg-zinc-800 hover:border-white/10 transition-all duration-300 min-h-[350px] flex flex-col justify-between"
+            className="lg:col-span-2 group bg-zinc-900/50 border border-zinc-800 rounded-xl p-8 hover:border-white/10 transition-all duration-300 min-h-[350px] flex flex-col justify-between"
         >
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-zinc-900 flex items-center justify-center border border-zinc-700/50">
-                        <TrendingUp className="w-6 h-6 text-emerald-400" />
+                    <div className="w-12 h-12 rounded-sm bg-zinc-900 flex items-center justify-center border border-zinc-800">
+                        <TrendingUp className="w-6 h-6 text-[#BFFF0B]" />
                     </div>
                     <div>
                         <h3 className="text-white text-lg font-bold">Aktivitas Belajar</h3>
@@ -34,7 +34,7 @@ export function ActivityChart() {
                 </div>
                 <div className="text-right">
                     <div className="text-2xl font-black text-white">41.9 jam</div>
-                    <p className="text-emerald-400 text-xs font-bold uppercase tracking-wider">+12% vs minggu lalu</p>
+                    <p className="text-[#BFFF0B] text-xs font-bold uppercase tracking-wider">+12% vs minggu lalu</p>
                 </div>
             </div>
 
@@ -43,8 +43,8 @@ export function ActivityChart() {
                     <AreaChart data={data}>
                         <defs>
                             <linearGradient id="colorHours" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#34d399" stopOpacity={0.3} />
-                                <stop offset="95%" stopColor="#34d399" stopOpacity={0} />
+                                <stop offset="5%" stopColor="#BFFF0B" stopOpacity={0.3} />
+                                <stop offset="95%" stopColor="#BFFF0B" stopOpacity={0} />
                             </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
@@ -62,13 +62,13 @@ export function ActivityChart() {
                                 border: '1px solid rgba(255,255,255,0.1)',
                                 boxShadow: '0 4px 20px rgba(0,0,0,0.5)'
                             }}
-                            itemStyle={{ color: '#34d399', fontWeight: 'bold' }}
+                            itemStyle={{ color: '#BFFF0B', fontWeight: 'bold' }}
                             cursor={{ stroke: 'rgba(255,255,255,0.1)', strokeWidth: 1 }}
                         />
                         <Area
                             type="monotone"
                             dataKey="hours"
-                            stroke="#34d399"
+                            stroke="#BFFF0B"
                             strokeWidth={3}
                             fillOpacity={1}
                             fill="url(#colorHours)"

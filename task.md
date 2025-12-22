@@ -44,8 +44,8 @@
   - [x] Navigation sidebar
 
 - [ ] **Tracking Page**
-  - [ ] Hierarchy tree: Subtes → Materi → Submateri
-  - [ ] Checkbox system (Belajar/Latsol/Review)
+  - [x] Hierarchy tree: Subtes → Materi → Submateri
+  - [x] Checkbox system (Belajar/Latsol/Review)
   - [ ] Progress bar per section
   - [ ] Menggunakan data dari `materi-structure.ts`
 

@@ -40,17 +40,17 @@ export function TodayAgenda() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-zinc-800/50 border border-white/5 rounded-3xl p-6 hover:bg-zinc-800 hover:border-white/10 transition-all duration-300 min-h-[350px] flex flex-col"
+            className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-6 hover:border-white/10 transition-all duration-300 min-h-[350px] flex flex-col"
         >
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h3 className="text-white text-lg font-bold flex items-center gap-2">
                         Target Hari Ini
-                        <span className="bg-emerald-400/20 text-emerald-400 text-xs px-2 py-0.5 rounded-full font-black">3</span>
+                        <span className="bg-[#BFFF0B]/20 text-[#BFFF0B] text-xs px-2 py-0.5 rounded-sm font-black">3</span>
                     </h3>
                     <p className="text-zinc-500 text-xs font-semibold uppercase tracking-wider mt-1">Senin, 22 Des 2025</p>
                 </div>
-                <button className="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center border border-zinc-700/50 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
+                <button className="w-8 h-8 rounded-sm bg-zinc-900 flex items-center justify-center border border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">
                     <ArrowRight className="w-4 h-4" />
                 </button>
             </div>
@@ -60,9 +60,9 @@ export function TodayAgenda() {
                     <div
                         key={item.id}
                         className={cn(
-                            "group relative overflow-hidden rounded-2xl p-4 border transition-all duration-300",
+                            "group relative overflow-hidden rounded-sm p-4 border transition-all duration-300",
                             item.status === "active"
-                                ? "bg-emerald-400/10 border-emerald-400/20"
+                                ? "bg-[#BFFF0B]/10 border-[#BFFF0B]/20"
                                 : "bg-zinc-900/50 border-white/5 hover:border-white/10 hover:bg-zinc-900"
                         )}
                     >
@@ -73,9 +73,9 @@ export function TodayAgenda() {
 
                         <div className="flex items-start gap-4">
                             <div className={cn(
-                                "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border",
+                                "w-10 h-10 rounded-sm flex items-center justify-center shrink-0 border",
                                 item.status === "active"
-                                    ? "bg-emerald-400/20 border-emerald-400/30 text-emerald-400"
+                                    ? "bg-[#BFFF0B]/20 border-[#BFFF0B]/30 text-[#BFFF0B]"
                                     : "bg-zinc-800 border-zinc-700/50 text-zinc-500 group-hover:text-zinc-300 group-hover:border-zinc-600"
                             )}>
                                 <item.icon className="w-5 h-5" />
@@ -90,9 +90,9 @@ export function TodayAgenda() {
                                         {item.title}
                                     </h4>
                                     <span className={cn(
-                                        "text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border",
+                                        "text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm border",
                                         item.status === "active"
-                                            ? "bg-emerald-400/20 border-emerald-400/20 text-emerald-400"
+                                            ? "bg-[#BFFF0B]/20 border-[#BFFF0B]/20 text-[#BFFF0B]"
                                             : "bg-zinc-800 border-zinc-700 text-zinc-500"
                                     )}>
                                         {item.time}
