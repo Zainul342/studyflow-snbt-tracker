@@ -63,10 +63,10 @@
   - [x] **Interactive Elements**: Implemented hover lifts and smooth transitions
   - [x] **Design System Harmonization**: Enforced `rounded-sm`, Grid Backgrounds, and Osmo Ambient Lighting across Dashboard & Agenda
 
-- [ ] **Profile/Settings Page**
-  - [ ] User info display
-  - [ ] Target PTN & Jurusan
-  - [ ] Target date picker
+- [x] **Profile/Settings Page**
+  - [x] User info display
+  - [x] Target PTN & Jurusan
+  - [x] Target Score & Preferences
 
 - [ ] **Login/Register Page UI**
   - [ ] Clean login form
