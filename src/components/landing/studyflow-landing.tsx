@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Lenis from "lenis";
 import {
@@ -54,8 +55,13 @@ export default function StudyFlowLanding() {
             <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 pointer-events-none">
                 <div className="bg-zinc-900/80 backdrop-blur-xl pointer-events-auto text-white h-14 rounded-2xl flex items-center justify-between px-2 w-full max-w-xl mx-auto border border-white/5 shadow-2xl">
                     <div className="flex items-center gap-3 pl-3">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">
-                            <BookOpen size={16} className="text-black" />
+                        <div className="relative w-8 h-8 rounded-xl overflow-hidden border border-white/10">
+                            <Image
+                                src="/logo.png"
+                                alt="StudyFlow Logo"
+                                fill
+                                className="object-cover"
+                            />
                         </div>
                         <span className="font-black text-base tracking-tight">StudyFlow</span>
                     </div>
@@ -81,14 +87,14 @@ export default function StudyFlowLanding() {
                 <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/20 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="z-20 text-center px-4 max-w-4xl"
                 >
                     {/* Badge */}
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2 }}
@@ -162,7 +168,7 @@ export default function StudyFlowLanding() {
                             { value: "3x", label: "Lebih Efisien", icon: TrendingUp },
                             { value: "100%", label: "Gratis Selamanya", icon: Trophy },
                         ].map((stat, i) => (
-                            <motion.div 
+                            <motion.div
                                 key={i}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -182,7 +188,7 @@ export default function StudyFlowLanding() {
             {/* --- SECTION 3: DASHBOARD PREVIEW --- */}
             <section className="py-24 md:py-32 relative">
                 <div className="max-w-7xl mx-auto px-6">
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -283,7 +289,7 @@ export default function StudyFlowLanding() {
             {/* --- SECTION 4: FEATURES --- */}
             <section className="py-24 md:py-32 bg-zinc-900/50">
                 <div className="max-w-6xl mx-auto px-6">
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}

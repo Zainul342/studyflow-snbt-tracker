@@ -1,6 +1,8 @@
 "use client";
 
 import { ProgressOverview } from "@/components/dashboard/progress-overview";
+import { ActivityChart } from "@/components/dashboard/activity-chart";
+import { TodayAgenda } from "@/components/dashboard/today-agenda";
 import { BookOpen, Trophy, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -61,33 +63,11 @@ export default function DashboardPage() {
 
                 {/* Placeholder for future widgets (StatsGrid & Agenda) */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Chart Area Placeholder */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className="lg:col-span-2 group bg-zinc-800/50 border border-white/5 rounded-3xl p-8 hover:bg-zinc-800 hover:border-white/10 transition-all duration-300 min-h-[350px] flex flex-col items-center justify-center text-center"
-                    >
-                        <div className="w-16 h-16 rounded-full bg-zinc-900 flex items-center justify-center mb-4 border border-zinc-700/50">
-                            <TrendingUp className="w-6 h-6 text-zinc-600" />
-                        </div>
-                        <h3 className="text-zinc-500 font-bold mb-1">Activity Chart</h3>
-                        <p className="text-xs text-zinc-600 uppercase tracking-widest font-bold">Coming Soon</p>
-                    </motion.div>
+                    {/* Chart Area */}
+                    <ActivityChart />
 
-                    {/* Agenda Placeholder */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className="bg-zinc-800/50 border border-white/5 rounded-3xl p-8 hover:bg-zinc-800 hover:border-white/10 transition-all duration-300 min-h-[350px] flex flex-col items-center justify-center text-center"
-                    >
-                        <div className="w-16 h-16 rounded-full bg-zinc-900 flex items-center justify-center mb-4 border border-zinc-700/50">
-                            <BookOpen className="w-6 h-6 text-zinc-600" />
-                        </div>
-                        <h3 className="text-zinc-500 font-bold mb-1">Today's Agenda</h3>
-                        <p className="text-xs text-zinc-600 uppercase tracking-widest font-bold">Coming Soon</p>
-                    </motion.div>
+                    {/* Today's Agenda */}
+                    <TodayAgenda />
                 </div>
             </div>
         </div>

@@ -39,8 +39,8 @@
 
 - [ ] **Dashboard Page**
   - [x] Progress overview cards
-  - [ ] Stats grid (dummy data)
-  - [ ] Today's agenda widget
+  - [x] Stats grid (dummy data)
+  - [x] Today's agenda widget
   - [ ] Navigation sidebar
 
 - [ ] **Tracking Page**
