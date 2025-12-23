@@ -7,6 +7,9 @@ import { ArrowRight, Target, Calendar, Award, Sparkles, ChevronDown } from "luci
 import { Button } from "@/components/ui/button";
 import { mockDB } from "@/lib/data/mock-db";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase/config";
 
 // PTN List
 const PTN_LIST = [
@@ -23,6 +26,7 @@ interface FormErrors {
 
 export default function OnboardingPage() {
     const router = useRouter();
+    const { user } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState<FormErrors>({});
     const [formData, setFormData] = useState({
@@ -78,15 +82,25 @@ export default function OnboardingPage() {
             ? Math.ceil(totalSubmateri / daysRemaining)
             : totalSubmateri;
 
-        mockDB.saveProfile({
-            name: formData.name.trim(),
-            targetUniversity: formData.targetUniversity,
-            targetMajor: formData.targetMajor.trim(),
-            targetDate: formData.targetDate,
-            dailyGoalHours: dailyGoal,
-        });
+        try {
+            // 4. Save to Firestore
+            if (user?.uid) {
+                const userRef = doc(db, "users", user.uid);
+                await updateDoc(userRef, {
+                    displayName: formData.name.trim(), // Update name definition if changed
+                    targetPTN: formData.targetUniversity,
+                    targetMajor: formData.targetMajor.trim(),
+                    targetDate: formData.targetDate,
+                    "stats.dailyGoal": dailyGoal
+                });
+            }
 
-        router.push("/dashboard");
+            router.push("/dashboard");
+        } catch (error) {
+            console.error("Error saving profile:", error);
+            // Optionally set an error state here
+            setIsLoading(false);
+        }
     };
 
     return (

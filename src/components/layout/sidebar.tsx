@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { mockDB, UserProfile } from "@/lib/data/mock-db";
+import { useAuth } from "@/contexts/auth-context";
 
 const sidebarNavItems = [
     {
@@ -50,12 +50,16 @@ const sidebarNavItems = [
 
 export function Sidebar() {
     const pathname = usePathname();
-    const [profile, setProfile] = useState<UserProfile | null>(null);
+    const { user, logout } = useAuth();
 
-    useEffect(() => {
-        const userProfile = mockDB.getProfile();
-        setProfile(userProfile);
-    }, []);
+    const handleLogout = async () => {
+        try {
+            await logout();
+            // Redirect is handled by ProtectedRoute or middleware effectively pushing to login
+        } catch (error) {
+            console.error("Logout failed", error);
+        }
+    };
 
     return (
         <div className="hidden border-r border-white/5 bg-[#0A0A0A] md:block w-64 h-screen fixed left-0 top-0 z-30">
@@ -120,7 +124,11 @@ export function Sidebar() {
                                         <span>Settings</span>
                                     </Button>
                                 </Link>
-                                <Button variant="ghost" className="w-full justify-start gap-3 h-10 px-4 text-red-500/70 hover:text-red-500 hover:bg-red-500/5 rounded-sm group transition-all text-xs border border-transparent hover:border-red-500/10 font-bold uppercase tracking-wide">
+                                <Button
+                                    variant="ghost"
+                                    onClick={handleLogout}
+                                    className="w-full justify-start gap-3 h-10 px-4 text-red-500/70 hover:text-red-500 hover:bg-red-500/5 rounded-sm group transition-all text-xs border border-transparent hover:border-red-500/10 font-bold uppercase tracking-wide"
+                                >
                                     <LogOut className="h-4 w-4 opacity-70 group-hover:opacity-100" />
                                     <span>Logout</span>
                                 </Button>
@@ -132,11 +140,11 @@ export function Sidebar() {
                         <div className="p-3 rounded-sm border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors cursor-pointer group">
                             <div className="flex items-center gap-3">
                                 <div className="h-9 w-9 rounded-sm bg-gradient-to-br from-[#6B4FFF] to-purple-800 flex items-center justify-center font-black text-[10px] text-white border border-white/10 group-hover:border-[#6B4FFF] transition-colors">
-                                    {profile?.name ? profile.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase() : "ZN"}
+                                    {user?.displayName ? user.displayName.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase() : (user?.email?.slice(0, 2).toUpperCase() || "ZN")}
                                 </div>
                                 <div className="overflow-hidden">
                                     <p className="text-xs font-black text-white truncate group-hover:text-[#BFFF0B] transition-colors uppercase tracking-tight">
-                                        {profile?.name ? profile.name.split(" ")[0] : "Student"}
+                                        {user?.displayName ? user.displayName.split(" ")[0] : (user?.email?.split("@")[0] || "Student")}
                                     </p>
                                     <div className="flex items-center gap-1.5 text-[9px] text-zinc-600 font-bold uppercase tracking-wider group-hover:text-zinc-400">
                                         <Sparkles size={10} className="text-[#BFFF0B]" />

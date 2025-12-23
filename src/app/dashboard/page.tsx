@@ -6,8 +6,16 @@ import { TodayAgenda } from "@/components/dashboard/today-agenda";
 import { BookOpen, Trophy, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useAuth } from "@/contexts/auth-context";
 
 export default function DashboardPage() {
+    const { user, userData } = useAuth();
+
+    // Default Fallback
+    const displayName = userData?.displayName || user?.displayName || "Accessing Protocol...";
+    const targetPTN = userData?.targetPTN || "Target Universitas";
+    const targetMajor = userData?.targetMajor || "Target Jurusan";
+
     return (
         // Main container match landing page bg-[#09090b] and selection color
         <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-emerald-400 selection:text-black font-sans overflow-x-hidden relative">
@@ -31,7 +39,7 @@ export default function DashboardPage() {
                             animate={{ opacity: 1, x: 0 }}
                             className="text-3xl md:text-4xl font-black tracking-tight text-white mb-2"
                         >
-                            Selamat Pagi, <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">Zain</span> 👋
+                            Selamat Pagi, <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">{displayName}</span> 👋
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, x: -20 }}
@@ -39,7 +47,7 @@ export default function DashboardPage() {
                             transition={{ delay: 0.1 }}
                             className="text-zinc-400 text-lg font-medium"
                         >
-                            Siap untuk mengejar target <span className="text-white font-semibold">ITB - Teknik Informatika</span> hari ini?
+                            Siap untuk mengejar target <span className="text-white font-semibold">{targetPTN} - {targetMajor}</span> hari ini?
                         </motion.p>
                     </div>
 
@@ -49,7 +57,7 @@ export default function DashboardPage() {
                         transition={{ delay: 0.2 }}
                         className="flex gap-3"
                     >
-                        <Link href="/materials" className="flex items-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800 transition-all text-zinc-400 hover:text-white text-sm font-bold">
+                        <Link href="/dashboard/study" className="flex items-center gap-2 px-5 py-2.5 rounded-sm bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800 transition-all text-zinc-400 hover:text-white text-sm font-bold">
                             <BookOpen className="w-4 h-4" />
                             Materi
                         </Link>

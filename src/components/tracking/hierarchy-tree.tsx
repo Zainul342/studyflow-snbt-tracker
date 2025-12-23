@@ -8,6 +8,7 @@ import { mockDB } from "@/lib/data/mock-db";
 import { useEffect } from "react";
 import { SubmateriItem } from "./submateri-item";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
 
 export function HierarchyTree() {
     // State for progress map: subtesId -> { current, total, percentage }
@@ -22,9 +23,12 @@ export function HierarchyTree() {
         );
     };
 
+    const { userData } = useAuth(); // Live data from Firestore
+
     useEffect(() => {
         const calculateProgress = () => {
-            const allProgress = mockDB.getAllProgress();
+            // MVP: If no progress data yet, fallback to empty object
+            const allProgress = userData?.progress || {};
             const newMap: Record<string, any> = {};
 
             SUBTES_STRUCTURE.forEach(subtes => {
@@ -53,14 +57,8 @@ export function HierarchyTree() {
             setProgressMap(newMap);
         };
 
-        // Initial calc
         calculateProgress();
-
-        // Listen for updates
-        const handleUpdate = () => calculateProgress();
-        window.addEventListener("progress-updated" as any, handleUpdate);
-        return () => window.removeEventListener("progress-updated" as any, handleUpdate);
-    }, []);
+    }, [userData]); // Re-run whenever Firestore data changes
 
     return (
         <div className="space-y-4">

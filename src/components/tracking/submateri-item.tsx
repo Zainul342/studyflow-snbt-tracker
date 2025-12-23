@@ -5,6 +5,9 @@ import { BookOpen, CheckCircle2, Clock, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mockDB, ProgressStatus } from "@/lib/data/mock-db";
 import { motion } from "framer-motion";
+import { useAuth } from "@/contexts/auth-context";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase/config";
 
 interface SubmateriItemProps {
     id: string;
@@ -38,15 +41,34 @@ export function SubmateriItem({ id, name }: SubmateriItemProps) {
         return () => window.removeEventListener("progress-updated" as any, handleUpdate);
     }, [id]);
 
-    const toggleStatus = (type: keyof Omit<ProgressStatus, "lastUpdated">) => {
+    const toggleStatus = async (type: keyof Omit<ProgressStatus, "lastUpdated">) => {
         const newValue = !status[type];
 
         // 1. Optimistic Update
         const newStatus = { ...status, [type]: newValue };
         setStatus(newStatus);
 
-        // 2. Persist to DB
-        mockDB.updateSubmateriProgress(id, { [type]: newValue });
+        // 2. Persist to Firestore
+        if (user?.uid) {
+            const userRef = doc(db, "users", user.uid);
+            // We use dot notation "progress.submateriId" to update only this specific field in the map
+            // This requires the document to exist.
+            try {
+                // Construct the dynamic key for the map
+                const fieldPath = `progress.${id}`;
+                await setDoc(userRef, {
+                    progress: {
+                        [id]: { [type]: newValue }
+                    }
+                }, { merge: true });
+            } catch (err) {
+                console.error("Failed to save progress:", err);
+                // Rollback if needed (omitted for brevity)
+            }
+        } else {
+            // Fallback for non-logged in (shouldn't happen in protected route)
+            mockDB.updateSubmateriProgress(id, { [type]: newValue });
+        }
     };
 
     return (

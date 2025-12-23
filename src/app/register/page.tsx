@@ -7,16 +7,76 @@ import { motion } from "framer-motion";
 import { ArrowRight, Eye, EyeOff, Lock, Mail, User, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "@/lib/firebase/config";
+import { doc, setDoc } from "firebase/firestore";
+import { useAuth } from "@/contexts/auth-context";
 
 export default function RegisterPage() {
-    const router = useRouter(); // Import useRouter
+    const router = useRouter();
+    const { signInWithGoogle } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-    const handleRegister = async () => {
+    const handleRegister = async (e: React.FormEvent) => {
+        e.preventDefault();
         setIsLoading(true);
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 800));
-        router.push("/onboarding");
+        setError("");
+
+        try {
+            // 1. Create User
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+            // 2. Update Profile Name
+            await updateProfile(userCredential.user, {
+                displayName: name
+            });
+
+            // 3. Create Firestore Document
+            await setDoc(doc(db, "users", userCredential.user.uid), {
+                uid: userCredential.user.uid,
+                email: email,
+                displayName: name,
+                createdAt: Date.now(),
+                role: "student",
+                stats: {
+                    level: 1,
+                    xp: 0,
+                    streak: 0
+                },
+                targetPTN: null,
+                targetMajor: null
+            });
+
+            // 4. Redirect
+            router.push("/onboarding");
+        } catch (err: any) {
+            console.error(err);
+            if (err.code === "auth/email-already-in-use") {
+                setError("Email is already registered.");
+            } else if (err.code === "auth/weak-password") {
+                setError("Password should be at least 6 characters.");
+            } else {
+                setError("Registration failed. Please try again.");
+            }
+            setIsLoading(false);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        setIsLoading(true);
+        setError("");
+        try {
+            await signInWithGoogle();
+            router.push("/onboarding");
+        } catch (err) {
+            console.error(err);
+            setError("Google Sign-In failed.");
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -71,18 +131,27 @@ export default function RegisterPage() {
                     </div>
 
                     {/* B. Tactile Forms */}
-                    <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-4" onSubmit={handleRegister}>
+                        {error && (
+                            <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-sm text-red-400 text-xs font-bold text-center">
+                                {error}
+                            </div>
+                        )}
                         <AuthInput
                             label="Operator Name"
                             type="text"
                             placeholder="Zainul Arifin"
                             icon={User}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
                         <AuthInput
                             label="Email Address"
                             type="email"
                             placeholder="operator@studyflow.id"
                             icon={Mail}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <AuthInput
                             label="Secure Password"
@@ -90,13 +159,16 @@ export default function RegisterPage() {
                             placeholder="••••••••"
                             icon={Lock}
                             isPassword
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
 
                         {/* C. Action Area */}
                         <div className="pt-2">
                             <Button
+                                type="submit"
                                 className="w-full h-12 bg-[#BFFF0B] hover:bg-[#BFFF0B] text-black font-bold uppercase tracking-widest rounded-sm group relative overflow-hidden transition-all"
-                                onClick={handleRegister}
+                                disabled={isLoading}
                             >
                                 <span className="relative z-10 flex items-center gap-2">
                                     {isLoading ? "Synchronizing..." : "Create Account"}
@@ -120,7 +192,10 @@ export default function RegisterPage() {
                         </div>
 
                         <Button
+                            type="button"
                             variant="outline"
+                            onClick={handleGoogleLogin}
+                            disabled={isLoading}
                             className="w-full h-11 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 text-white rounded-sm font-medium text-xs uppercase tracking-wide flex items-center gap-2 grayscale hover:grayscale-0 transition-all duration-300"
                         >
                             <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -182,13 +257,17 @@ function AuthInput({
     type = "text",
     placeholder,
     icon: Icon,
-    isPassword = false
+    isPassword = false,
+    value,
+    onChange
 }: {
     label: string,
     type?: string,
     placeholder: string,
     icon: any,
-    isPassword?: boolean
+    isPassword?: boolean,
+    value?: string,
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }) {
     const [showPassword, setShowPassword] = useState(false);
     const inputType = isPassword ? (showPassword ? "text" : "password") : type;
@@ -206,6 +285,8 @@ function AuthInput({
 
                 <input
                     type={inputType}
+                    value={value}
+                    onChange={onChange}
                     placeholder={placeholder}
                     className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-12 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-[#BFFF0B] focus:bg-black/60 transition-all font-medium"
                 />

@@ -7,16 +7,44 @@ import { motion } from "framer-motion";
 import { ArrowRight, Eye, EyeOff, Lock, Mail, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/auth-context";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase/config";
 
 export default function LoginPage() {
-    const router = useRouter(); // Import useRouter
+    const router = useRouter();
+    const { signInWithGoogle } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-    const handleLogin = async () => {
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
         setIsLoading(true);
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 800));
-        router.push("/dashboard");
+        setError("");
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            router.push("/dashboard");
+        } catch (err: any) {
+            console.error(err);
+            setError("Invalid credentials. Please try again.");
+            setIsLoading(false);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        setIsLoading(true);
+        setError("");
+        try {
+            await signInWithGoogle();
+            router.push("/dashboard");
+        } catch (err) {
+            console.error(err);
+            setError("Google Sign-In failed.");
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -71,12 +99,19 @@ export default function LoginPage() {
                     </div>
 
                     {/* B. Tactile Forms */}
-                    <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-4" onSubmit={handleLogin}>
+                        {error && (
+                            <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-sm text-red-400 text-xs font-bold text-center">
+                                {error}
+                            </div>
+                        )}
                         <AuthInput
                             label="Email Address"
                             type="email"
                             placeholder="operator@studyflow.id"
                             icon={Mail}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <AuthInput
                             label="Password"
@@ -84,6 +119,8 @@ export default function LoginPage() {
                             placeholder="••••••••"
                             icon={Lock}
                             isPassword
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
 
                         {/* Forgot Password Link */}
@@ -95,8 +132,9 @@ export default function LoginPage() {
 
                         {/* C. Action Area */}
                         <Button
+                            type="submit"
                             className="w-full h-12 bg-[#BFFF0B] hover:bg-[#BFFF0B] text-black font-bold uppercase tracking-widest rounded-sm group relative overflow-hidden"
-                            onClick={handleLogin}
+                            disabled={isLoading}
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 {isLoading ? "Authenticating..." : "Initiate Protocol"}
@@ -119,7 +157,10 @@ export default function LoginPage() {
                         </div>
 
                         <Button
+                            type="button"
                             variant="outline"
+                            onClick={handleGoogleLogin}
+                            disabled={isLoading}
                             className="w-full h-11 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 text-white rounded-sm font-medium text-xs uppercase tracking-wide flex items-center gap-2 grayscale hover:grayscale-0 transition-all duration-300"
                         >
                             <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -172,13 +213,17 @@ function AuthInput({
     type = "text",
     placeholder,
     icon: Icon,
-    isPassword = false
+    isPassword = false,
+    value,
+    onChange
 }: {
     label: string,
     type?: string,
     placeholder: string,
     icon: any,
-    isPassword?: boolean
+    isPassword?: boolean,
+    value?: string,
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }) {
     const [showPassword, setShowPassword] = useState(false);
     const inputType = isPassword ? (showPassword ? "text" : "password") : type;
@@ -196,6 +241,8 @@ function AuthInput({
 
                 <input
                     type={inputType}
+                    value={value}
+                    onChange={onChange}
                     placeholder={placeholder}
                     className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-12 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-[#BFFF0B] focus:bg-black/60 transition-all font-medium"
                 />

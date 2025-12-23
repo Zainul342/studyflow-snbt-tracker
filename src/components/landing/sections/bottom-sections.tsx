@@ -102,7 +102,7 @@ export function ShowcaseGallery() {
                 {[...Array(10)].map((_, i) => (
                     <div key={i} className="relative w-[400px] aspect-video rounded-sm overflow-hidden flex-shrink-0 bg-white/5">
                         <Image
-                            src={`/api/placeholder/800/450`}
+                            src={`https://placehold.co/800x450/1e1e1e/FFF?text=Dashboard+Preview`}
                             alt="Showcase"
                             fill
                             className="object-cover opacity-50 hover:opacity-100 transition-opacity duration-700"
