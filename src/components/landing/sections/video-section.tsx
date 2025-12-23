@@ -21,8 +21,8 @@ export function VideoSection() {
                         <br />
                         <span className="gradient-text-green">In One Place</span>
                     </h2>
-                    <p className="text-white/60 text-lg max-w-3xl mx-auto">
-                        Dapetin akses eksklusif ke sistem tracking, analitik, dan strategi belajar dari para <span className="text-white">top scorer</span>. Tiru cara main mereka.
+                    <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                        Dapetin akses eksklusif ke sistem tracking, analitik, dan strategi belajar dari para <span className="text-foreground font-bold">top scorer</span>. Tiru cara main mereka.
                     </p>
                 </motion.div>
 
@@ -53,11 +53,11 @@ export function VideoSection() {
                         {[1, 2, 3, 4].map((i) => (
                             <div
                                 key={i}
-                                className="w-12 h-12 rounded-sm bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-[#0A0A0A]"
+                                className="w-12 h-12 rounded-sm bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-background"
                             />
                         ))}
                     </div>
-                    <span className="text-white/80 font-medium">Join 500+ others</span>
+                    <span className="text-muted-foreground font-medium">Join 500+ others</span>
                 </div>
             </div>
         </section>

@@ -40,13 +40,20 @@
 - [x] Login / Register UI (Glass Monolith)
 - [x] Onboarding Page Redesign (Glass Monolith & Setup Flow)
 - [ ] Dashboard & Tracking UI
-    - [x] Unified "Mission Control" Dashboard
-    - [x] Agenda Harian (Tasks Page)
-  - [x] Today's agenda widget
-  - [x] Navigation sidebar
+    - [x] **Phase 6: Noir & Samba Theming** <!-- id: 6 -->
+    - [x] Integrate `next-themes`.
+    - [x] Refactor `globals.css` (semantic variables).
+    - [x] Fix Tailwind `@apply` build errors.
+    - [x] Update all Landing Page components.
+- [x] **Phase 6.5: Landing Page Refinement** (In Progress)
+    - [x] Make "Products" section cards interactive (Coming Soon Modal).
+    - [x] Polish Copywriting across the landing page.
+    - [x] Ensure Mobile Menu is fully functional.
+    - [x] Restore Semantic Colors for Dual Theme support. (@globals.css, @hero-section.tsx, @video-section.tsx)
+    - [x] **New:** Create Realtime Dashboard Preview (interactive code) instead of static image.
+    - [x] **New:** Fix Light Mode visibility (black on black) in Hero & Video sections.
 
-  - [x] **Tracking Page**
-  - [x] Hierarchy tree: Subtes → Materi → Submateri
+**Current Focus**: Phase 7: Polish & Deployment (Images & Final UX)eri
   - [x] Checkbox system (Belajar/Latsol/Review)
   - [x] Progress bar per section
   - [x] **Unified Mission Dashboard** (Phase 2 Extension)

@@ -14,7 +14,7 @@ export function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOp
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="fixed top-4 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
         >
-            <div className="pointer-events-auto glass-dark w-[90vw] sm:w-[500px] rounded-sm px-4 py-2 flex items-center justify-between border border-white/10 bg-[#0A0A0A]/80 backdrop-blur-xl shadow-2xl shadow-black/50">
+            <div className="pointer-events-auto glass-dark w-[90vw] sm:w-[500px] rounded-sm px-4 py-2 flex items-center justify-between border border-white/10 bg-[#0A0A0A]/80 backdrop-blur-md shadow-2xl shadow-black/50">
                 {/* Menu Trigger */}
                 <button
                     onClick={() => setMenuOpen(!menuOpen)}

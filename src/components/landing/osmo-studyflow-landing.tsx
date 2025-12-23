@@ -42,36 +42,37 @@ export default function OsmoStudyFlowLanding() {
 
     // Smooth scroll setup
     useEffect(() => {
+        // Detect mobile/touch
+        const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+
+        if (isMobile) return;
+
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
         });
 
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
-
         // Connect Lenis with GSAP ScrollTrigger
-        lenis.on('scroll', ScrollTrigger.update);
+        const updateScrolltrigger = () => ScrollTrigger.update();
+        lenis.on('scroll', updateScrolltrigger);
 
-        gsap.ticker.add((time) => {
+        const tickerUpdate = (time: number) => {
             lenis.raf(time * 1000);
-        });
+        };
+        gsap.ticker.add(tickerUpdate);
 
         gsap.ticker.lagSmoothing(0);
 
         return () => {
             lenis.destroy();
-            gsap.ticker.remove(() => { });
+            lenis.off('scroll', updateScrolltrigger);
+            gsap.ticker.remove(tickerUpdate);
         };
     }, []);
 
     return (
-        <div ref={containerRef} className="relative bg-[#0A0A0A] text-white overflow-x-hidden">
+        <div ref={containerRef} className="relative bg-background text-foreground overflow-x-hidden selection:bg-primary selection:text-black">
 
             {/* HEADER */}
             <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />

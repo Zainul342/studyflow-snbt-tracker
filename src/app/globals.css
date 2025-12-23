@@ -5,99 +5,124 @@
 
 @plugin "tailwindcss-animate";
 
-  /* Osmo-inspired Design Tokens */
-  :root {
-    /* Brand Colors - Osmo Style */
-    --color-osmo-purple: 107 79 255; /* #6B4FFF */
-    --color-osmo-green: 191 255 11; /* #BFFF0B */
-    --color-osmo-dark: 10 10 10;    /* #0A0A0A */
-    --color-osmo-card: 26 26 26;    /* #1A1A1A */
-    --color-osmo-light: 245 245 245; /* #F5F5F5 */
+/* Osmo-inspired Design Tokens */
+:root {
+  /* Brand Colors - Osmo Style */
+  --color-osmo-purple: 107 79 255;
+  --color-osmo-purple: #6B4FFF;
+  /* #6B4FFF */
+  --color-osmo-green: #BFFF0B;
+  /* #BFFF0B */
+  --color-osmo-dark: #0A0A0A;
+  /* #0A0A0A */
+  --color-osmo-card: #1A1A1A;
+  /* #1A1A1A */
 
-    /* Map to System Colors */
-    --background: 10 10 10;
-    --foreground: 245 245 245;
-    
-    --card: 26 26 26;
-    --card-foreground: 245 245 245;
-    
-    --primary: 191 255 11; /* Osmo Green as Primary */
-    --primary-foreground: 10 10 10;
-    
-    --secondary: 107 79 255; /* Osmo Purple as Secondary */
-    --secondary-foreground: 245 245 245;
-    
-    --muted: 26 26 26;
-    --muted-foreground: 161 161 170;
-    
-    --accent: 39 39 42;
-    --accent-foreground: 245 245 245;
-    
-    --destructive: 239 68 68;
-    --destructive-foreground: 245 245 245;
-    
-    --border: 39 39 42;
-    --input: 39 39 42;
-    --ring: 191 255 11;
-    
-    /* Radius - SHARP BUT NOT POINTY */
-    --radius: 0.125rem; /* 2px - rounded-sm */
-  }
+  /* Glass Variables - Light Mode */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
 
-  .dark {
-    --background: 10 10 10;
-    --foreground: 245 245 245;
-    --card: 26 26 26;
-    --card-foreground: 245 245 245;
-    --primary: 191 255 11;
-    --primary-foreground: 10 10 10;
-    --secondary: 107 79 255;
-    --secondary-foreground: 245 245 245;
-    --muted: 26 26 26;
-    --muted-foreground: 161 161 170;
-    --accent: 39 39 42;
-    --accent-foreground: 245 245 245;
-    --destructive: 239 68 68;
-    --destructive-foreground: 245 245 245;
-    --border: 39 39 42;
-    --input: 39 39 42;
-    --ring: 191 255 11;
-  }
+  --glass-light-bg: rgba(0, 0, 0, 0.05);
+  --glass-light-border: rgba(0, 0, 0, 0.05);
+  --color-osmo-light: #F5F5F5;
+  /* #F5F5F5 */
 
-  @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-card: var(--card);
-    --color-card-foreground: var(--card-foreground);
-    --color-popover: var(--card);
-    --color-popover-foreground: var(--card-foreground);
-    --color-primary: var(--primary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--secondary);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-accent: var(--accent);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-destructive: var(--destructive);
-    --color-destructive-foreground: var(--destructive-foreground);
-    --color-border: var(--border);
-    --color-input: var(--input);
-    --color-ring: var(--ring);
-    
-    /* Enforce Sharp Radius */
-    --radius-xs: calc(var(--radius) - 2px);
-    --radius-sm: var(--radius);
-    --radius-md: calc(var(--radius) + 2px);
-    --radius-lg: calc(var(--radius) + 4px);
-    --radius-xl: calc(var(--radius) + 8px);
-    
-    /* Custom Colors */
-    --color-osmo-purple: 107 79 255;
-    --color-osmo-green: 191 255 11;
-    --color-osmo-dark: 10 10 10;
-    --color-osmo-card: 26 26 26;
-  }
+  /* Map to System Colors - LIGHT MODE DEFAULT (Samba) */
+  --background: #F5F5F7;
+  /* Osmo Light Background */
+  --foreground: #0A0A0A;
+  /* Osmo Dark Text */
+
+  --card: #FFFFFF;
+  --card-foreground: #0A0A0A;
+
+  --primary: #BFFF0B;
+  /* Osmo Green */
+  --primary-foreground: #0A0A0A;
+
+  --secondary: #6B4FFF;
+  /* Osmo Purple */
+  --secondary-foreground: #FFFFFF;
+
+  --muted: #F0F0F2;
+  --muted-foreground: #71717A;
+
+  --accent: #F0F0F2;
+  --accent-foreground: #0A0A0A;
+
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #E4E4E7;
+  --input: #E4E4E7;
+  --ring: #BFFF0B;
+
+  /* Radius - SHARP BUT NOT POINTY */
+  --radius: 0.125rem;
+  /* 2px - rounded-sm */
+}
+
+.dark {
+  --background: #0A0A0A;
+  --foreground: #F5F5F5;
+  --card: #1A1A1A;
+  --card-foreground: #F5F5F5;
+  --primary: #BFFF0B;
+  --primary-foreground: #0A0A0A;
+  --secondary: #6B4FFF;
+  --secondary-foreground: #F5F5F5;
+  --muted: #1A1A1A;
+  --muted-foreground: #A1A1AA;
+  --accent: #27272A;
+  --accent-foreground: #F5F5F5;
+  --destructive: #EF4444;
+  --destructive-foreground: #F5F5F5;
+  --border: #27272A;
+  --input: #27272A;
+  --ring: #BFFF0B;
+
+  /* Glass Variables - Dark Mode */
+  --glass-bg: rgba(26, 26, 26, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  --glass-light-bg: rgba(255, 255, 255, 0.05);
+  --glass-light-border: rgba(255, 255, 255, 0.05);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Enforce Sharp Radius */
+  --radius-xs: calc(var(--radius) - 2px);
+  --radius-sm: var(--radius);
+  --radius-md: calc(var(--radius) + 2px);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+
+  /* Custom Colors */
+  --color-osmo-purple: 107 79 255;
+  --color-osmo-green: 191 255 11;
+  --color-osmo-dark: 10 10 10;
+  --color-osmo-card: 26 26 26;
+}
 
 /* Base Styles */
 @layer base {
@@ -129,20 +154,31 @@
 }
 
 /* Utilities */
-/* Utilities */
-/* Glassmorphism */
+/* Glassmorphism - Theme Aware */
 @utility glass {
-  background: rgba(26, 26, 26, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+
+  @media (max-width: 1024px) {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(10, 10, 10, 0.9);
+  }
 }
 
 @utility glass-light {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--glass-light-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--glass-light-border);
+
+  @media (max-width: 1024px) {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.08);
+  }
 }
 
 /* Gradient Text */
@@ -187,12 +223,18 @@
 /* Custom Animations */
 @keyframes marquee {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
+}
+
+.animate-marquee,
+[class*="animate-[marquee"] {
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 @keyframes float {

@@ -38,10 +38,10 @@ export function HeroSection() {
                     <span className="gradient-text-purple font-light tracking-tight">Built for Warriors</span>
                 </h1>
 
-                <p className="text-white/60 text-lg sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
-                    Platform lengkap dengan <span className="text-white">progress tracking</span>,{" "}
-                    <span className="text-white">analytics</span>, dan sistem belajar yang terstruktur.{" "}
-                    <span className="text-white">Gak ada lagi cerita belajar tanpa arah.</span>
+                <p className="text-muted-foreground text-lg sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
+                    Platform lengkap dengan <span className="text-foreground font-bold">progress tracking</span>,{" "}
+                    <span className="text-foreground font-bold">analytics</span>, dan sistem belajar yang terstruktur.{" "}
+                    <span className="text-foreground font-bold">Gak ada lagi cerita belajar tanpa arah.</span>
                 </p>
             </motion.div>
         </section>

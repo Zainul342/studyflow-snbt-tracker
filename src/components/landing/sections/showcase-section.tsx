@@ -25,10 +25,19 @@ export function ShowcaseSection() {
                             className="group relative aspect-[4/5] rounded-sm overflow-hidden cursor-pointer"
                             style={{ transformStyle: "preserve-3d" }}
                         >
-                            <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-80`} />
-                            <div className="absolute inset-0 bg-[#1A1A1A]/40 backdrop-blur-sm" />
+                            {/* Animated Gradient Background */}
+                            <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-80 group-hover:opacity-100 transition-opacity`} />
+
+                            {/* Abstract Pattern Overlay */}
+                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+                            <div className="absolute inset-0 bg-grid-white/[0.1] bg-[length:20px_20px]" />
+
+                            {/* Darker Gradient for text readability */}
+                            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
                             <div className="relative h-full p-6 flex flex-col justify-end">
-                                <h3 className="text-2xl font-bold text-white">{item.title}</h3>
+                                <item.icon className="w-12 h-12 text-white/50 mb-auto group-hover:text-white group-hover:scale-110 transition-all duration-500" />
+                                <h3 className="text-2xl font-bold text-white group-hover:translate-x-2 transition-transform">{item.title}</h3>
                             </div>
                         </motion.div>
                     ))}
