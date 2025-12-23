@@ -26,7 +26,7 @@ export function CreatorsSection() {
                         <div className="text-center group cursor-pointer">
                             <div className="relative w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 bg-[#1A1A1A] border-4 border-primary/20 shadow-2xl group-hover:scale-105 transition-all duration-500">
                                 <Image
-                                    src="/creators/zain.png"
+                                    src="/zain.png"
                                     alt="Zain"
                                     fill
                                     className="object-cover"
@@ -68,9 +68,9 @@ export function UpdatesSection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {[
-                        { title: "Progress Dashboard", time: "4 days ago", tag: "New Feature", color: "bg-blue-500", desc: "Visualize your mastery." },
-                        { title: "Tryout Analytics", time: "6 days ago", tag: "Update", color: "bg-purple-500", desc: "Deep dive into your scores." },
-                        { title: "Study Streaks", time: "1 week ago", tag: "Gamification", color: "bg-pink-500", desc: "Don't break the chain!" },
+                        { title: "Progress Dashboard", time: "4 days ago", tag: "New Feature", color: "bg-blue-500", icon: Sparkles, desc: "Visualize your mastery." },
+                        { title: "Tryout Analytics", time: "6 days ago", tag: "Update", color: "bg-purple-500", icon: ChevronRight, desc: "Deep dive into your scores." },
+                        { title: "Study Streaks", time: "1 week ago", tag: "Gamification", color: "bg-pink-500", icon: Lock, desc: "Don't break the chain!" },
                     ].map((update, i) => (
                         <motion.div
                             key={i}
@@ -78,17 +78,24 @@ export function UpdatesSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="glass-light rounded-xl p-6 hover:border-primary/50 transition-all cursor-pointer group border border-transparent"
+                            className="glass-light rounded-xl p-6 hover:border-primary/50 transition-all cursor-pointer group border border-transparent flex flex-col items-start"
                         >
-                            <div className="flex items-center gap-2 mb-4">
+                            <div className="flex items-center gap-2 mb-4 w-full">
                                 <span className="text-xs bg-primary/20 text-primary px-3 py-1 rounded-sm font-bold">
                                     {update.tag}
                                 </span>
-                                <span className="text-muted-foreground text-xs">{update.time}</span>
+                                <span className="text-muted-foreground text-xs ml-auto">{update.time}</span>
                             </div>
+
                             <h3 className="text-2xl font-bold text-foreground mb-2">{update.title}</h3>
-                            <p className="text-sm text-muted-foreground mb-4">{update.desc}</p>
-                            <div className={`aspect-video rounded-lg ${update.color} opacity-20 group-hover:opacity-40 transition-opacity`} />
+                            <p className="text-sm text-muted-foreground mb-6">{update.desc}</p>
+
+                            {/* Rich Visual Area */}
+                            <div className={`w-full aspect-video rounded-lg ${update.color}/10 border border-${update.color}/20 relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-500 flex items-center justify-center`}>
+                                <div className={`absolute inset-0 bg-${update.color}/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity`} />
+                                <div className="absolute inset-0 bg-grid-white/[0.05] bg-[length:16px_16px]" />
+                                <update.icon className={`w-12 h-12 text-${update.color.replace('bg-', '')} relative z-10 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all`} />
+                            </div>
                         </motion.div>
                     ))}
                 </div>
@@ -144,9 +151,9 @@ export function ProductsSection() {
     const [activeFeature, setActiveFeature] = useState({ name: "", desc: "" });
 
     const products = [
-        { name: "Progress Tracker", status: "Available", color: "from-blue-500 to-blue-600", link: "/dashboard" },
-        { name: "Tryout Engine", status: "Coming Soon", color: "from-purple-500 to-purple-600", desc: "Real exam simulation with IRT scoring system." },
-        { name: "AI Analytics", status: "Roadmap", color: "from-pink-500 to-pink-600", desc: "Personalized study recommendations based on your weak points." },
+        { name: "Progress Tracker", status: "Available", color: "from-blue-500 to-blue-600", icon: Sparkles, link: "/dashboard" },
+        { name: "Tryout Engine", status: "Coming Soon", color: "from-purple-500 to-purple-600", icon: ChevronRight, desc: "Real exam simulation with IRT scoring system." },
+        { name: "AI Analytics", status: "Roadmap", color: "from-pink-500 to-pink-600", icon: Lock, desc: "Personalized study recommendations based on your weak points." },
     ];
 
     const handleProductClick = (product: any) => {
@@ -195,7 +202,14 @@ export function ProductsSection() {
                                 onClick={() => !isAvailable && handleProductClick(product)}
                                 className="glass-light rounded-xl p-8 hover:border-primary/50 transition-all group cursor-pointer relative h-full flex flex-col"
                             >
-                                <div className={`aspect-video rounded-lg bg-gradient-to-br ${product.color} mb-6 opacity-30 group-hover:opacity-100 transition-all duration-500`} />
+                                {/* Rich Visual */}
+                                <div className={`aspect-video rounded-lg bg-gradient-to-br ${product.color} mb-6 relative overflow-hidden shadow-lg group-hover:shadow-${product.color}/20 transition-all`}>
+                                    <div className="absolute inset-0 bg-black/20" />
+                                    <div className="absolute inset-0 bg-grid-white/[0.1] bg-[length:20px_20px]" />
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <product.icon className="w-16 h-16 text-white opacity-80 group-hover:scale-110 transition-transform duration-500" />
+                                    </div>
+                                </div>
 
                                 <div className="flex items-center justify-between mb-2">
                                     <span className={`text-xs px-3 py-1 rounded-full font-bold ${isAvailable ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'}`}>

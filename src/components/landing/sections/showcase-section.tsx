@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { BarChart3, BrainCircuit, Target, Zap } from "lucide-react";
 
 export function ShowcaseSection() {
     const showcaseItems = [
-        { title: "Progress Tracking", image: "https://placehold.co/400x300/1e1e1e/FFF?text=Tracking", color: "from-blue-500 to-blue-600" },
-        { title: "Smart Analytics", image: "https://placehold.co/400x300/1e1e1e/FFF?text=Analytics", color: "from-purple-500 to-purple-600" },
-        { title: "Tryout System", image: "https://placehold.co/400x300/1e1e1e/FFF?text=Tryout", color: "from-pink-500 to-pink-600" },
-        { title: "Study Streaks", image: "https://placehold.co/400x300/1e1e1e/FFF?text=Streaks", color: "from-orange-500 to-orange-600" },
+        { title: "Progress Tracking", icon: BarChart3, color: "from-blue-500 to-blue-600" },
+        { title: "Smart Analytics", icon: BrainCircuit, color: "from-purple-500 to-purple-600" },
+        { title: "Tryout System", icon: Target, color: "from-pink-500 to-pink-600" },
+        { title: "Study Streaks", icon: Zap, color: "from-orange-500 to-orange-600" },
     ];
 
     return (
