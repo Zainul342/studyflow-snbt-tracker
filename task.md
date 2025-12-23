@@ -37,9 +37,11 @@
 ## 🖼️ Phase 2: UI Pages - Dummy Data (Week 2)
 > Tujuan: Bangun semua halaman UI tanpa backend dulu (Lesson 3 & 4)
 
-- [x] **Dashboard Page**
-  - [x] Progress overview cards
-  - [x] Stats grid (dummy data)
+- [x] Login / Register UI (Glass Monolith)
+- [x] Onboarding Page Redesign (Glass Monolith & Setup Flow)
+- [ ] Dashboard & Tracking UI
+    - [x] Unified "Mission Control" Dashboard
+    - [x] Agenda Harian (Tasks Page)
   - [x] Today's agenda widget
   - [x] Navigation sidebar
 
@@ -68,9 +70,9 @@
   - [x] Target PTN & Jurusan
   - [x] Target Score & Preferences
 
-- [ ] **Login/Register Page UI**
-  - [ ] Clean login form
-  - [ ] Google sign-in button (UI only)
+- [x] **Login/Register Page UI**
+  - [x] Clean login form
+  - [x] Google sign-in button (UI only)
 
 ---
 

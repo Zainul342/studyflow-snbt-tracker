@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
     Menu,
+    X,
     ArrowRight,
     BookOpen,
     Play,
@@ -70,6 +72,13 @@ export default function OsmoStudyFlowLanding() {
             {/* HEADER */}
             <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
+            {/* MOBILE MENU OVERLAY */}
+            <AnimatePresence>
+                {menuOpen && (
+                    <MobileMenu onClose={() => setMenuOpen(false)} />
+                )}
+            </AnimatePresence>
+
             {/* MARQUEE BANNER */}
             <MarqueeBanner />
 
@@ -127,7 +136,10 @@ function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (op
             <div className="pointer-events-auto glass-dark w-[90vw] sm:w-[500px] rounded-sm px-4 py-2 flex items-center justify-between border border-white/10 bg-[#0A0A0A]/80 backdrop-blur-xl shadow-2xl shadow-black/50">
                 {/* Menu Trigger */}
                 <button
-                    onClick={() => setMenuOpen(!menuOpen)}
+                    onClick={() => {
+                        console.log("Menu button clicked. Current state:", menuOpen, "New state:", !menuOpen);
+                        setMenuOpen(!menuOpen);
+                    }}
                     className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group"
                 >
                     <Menu className="w-4 h-4 group-hover:text-[#BFFF0B] transition-colors" />
@@ -151,7 +163,7 @@ function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (op
                             Login
                         </span>
                     </Link>
-                    <Link href="/onboarding">
+                    <Link href="/register">
                         <Button
                             size="sm"
                             className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black text-xs font-black rounded-sm h-8 px-5"
@@ -161,7 +173,46 @@ function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (op
                     </Link>
                 </div>
             </div>
-        </motion.header>
+
+        </motion.header >
+    );
+}
+
+function MobileMenu({ onClose }: { onClose: () => void }) {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        console.log("MobileMenu component mounted/rendered");
+        return () => setMounted(false);
+    }, []);
+
+    if (!mounted) return null;
+
+    return createPortal(
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] bg-[#0A0A0A] flex flex-col p-6 pointer-events-auto md:hidden"
+        >
+            <div className="flex justify-between items-center mb-8">
+                <div className="text-sm font-black tracking-tight text-white">STUDYFLOW</div>
+                <button onClick={onClose} className="p-2 text-zinc-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                </button>
+            </div>
+            <nav className="flex flex-col gap-6">
+                <Link href="/login" onClick={onClose} className="text-2xl font-bold text-white/80 hover:text-[#BFFF0B]">Login</Link>
+                <Link href="/register" onClick={onClose} className="text-2xl font-bold text-white/80 hover:text-[#BFFF0B]">Join Now</Link>
+                <div className="h-px bg-white/10 my-2" />
+                <Link href="/dashboard" onClick={onClose} className="text-lg font-medium text-white/60 hover:text-white">Dashboard</Link>
+                <Link href="/analytics" onClick={onClose} className="text-lg font-medium text-white/60 hover:text-white">Analytics</Link>
+                <Link href="/about" onClick={onClose} className="text-lg font-medium text-white/60 hover:text-white">About</Link>
+            </nav>
+        </motion.div>,
+        document.body
     );
 }
 
@@ -804,7 +855,7 @@ function Footer() {
                     </div>
                     <div className="flex items-center gap-6">
                         <Link href="/login" className="text-white/60 hover:text-white text-sm transition-colors">Login</Link>
-                        <Link href="/onboarding" className="text-white/60 hover:text-white text-sm transition-colors">Join StudyFlow</Link>
+                        <Link href="/register" className="text-white/60 hover:text-white text-sm transition-colors">Join StudyFlow</Link>
                     </div>
                 </div>
             </div>

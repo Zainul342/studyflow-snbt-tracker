@@ -4,44 +4,44 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, Eye, EyeOff, Lock, Mail, Activity } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, Lock, Mail, User, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-export default function LoginPage() {
+export default function RegisterPage() {
     const router = useRouter(); // Import useRouter
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = async () => {
+    const handleRegister = async () => {
         setIsLoading(true);
         // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, 800));
-        router.push("/dashboard");
+        router.push("/onboarding");
     };
 
     return (
         <div className="min-h-screen bg-[#0A0A0A] text-white font-sans selection:bg-[#BFFF0B] selection:text-black flex items-center justify-center relative overflow-hidden">
 
-            {/* 1. Interactive Void Background */}
+            {/* 1. Interactive Void Background (Matches Login) */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-grid-white opacity-10 bg-[length:50px_50px]" />
-                {/* The "Heartbeat" Glow - Pulsing behind the card */}
+                {/* The "Heartbeat" Glow - Slightly more Lime heavily for Register */}
                 <motion.div
-                    animate={{ opacity: [0.4, 0.6, 0.4], scale: [1, 1.1, 1] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-900/20 blur-[120px] rounded-full mix-blend-screen"
+                    animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.1, 1] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-lime-900/10 blur-[120px] rounded-full mix-blend-screen"
                 />
             </div>
 
             {/* 2. The Glass Monolith */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "backOut" }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: "circOut" }}
                 className="relative z-10 w-full max-w-[420px] p-6 md:p-10 mx-4"
             >
                 {/* Monolith Card */}
-                <div className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 rounded-sm shadow-2xl" />
+                <div className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 rounded-sm shadow-[0_0_50px_rgba(0,0,0,0.5)]" />
 
                 {/* Content Container */}
                 <div className="relative z-20 space-y-8">
@@ -49,29 +49,35 @@ export default function LoginPage() {
                     {/* A. Vibe Header */}
                     <div className="text-center space-y-2">
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-[#BFFF0B]/10 border border-[#BFFF0B]/20 mb-4"
+                            initial={{ width: 0, opacity: 0 }}
+                            animate={{ width: "auto", opacity: 1 }}
+                            transition={{ delay: 0.3 }}
+                            className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-purple-500/10 border border-purple-500/20 mb-4 whitespace-nowrap overflow-hidden"
                         >
-                            <Activity className="w-3 h-3 text-[#BFFF0B]" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-[#BFFF0B]">
-                                System Standby
+                            <ShieldCheck className="w-3 h-3 text-purple-400" />
+                            <span className="text-[10px] font-black uppercase tracking-widest text-purple-400">
+                                New Profile Detected
                             </span>
                         </motion.div>
-                        <h1 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">
-                            Welcome Back,<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600">
-                                Operator
+                        <h1 className="text-3xl md:text-3xl font-black text-white uppercase tracking-tighter">
+                            Initiate<br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BFFF0B] to-emerald-500">
+                                Study Protocol
                             </span>
                         </h1>
                         <p className="text-zinc-500 text-sm font-medium">
-                            Enter your credentials to resume the mission.
+                            Create your operator profile to begin.
                         </p>
                     </div>
 
                     {/* B. Tactile Forms */}
                     <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                        <AuthInput
+                            label="Operator Name"
+                            type="text"
+                            placeholder="Zainul Arifin"
+                            icon={User}
+                        />
                         <AuthInput
                             label="Email Address"
                             type="email"
@@ -79,34 +85,29 @@ export default function LoginPage() {
                             icon={Mail}
                         />
                         <AuthInput
-                            label="Password"
+                            label="Secure Password"
                             type="password"
                             placeholder="••••••••"
                             icon={Lock}
                             isPassword
                         />
 
-                        {/* Forgot Password Link */}
-                        <div className="flex justify-end">
-                            <Link href="/forgot-password" className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 hover:text-[#BFFF0B] transition-colors">
-                                Lost Access?
-                            </Link>
+                        {/* C. Action Area */}
+                        <div className="pt-2">
+                            <Button
+                                className="w-full h-12 bg-[#BFFF0B] hover:bg-[#BFFF0B] text-black font-bold uppercase tracking-widest rounded-sm group relative overflow-hidden transition-all"
+                                onClick={handleRegister}
+                            >
+                                <span className="relative z-10 flex items-center gap-2">
+                                    {isLoading ? "Synchronizing..." : "Create Account"}
+                                    {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+                                </span>
+                                {/* Glitch/Hover Effect Overlay */}
+                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                            </Button>
                         </div>
 
-                        {/* C. Action Area */}
-                        <Button
-                            className="w-full h-12 bg-[#BFFF0B] hover:bg-[#BFFF0B] text-black font-bold uppercase tracking-widest rounded-sm group relative overflow-hidden"
-                            onClick={handleLogin}
-                        >
-                            <span className="relative z-10 flex items-center gap-2">
-                                {isLoading ? "Authenticating..." : "Initiate Protocol"}
-                                {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
-                            </span>
-                            {/* Glitch/Hover Effect Overlay */}
-                            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                        </Button>
-
-                        {/* Social Auth */}
+                        {/* Social Auth (Added to match Login) */}
                         <div className="relative py-2">
                             <div className="absolute inset-0 flex items-center">
                                 <span className="w-full border-t border-white/5" />
@@ -146,16 +147,25 @@ export default function LoginPage() {
                             </svg>
                             Google Account
                         </Button>
+
+
+                        {/* Disclaimer */}
+                        <p className="text-[10px] text-zinc-600 text-center px-4 leading-relaxed">
+                            By initiating protocol, you agree to our <span className="text-zinc-400 hover:text-white cursor-pointer underline">Terms</span> and <span className="text-zinc-400 hover:text-white cursor-pointer underline">Privacy Policy</span>.
+                        </p>
                     </form>
 
                     {/* D. The Switch */}
-                    <div className="text-center pt-2">
-                        <Link href="/register" className="group">
-                            <span className="text-zinc-500 text-xs">Don't have an account? </span>
-                            <span className="text-white font-bold text-xs uppercase tracking-wide group-hover:text-[#BFFF0B] transition-colors border-b border-transparent group-hover:border-[#BFFF0B]">
-                                Access Protocol
-                            </span>
-                        </Link>
+                    <div className="text-center pt-2 relative">
+                        <div className="absolute top-0 left-10 right-10 border-t border-white/5" />
+                        <div className="pt-6">
+                            <Link href="/login" className="group">
+                                <span className="text-zinc-500 text-xs">Already have clearance? </span>
+                                <span className="text-[#BFFF0B] font-bold text-xs uppercase tracking-wide group-hover:text-white transition-colors border-b border-transparent group-hover:border-white">
+                                    Access System
+                                </span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </motion.div>
@@ -164,7 +174,7 @@ export default function LoginPage() {
 }
 
 // ----------------------------------------------------------------------
-// SUB-COMPONENT: AuthInput (Local)
+// SUB-COMPONENT: AuthInput (Local Reused)
 // ----------------------------------------------------------------------
 
 function AuthInput({

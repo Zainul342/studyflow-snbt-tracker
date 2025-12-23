@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, AlertCircle } from "lucide-react";
+import { ArrowRight, Target, Calendar, Award, Sparkles, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { mockDB } from "@/lib/data/mock-db";
+import { cn } from "@/lib/utils";
 
+// PTN List
 const PTN_LIST = [
     "ITB", "UI", "UGM", "ITS", "IPB", "UNPAD", "UNDIP", "UNAIR",
     "UB", "UNHAS", "USU", "UNSRI", "UNAND", "UNS", "UDAYANA"
@@ -27,7 +26,7 @@ export default function OnboardingPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState<FormErrors>({});
     const [formData, setFormData] = useState({
-        name: "",
+        name: "", // Usually passed from auth, but kept for standalone feel
         targetUniversity: "",
         targetMajor: "",
         targetDate: "2026-05-01",
@@ -39,37 +38,18 @@ export default function OnboardingPage() {
         // Validasi Nama
         const trimmedName = formData.name.trim();
         if (!trimmedName) {
-            newErrors.name = "Nama tidak boleh kosong";
-        } else if (trimmedName.length < 3) {
-            newErrors.name = "Nama minimal 3 karakter";
-        } else if (!/^[a-zA-Z\s]+$/.test(trimmedName)) {
-            newErrors.name = "Nama hanya boleh berisi huruf dan spasi";
+            newErrors.name = "ID Required";
         }
 
         // Validasi PTN
         if (!formData.targetUniversity) {
-            newErrors.targetUniversity = "Pilih target PTN Anda";
+            newErrors.targetUniversity = "Target Required";
         }
 
         // Validasi Jurusan
         const trimmedMajor = formData.targetMajor.trim();
         if (!trimmedMajor) {
-            newErrors.targetMajor = "Jurusan tidak boleh kosong";
-        } else if (trimmedMajor.length < 2) {
-            newErrors.targetMajor = "Jurusan minimal 2 karakter";
-        }
-
-        // Validasi Tanggal
-        const selectedDate = new Date(formData.targetDate);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const oneYearFromNow = new Date(today);
-        oneYearFromNow.setFullYear(today.getFullYear() + 1);
-
-        if (selectedDate < today) {
-            newErrors.targetDate = "Tanggal tidak boleh di masa lalu";
-        } else if (selectedDate > oneYearFromNow) {
-            newErrors.targetDate = "⚠️ Tanggal lebih dari 1 tahun dari sekarang";
+            newErrors.targetMajor = "Major Required";
         }
 
         setErrors(newErrors);
@@ -85,22 +65,18 @@ export default function OnboardingPage() {
 
         setIsLoading(true);
 
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 800));
+        // Simulate network delay & calibration
+        await new Promise(resolve => setTimeout(resolve, 1200));
 
-        // Calculate dynamic daily goal
+        // Calculate dynamic daily goal logic (retained)
         const targetDate = new Date(formData.targetDate);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const daysRemaining = Math.ceil((targetDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-
-        // Total submateri from structure (should be 93)
-        const totalSubmateri = 93; // Could also use: getTotalSubmateriCount() if imported
-
-        // Calculate daily goal (minimum 1 to avoid division issues)
+        const totalSubmateri = 93;
         const dailyGoal = daysRemaining > 0
             ? Math.ceil(totalSubmateri / daysRemaining)
-            : totalSubmateri; // If date is today, need to complete all
+            : totalSubmateri;
 
         mockDB.saveProfile({
             name: formData.name.trim(),
@@ -111,164 +87,147 @@ export default function OnboardingPage() {
         });
 
         router.push("/dashboard");
-        setIsLoading(false);
-    };
-
-    const handleNameChange = (value: string) => {
-        setFormData({ ...formData, name: value });
-        if (errors.name) {
-            setErrors({ ...errors, name: undefined });
-        }
-    };
-
-    const handleMajorChange = (value: string) => {
-        setFormData({ ...formData, targetMajor: value });
-        if (errors.targetMajor) {
-            setErrors({ ...errors, targetMajor: undefined });
-        }
-    };
-
-    const handleDateChange = (value: string) => {
-        setFormData({ ...formData, targetDate: value });
-        if (errors.targetDate) {
-            setErrors({ ...errors, targetDate: undefined });
-        }
     };
 
     return (
-        <div className="min-h-screen bg-[#09090b] text-white flex items-center justify-center p-4 relative overflow-hidden">
-            {/* Background Grids */}
-            <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
+        <div className="min-h-screen bg-[#0A0A0A] text-white font-sans selection:bg-[#BFFF0B] selection:text-black flex items-center justify-center relative overflow-hidden">
 
+            {/* 1. Interactive Void Background */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-grid-white opacity-10 bg-[length:50px_50px]" />
+                <motion.div
+                    animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.05, 1] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-indigo-900/10 blur-[120px] rounded-full mix-blend-screen"
+                />
+            </div>
+
+            {/* 2. The Glass Monolith */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="max-w-md w-full relative z-10"
+                transition={{ duration: 0.6, ease: "backOut" }}
+                className="relative z-10 w-full max-w-[480px] p-6 md:p-10 mx-4"
             >
-                <div className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 shadow-2xl">
-                    <div className="text-center mb-8">
-                        <div className="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4 border border-zinc-700">
-                            <Sparkles className="w-5 h-5 text-[#ccff00]" />
+                {/* Monolith Card */}
+                <div className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 rounded-sm shadow-2xl" />
+
+                {/* Content Container */}
+                <div className="relative z-20 space-y-8">
+
+                    {/* A. Header */}
+                    <div className="text-center space-y-2">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-indigo-500/10 border border-indigo-500/20 mb-4">
+                            <Sparkles className="w-3 h-3 text-indigo-400" />
+                            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400">
+                                Calibration Sequence
+                            </span>
                         </div>
-                        <h1 className="text-2xl font-bold tracking-tight mb-2">Setup Your Profile</h1>
-                        <p className="text-zinc-500 text-sm">
-                            StudyFlow optimizes your SNBT preparation based on your personal goals.
+                        <h1 className="text-3xl md:text-3xl font-black text-white uppercase tracking-tighter">
+                            Target<br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+                                Parameters
+                            </span>
+                        </h1>
+                        <p className="text-zinc-500 text-sm font-medium">
+                            Configure your mission objectives for maximum efficiency.
                         </p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        {/* Nama Field */}
-                        <div className="space-y-2">
-                            <Label htmlFor="name" className="text-xs uppercase tracking-wider text-zinc-400">
-                                Full Name *
-                            </Label>
-                            <Input
-                                id="name"
-                                placeholder="Zainul Mutaqin"
-                                value={formData.name}
-                                onChange={(e) => handleNameChange(e.target.value)}
-                                className={`bg-zinc-950/50 border-zinc-800 focus:border-[#ccff00] h-12 text-lg ${errors.name ? "border-red-500 focus:border-red-500" : ""
-                                    }`}
-                            />
-                            {errors.name && (
-                                <div id="name-error" role="alert" className="flex items-center gap-2 text-red-400 text-xs mt-1">
-                                    <AlertCircle className="w-3 h-3" />
-                                    <span>{errors.name}</span>
-                                </div>
-                            )}
-                        </div>
+                    {/* B. Form */}
+                    <form className="space-y-5" onSubmit={handleSubmit}>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            {/* Target PTN Field */}
-                            <div className="space-y-2">
-                                <Label htmlFor="univ" className="text-xs uppercase tracking-wider text-zinc-400">
-                                    Target PTN *
-                                </Label>
-                                <Select
-                                    value={formData.targetUniversity}
-                                    onValueChange={(value) => {
-                                        setFormData({ ...formData, targetUniversity: value });
-                                        setErrors({ ...errors, targetUniversity: undefined });
-                                    }}
-                                >
-                                    <SelectTrigger className={`bg-zinc-950/50 border-zinc-800 ${errors.targetUniversity ? "border-red-500" : ""
-                                        }`}>
-                                        <SelectValue placeholder="Pilih PTN" />
-                                    </SelectTrigger>
-                                    <SelectContent className="bg-zinc-900 border-zinc-800">
-                                        {PTN_LIST.map((ptn) => (
-                                            <SelectItem
-                                                key={ptn}
-                                                value={ptn}
-                                                className="text-white hover:bg-zinc-800 cursor-pointer"
-                                            >
-                                                {ptn}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                                {errors.targetUniversity && (
-                                    <div className="flex items-center gap-1 text-red-400 text-xs">
-                                        <AlertCircle className="w-3 h-3" />
-                                        <span>{errors.targetUniversity}</span>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Jurusan Field */}
-                            <div className="space-y-2">
-                                <Label htmlFor="major" className="text-xs uppercase tracking-wider text-zinc-400">
-                                    Jurusan *
-                                </Label>
-                                <Input
-                                    id="major"
-                                    placeholder="Informatika"
-                                    value={formData.targetMajor}
-                                    onChange={(e) => handleMajorChange(e.target.value)}
-                                    className={`bg-zinc-950/50 border-zinc-800 ${errors.targetMajor ? "border-red-500 focus:border-red-500" : ""
-                                        }`}
+                        {/* Name Input */}
+                        <div className="space-y-1.5">
+                            <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
+                                Operator Identity
+                            </label>
+                            <div className="relative group/input">
+                                <Award className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within/input:text-indigo-400 transition-colors" />
+                                <input
+                                    type="text"
+                                    placeholder="Your Code Name"
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-4 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-indigo-500 focus:bg-black/60 transition-all font-medium"
                                 />
-                                {errors.targetMajor && (
-                                    <div className="flex items-center gap-1 text-red-400 text-xs">
-                                        <AlertCircle className="w-3 h-3" />
-                                        <span>{errors.targetMajor}</span>
-                                    </div>
-                                )}
+                                {errors.name && <span className="text-[10px] text-red-500 absolute -bottom-4 right-0">{errors.name}</span>}
                             </div>
                         </div>
 
-                        {/* Target Date Field */}
-                        <div className="space-y-2">
-                            <Label htmlFor="date" className="text-xs uppercase tracking-wider text-zinc-400">
-                                Target Date (SNBT) *
-                            </Label>
-                            <Input
-                                id="date"
-                                type="date"
-                                value={formData.targetDate}
-                                onChange={(e) => handleDateChange(e.target.value)}
-                                className={`bg-zinc-950/50 border-zinc-800 ${errors.targetDate ? "border-red-500 focus:border-red-500" : ""
-                                    }`}
-                            />
-                            {errors.targetDate && (
-                                <div className={`flex items-center gap-2 text-xs mt-1 ${errors.targetDate.includes("⚠️") ? "text-yellow-400" : "text-red-400"
-                                    }`}>
-                                    <AlertCircle className="w-3 h-3" />
-                                    <span>{errors.targetDate}</span>
-                                </div>
-                            )}
+                        {/* PTN Selection */}
+                        <div className="space-y-1.5">
+                            <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
+                                Target Sector (PTN)
+                            </label>
+                            <div className="relative group/select">
+                                <Target className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within/select:text-indigo-400 transition-colors z-10" />
+                                <select
+                                    value={formData.targetUniversity}
+                                    onChange={(e) => setFormData({ ...formData, targetUniversity: e.target.value })}
+                                    className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-10 text-sm text-white focus:outline-none focus:border-indigo-500 focus:bg-black/60 transition-all font-medium appearance-none cursor-pointer"
+                                >
+                                    <option value="" disabled className="bg-[#1A1A1A] text-zinc-500">Select University...</option>
+                                    {PTN_LIST.map(ptn => (
+                                        <option key={ptn} value={ptn} className="bg-[#1A1A1A] text-white">{ptn}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 pointer-events-none" />
+                                {errors.targetUniversity && <span className="text-[10px] text-red-500 absolute -bottom-4 right-0">{errors.targetUniversity}</span>}
+                            </div>
                         </div>
 
-                        <Button
-                            type="submit"
-                            className="w-full h-12 bg-[#ccff00] text-black hover:bg-[#b0dd00] font-bold tracking-tight text-base mt-2"
-                            disabled={isLoading}
-                        >
-                            {isLoading ? "Configuring..." : "Launch Dashboard"}
-                            {!isLoading && <ArrowRight className="w-4 h-4 ml-2" />}
-                        </Button>
+                        {/* Major Input */}
+                        <div className="space-y-1.5">
+                            <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
+                                Specific Mission (Major)
+                            </label>
+                            <div className="relative group/input">
+                                <div className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center text-zinc-600 group-focus-within/input:text-indigo-400 transition-colors font-black text-xs">
+                                    M
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="e.g. Informatics Engineering"
+                                    value={formData.targetMajor}
+                                    onChange={(e) => setFormData({ ...formData, targetMajor: e.target.value })}
+                                    className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-4 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-indigo-500 focus:bg-black/60 transition-all font-medium"
+                                />
+                                {errors.targetMajor && <span className="text-[10px] text-red-500 absolute -bottom-4 right-0">{errors.targetMajor}</span>}
+                            </div>
+                        </div>
+
+                        {/* Date Input */}
+                        <div className="space-y-1.5">
+                            <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
+                                Operation Deadline
+                            </label>
+                            <div className="relative group/input">
+                                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within/input:text-indigo-400 transition-colors" />
+                                <input
+                                    type="date"
+                                    value={formData.targetDate}
+                                    onChange={(e) => setFormData({ ...formData, targetDate: e.target.value })}
+                                    className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-4 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-indigo-500 focus:bg-black/60 transition-all font-medium [color-scheme:dark]"
+                                />
+                            </div>
+                        </div>
+
+
+                        {/* Action Button */}
+                        <div className="pt-4">
+                            <Button
+                                className="w-full h-12 bg-indigo-600 hover:bg-indigo-500 text-white font-bold uppercase tracking-widest rounded-sm group relative overflow-hidden transition-all border border-indigo-400/20"
+                                disabled={isLoading}
+                            >
+                                <span className="relative z-10 flex items-center justify-center gap-2">
+                                    {isLoading ? "Calibrating..." : "Initialize System"}
+                                    {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+                                </span>
+                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                            </Button>
+                        </div>
+
                     </form>
                 </div>
             </motion.div>
