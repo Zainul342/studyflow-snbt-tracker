@@ -112,6 +112,26 @@
 - [ ] Real-time sync progress
 - [ ] Firebase Security Rules
 
+- [ ] Firebase Security Rules
+
+---
+
+## ☁️ Phase 5b: Cloud Functions Strategy (Lesson 8)
+> Tujuan: Scalable Backend Logic & Security
+> **Core Concepts**: CRUD, Timeouts, Memory, Rate Limiting
+
+- [ ] **Plan Function Type**:
+  - [ ] **HTTP Callable**: User actions (e.g., Submit Tryout)
+  - [ ] **Triggers**: `onUserCreate` (Setup Profile), `onDelete` (Cleanup)
+  - [ ] **Scheduled**: Daily Rank Update (Pub/Sub)
+- [ ] **Configuration Planning**:
+  - [ ] Set Timeouts (60s default, 300s for AI ops)
+  - [ ] Memory Allocation (256MB vs 2GB for AI)
+- [ ] **Security & Abuse Prevention**:
+  - [ ] Implement Debounce (Frontend 300ms)
+  - [ ] Rate Limiting Strategy (e.g., 5 req/min for free tier)
+  - [ ] **Anti-Abuse**: "Disable Auth" instead of Delete Account
+
 ---
 
 ## 避 Phase 6: Polish & Deploy (Week 6)
@@ -119,8 +139,8 @@
 
 - [ ] Performance optimization
 - [ ] Final responsive check
-- [/] **SEO & Metadata** (Titles, Descriptions, Keywords)
-- [/] **Custom 404 Page** (Lost in the Void)
+- [x] **SEO & Metadata** (Titles, Descriptions, Keywords)
+- [x] **Custom 404 Page** (Lost in the Void)
 - [ ] Deploy ke Vercel
 - [ ] Connect custom domain (opsional)
 - [ ] Create walkthrough documentation
@@ -137,6 +157,7 @@
 5. ✅ **Frontend First**: Complete UI before backend integration
 6. ✅ **Backend is King**: Don't over-optimize local storage
 7. ✅ **Consistency is Key**: Visual harmony (Lighting, Shapes) builds trust.
+8. ✅ **Scale Smart (Lesson 8)**: Use Cloud Functions for heavy lifting. Log everything. Prevent abuse early.
 
 ### Current Focus:
 **Phase 2: UI Pages** - Membangun halaman Profile/Settings dan Login/Register dengan desain Osmo yang konsisten.
