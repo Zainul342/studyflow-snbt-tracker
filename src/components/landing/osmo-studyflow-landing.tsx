@@ -943,54 +943,66 @@ function FinalCTA() {
 // Footer
 function Footer() {
     return (
-        <footer className="py-16 px-4 border-t border-white/10">
-            <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                    <div>
-                        <h3 className="text-white font-bold mb-4">Product</h3>
-                        <ul className="space-y-2">
-                            <li><Link href="/dashboard" className="text-white/60 hover:text-white transition-colors">Dashboard</Link></li>
-                            <li><Link href="/tracking" className="text-white/60 hover:text-white transition-colors">Tracking</Link></li>
-                            <li><Link href="/analytics" className="text-white/60 hover:text-white transition-colors">Analytics</Link></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="text-white font-bold mb-4">Community</h3>
-                        <ul className="space-y-2">
-                            <li><Link href="/showcase" className="text-white/60 hover:text-white transition-colors">Showcase</Link></li>
-                            <li><Link href="/about" className="text-white/60 hover:text-white transition-colors">About</Link></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="text-white font-bold mb-4">Resources</h3>
-                        <ul className="space-y-2">
-                            <li><Link href="/updates" className="text-white/60 hover:text-white transition-colors">Updates</Link></li>
-                            <li><Link href="/faq" className="text-white/60 hover:text-white transition-colors">FAQs</Link></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="text-white font-bold mb-4">Subscribe to Newsletter</h3>
-                        <div className="flex gap-2">
-                            <input
-                                type="email"
-                                placeholder="your@email.com"
-                                className="flex-1 bg-white/5 border border-white/10 rounded-sm px-4 py-2 text-white placeholder:text-white/40 focus:outline-none focus:border-purple-500"
-                            />
-                            <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-sm">
-                                →
-                            </Button>
-                        </div>
-                    </div>
+        <footer className="mt-20 border-t border-white/10 bg-[#0A0A0A] relative flex flex-col justify-end overflow-hidden h-[50vh] min-h-[400px]">
+            {/* Infinite Marquee Typography */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-20 select-none pointer-events-none overflow-hidden">
+                <div className="flex whitespace-nowrap">
+                    {/* Stream 1 */}
+                    <motion.div
+                        initial={{ x: 0 }}
+                        animate={{ x: "-100%" }}
+                        transition={{
+                            duration: 30,
+                            ease: "linear",
+                            repeat: Infinity,
+                        }}
+                        className="flex flex-shrink-0"
+                    >
+                        {[1, 2, 3, 4].map((i) => (
+                            <h1 key={i} className="text-[50vh] font-black text-white leading-none tracking-tighter px-8">
+                                STUDYFLOW
+                            </h1>
+                        ))}
+                    </motion.div>
+
+                    {/* Stream 2 (Replica for seamless loop) */}
+                    <motion.div
+                        initial={{ x: 0 }}
+                        animate={{ x: "-100%" }}
+                        transition={{
+                            duration: 30,
+                            ease: "linear",
+                            repeat: Infinity,
+                        }}
+                        className="flex flex-shrink-0"
+                    >
+                        {[1, 2, 3, 4].map((i) => (
+                            <h1 key={i} className="text-[50vh] font-black text-white leading-none tracking-tighter px-8">
+                                STUDYFLOW
+                            </h1>
+                        ))}
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* Footer Links */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs sm:text-sm font-bold text-white/40 uppercase tracking-wider backdrop-blur-sm z-10 border-t border-white/5 bg-[#0A0A0A]/20">
+                <div className="flex gap-4">
+                    {["Licensing", "T&Cs", "Privacy", "Cookies"].map((item) => (
+                        <Link key={item} href="#" className="hover:text-white transition-colors bg-white/5 px-3 py-1.5 rounded-sm">
+                            {item}
+                        </Link>
+                    ))}
                 </div>
 
-                <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/10">
-                    <div className="text-white/40 text-sm mb-4 md:mb-0">
-                        © 2025 StudyFlow. Made with 💜 for SNBT warriors.
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <Link href="/login" className="text-white/60 hover:text-white text-sm transition-colors">Login</Link>
-                        <Link href="/register" className="text-white/60 hover:text-white text-sm transition-colors">Join StudyFlow</Link>
-                    </div>
+                <div className="hidden sm:block">
+                    © 2026 STUDYFLOW INC.
+                </div>
+
+                <div className="flex items-center gap-2">
+                    <span>CREATED BY</span>
+                    <span className="bg-purple-600 text-white px-2 py-1 rounded-sm shadow-lg shadow-purple-500/20">ZAIN</span>
+                    <span className="bg-blue-600 text-white px-2 py-1 rounded-sm shadow-lg shadow-blue-500/20">ANTIGRAVITY</span>
                 </div>
             </div>
         </footer>
