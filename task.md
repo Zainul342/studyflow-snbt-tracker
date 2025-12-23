@@ -84,9 +84,10 @@
 ## 🗄️ Phase 3: Backend Prep (Week 3)
 > Tujuan: Persiapan sebelum connect backend (Lesson 5)
 
-- [ ] Clean up dead code
-- [ ] Refactor file besar (>1000 lines) jadi komponen kecil
+- [x] Clean up dead code
+- [x] Refactor file besar (>1000 lines) jadi komponen kecil
 - [ ] Buat file `docs/firebase-schema.md` untuk AI reference
+- [ ] Define data paths: `users/[UID]/progress/[submateriId]`
 - [ ] Define data paths: `users/[UID]/progress/[submateriId]`
 - [ ] Create roadmap fitur untuk V1, V2, V3
 
