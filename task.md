@@ -86,7 +86,7 @@
 
 - [x] Clean up dead code
 - [x] Refactor file besar (>1000 lines) jadi komponen kecil
-- [ ] Buat file `docs/firebase-schema.md` untuk AI reference
+- [x] Buat file `docs/firebase-schema.md` untuk AI reference (Genius Architecture V1)
 - [ ] Define data paths: `users/[UID]/progress/[submateriId]`
 - [ ] Define data paths: `users/[UID]/progress/[submateriId]`
 - [ ] Create roadmap fitur untuk V1, V2, V3
