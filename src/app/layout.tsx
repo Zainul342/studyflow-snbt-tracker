@@ -22,8 +22,27 @@ const spaceGrotesk = Space_Grotesk({
 
 
 export const metadata: Metadata = {
-  title: "StudyFlow - SNBT Tracker",
-  description: "Advanced study tracking system for SNBT preparation",
+  title: {
+    default: "StudyFlow - The SNBT Toolkit",
+    template: "%s | StudyFlow",
+  },
+  description: "Platform belajar SNBT #1 untuk pejuang PTN. Sistem tracking otomatis, analitik progres, dan bank soal terstruktur dalam satu dashboard.",
+  keywords: ["SNBT 2026", "UTBK", "Study Tracker", "Bank Soal SNBT", "Latihan Soal UTBK", "Masuk PTN", "StudyFlow"],
+  authors: [{ name: "Antigravity Team" }],
+  openGraph: {
+    title: "StudyFlow - The SNBT Toolkit",
+    description: "Platform belajar SNBT #1 untuk pejuang PTN. Gabung sekarang.",
+    url: "https://studyflow.app",
+    siteName: "StudyFlow",
+    locale: 'id_ID',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "StudyFlow - The SNBT Toolkit",
+    description: "Stop belajar tanpa arah. Pakai StudyFlow.",
+    creator: "@studyflow",
+  },
 };
 
 export default function RootLayout({

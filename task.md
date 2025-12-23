@@ -57,7 +57,12 @@
     - [x] **Smart Players**: Support Youtube, Drive PDF, Twitter rendering (Fully Integrated)
     - [x] **Persistence**: 'Mark as Complete' logic with localStorage
     - [x] **Dynamic Context**: Automated 'Today' highlighting and progress checkmarks
+    - [x] **Dynamic Context**: Automated 'Today' highlighting and progress checkmarks
   - [x] Menggunakan data dari `materi-structure.ts`
+  - [x] **Focus Mode UI (New)**
+    - [x] Distraction-free Layout (No Sidebar)
+    - [x] Integrated Pomodoro Timer
+    - [x] Content Viewer (Video/PDF/Quiz)
 
 - [x] **UI/UX Polish (Agenda)**
   - [x] **Visual Overhaul**: Added ambient gradients, stats hero, and premium glass cards
@@ -103,7 +108,7 @@
 > Tujuan: Simpan data user ke Firestore (Lesson 7)
 
 - [ ] Setup Firestore database
-- [ ] Implement user progress saving
+- [x] Implement user progress saving (Local Storage MVP)
 - [ ] Real-time sync progress
 - [ ] Firebase Security Rules
 
@@ -114,6 +119,8 @@
 
 - [ ] Performance optimization
 - [ ] Final responsive check
+- [/] **SEO & Metadata** (Titles, Descriptions, Keywords)
+- [/] **Custom 404 Page** (Lost in the Void)
 - [ ] Deploy ke Vercel
 - [ ] Connect custom domain (opsional)
 - [ ] Create walkthrough documentation
