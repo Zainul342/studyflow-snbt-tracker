@@ -63,7 +63,7 @@
   - [x] **Visual Overhaul**: Added ambient gradients, stats hero, and premium glass cards
   - [x] **Color Harmony**: Tuned neon glows and dark contrasts
   - [x] **Interactive Elements**: Implemented hover lifts and smooth transitions
-  - [x] **Design System Harmonization**: Enforced `rounded-sm`, Grid Backgrounds, and Osmo Ambient Lighting across Dashboard & Agenda
+  - [/] **Design System Harmonization**: Enforced `rounded-sm`, Grid Backgrounds, and Osmo Ambient Lighting across Dashboard & Agenda
 
 - [x] **Profile/Settings Page**
   - [x] User info display

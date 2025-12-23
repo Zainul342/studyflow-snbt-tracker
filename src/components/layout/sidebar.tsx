@@ -86,7 +86,8 @@ export function Sidebar() {
                                         <Button
                                             variant="ghost"
                                             className={cn(
-                                                "w-full justify-start gap-3 h-10 px-4 rounded-sm transition-all duration-300 group text-xs font-bold uppercase tracking-wide",
+                                                "w-full justify-start gap-3 h-10 px-4 rounded-sm transition-all duration-200 group text-xs font-bold uppercase tracking-wide",
+                                                "active:scale-95 hover:scale-[1.02]",
                                                 pathname === item.href
                                                     ? "bg-[#6B4FFF]/10 text-[#6B4FFF] border border-[#6B4FFF]/20 shadow-[0_0_15px_rgba(107,79,255,0.1)]"
                                                     : "text-zinc-500 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/5"
