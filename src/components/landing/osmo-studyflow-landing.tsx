@@ -398,16 +398,16 @@ function HeroSection() {
 
                 {/* Main Headline */}
                 <h1 className="text-[clamp(3.5rem,11vw,8rem)] leading-[0.85] mb-8 tracking-tighter">
-                    Dev Toolkit{" "}
+                    The SNBT Toolkit{" "}
                     <Star className="inline w-[0.4em] h-[0.4em] text-purple-500 fill-purple-500 mb-4" />{" "}
                     <br />
-                    <span className="gradient-text-purple font-light tracking-tight">Built to Flex</span>
+                    <span className="gradient-text-purple font-light tracking-tight">Built for Warriors</span>
                 </h1>
 
                 <p className="text-white/60 text-lg sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
-                    Platform packed with <span className="text-white">SNBT resources</span>,{" "}
-                    <span className="text-white">progress tracking</span>, and a{" "}
-                    <span className="text-white">study system</span> that makes you unstoppable
+                    Platform lengkap dengan <span className="text-white">progress tracking</span>,{" "}
+                    <span className="text-white">analytics</span>, dan sistem belajar yang terstruktur.{" "}
+                    <span className="text-white">Gak ada lagi cerita belajar tanpa arah.</span>
                 </p>
             </motion.div>
         </section>
@@ -465,12 +465,12 @@ function VideoSection() {
                     className="mb-16"
                 >
                     <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-black tracking-tight mb-6">
-                        StudyFlow is an ever-growing platform with
+                        Everything You Need
                         <br />
-                        <span className="gradient-text-green">SNBT resources</span>
+                        <span className="gradient-text-green">In One Place</span>
                     </h2>
                     <p className="text-white/60 text-lg max-w-3xl mx-auto">
-                        Get exclusive access to the tracking system, analytics, and study techniques behind top SNBT scorers.
+                        Dapetin akses eksklusif ke sistem tracking, analitik, dan strategi belajar dari para <span className="text-white">top scorer</span>. Tiru cara main mereka.
                     </p>
                 </motion.div>
 
@@ -692,16 +692,16 @@ function ProductsSection() {
 function BenefitsSection() {
     const benefits = [
         {
-            title: "Track Faster and Better",
-            description: "Our system saves you hours of manual tracking. Focus on studying, not spreadsheets.",
+            title: "Input Tanpa Ribet",
+            description: "Sistem kami nyatet histori belajar lo otomatis. Fokus belajar aja, biar kami yang urus datanya.",
         },
         {
-            title: "Smart Analytics",
-            description: "AI-powered insights help you identify weak areas and optimize your study strategy.",
+            title: "Tahu Kelemahan Lo",
+            description: "AI bakal \"nunjuk\" materi mana yang lo masih merah. Hajar yang kurang, pertahankan yang jago.",
         },
         {
-            title: "Always Growing",
-            description: "We keep adding new features and improvements. Your toolkit never stops expanding.",
+            title: "Update Tiap Minggu",
+            description: "Toolkit ini hidup. Fitur baru bakal terus muncul seiring persiapan lo menuju hari-H.",
         },
     ];
 
@@ -915,17 +915,17 @@ function FinalCTA() {
                     <h2 className="text-[clamp(2.5rem,8vw,6rem)] font-black tracking-tight mb-6">
                         Ready to
                         <br />
-                        <span className="gradient-text-green">level up?</span>
+                        <span className="gradient-text-green">Dominate?</span>
                     </h2>
 
                     <p className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">
-                        Become a member to unlock the full StudyFlow toolkit today.
+                        Gabung jadi member dan buka full akses ke <span className="text-white">The Armory</span>. Jangan sampai nyesel pas hari-H.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link href="/onboarding">
                             <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold rounded-sm px-8 py-6 text-lg">
-                                Become a member
+                                Secure Your Spot
                             </Button>
                         </Link>
                         <Link href="/faq">
