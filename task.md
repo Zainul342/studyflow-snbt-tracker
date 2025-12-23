@@ -87,9 +87,8 @@
 - [x] Clean up dead code
 - [x] Refactor file besar (>1000 lines) jadi komponen kecil
 - [x] Buat file `docs/firebase-schema.md` untuk AI reference (Genius Architecture V1)
-- [ ] Define data paths: `users/[UID]/progress/[submateriId]`
-- [ ] Define data paths: `users/[UID]/progress/[submateriId]`
-- [ ] Create roadmap fitur untuk V1, V2, V3
+- [x] Define data paths: `users/[UID]/progress/[submateriId]` (Neural Architecture Defined in `docs/data-paths.md`)
+- [x] Create roadmap fitur untuk V1, V2, V3 (Integrated in Schema & Data Paths Plan)
 
 ---
 
@@ -161,4 +160,4 @@
 8. ✅ **Scale Smart (Lesson 8)**: Use Cloud Functions for heavy lifting. Log everything. Prevent abuse early.
 
 ### Current Focus:
-**Phase 2: UI Pages** - Membangun halaman Profile/Settings dan Login/Register dengan desain Osmo yang konsisten.
+**Phase 4: Authentication** - Implementasi Login/Register dengan Firebase Auth & Google Sign-In.
