@@ -52,6 +52,7 @@
     - [x] Restore Semantic Colors for Dual Theme support. (@globals.css, @hero-section.tsx, @video-section.tsx)
     - [x] **New:** Create Realtime Dashboard Preview (interactive code) instead of static image.
     - [x] **New:** Fix Light Mode visibility (black on black) in Hero & Video sections.
+    - [x] **New:** Create Realistic Video Player Preview with simulated interactions.
 
 **Current Focus**: Phase 7: Polish & Deployment (Images & Final UX)eri
   - [x] Checkbox system (Belajar/Latsol/Review)
@@ -160,6 +161,33 @@
 - [ ] Deploy ke Vercel
 - [ ] Connect custom domain (opsional)
 - [ ] Create walkthrough documentation
+
+---
+
+---
+
+## 🧠 Phase 6.75: Strategic UX Re-alignment (Universal Framework Pivot)
+> Tujuan: Ensure "Product-Market Fit" by prioritizing UX/Emotion over Features.
+> **Philosophy**: Break down into atomic units. Do not move to the next until the current is *fully functional*.
+
+### A. The Hook (Landing Page Core)
+- [x] **Copywriting Overhaul**: Rewrite Hero & Features. *Definition of Done*: No Lorem Ipsum, copy targets "Overwhelmed Zain".
+- [x] **Mobile Touch**: Verify big touch targets for Hero CTA.
+- [x] **Navigation Cleanup**: Remove dead links. Only keep working anchors.
+
+### B. The Trust (Social Proof)
+- [x] **Real Testimonials**: Replace generic "Creators" with "Success Stories" or value-propositions.
+- [x] **Contextual Trust**: Add "Why Trust Us" micro-copy near CTAs.
+
+### C. The Entry (Frictionless Onboarding)
+- [x] **Simplify Register Flow**: Remove non-essential fields (e.g., complex academic history).
+- [x] **Emotional Micro-copy**: Replace "Standard Registration" with "Welcome to the Tribe" vibe.
+- [x] **Functional Verification**: Ensure Register -> Onboarding -> Dashboard flow works.ure Firestore data is clean.
+
+### D. The First Win (Dashboard Focus)
+- [ ] **Focus Mode UI**: Create a "Today Only" view. Hide complex analytics initially.
+- [ ] **"The Checkmark"**: Ensure the primary action (completing a task) is satisfying and instant.
+- [ ] **Mobile Thumb Zone**: Verify dashboard controls on mobile.
 
 ---
 

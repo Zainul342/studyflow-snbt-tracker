@@ -112,21 +112,21 @@ export default function RegisterPage() {
                             initial={{ width: 0, opacity: 0 }}
                             animate={{ width: "auto", opacity: 1 }}
                             transition={{ delay: 0.3 }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-purple-500/10 border border-purple-500/20 mb-4 whitespace-nowrap overflow-hidden"
+                            className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-[#BFFF0B]/10 border border-[#BFFF0B]/20 mb-4 whitespace-nowrap overflow-hidden"
                         >
-                            <ShieldCheck className="w-3 h-3 text-purple-400" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-purple-400">
-                                New Profile Detected
+                            <ShieldCheck className="w-3 h-3 text-[#BFFF0B]" />
+                            <span className="text-[10px] font-black uppercase tracking-widest text-[#BFFF0B]">
+                                Langkah Pertama
                             </span>
                         </motion.div>
-                        <h1 className="text-3xl md:text-3xl font-black text-white uppercase tracking-tighter">
-                            Initiate<br />
+                        <h1 className="text-3xl md:text-3xl font-black text-white tracking-tight">
+                            Ambil Kendali<br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BFFF0B] to-emerald-500">
-                                Study Protocol
+                                Mimpimu.
                             </span>
                         </h1>
                         <p className="text-zinc-500 text-sm font-medium">
-                            Create your operator profile to begin.
+                            Satu akun untuk atur semua kekacauan belajar.
                         </p>
                     </div>
 
@@ -138,23 +138,23 @@ export default function RegisterPage() {
                             </div>
                         )}
                         <AuthInput
-                            label="Operator Name"
+                            label="Nama Panggilan"
                             type="text"
-                            placeholder="Zainul Arifin"
+                            placeholder="Zampir"
                             icon={User}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                         <AuthInput
-                            label="Email Address"
+                            label="Email Aktif"
                             type="email"
-                            placeholder="operator@studyflow.id"
+                            placeholder="pejuang@studyflow.id"
                             icon={Mail}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <AuthInput
-                            label="Secure Password"
+                            label="Password Rahasia"
                             type="password"
                             placeholder="••••••••"
                             icon={Lock}
@@ -171,7 +171,7 @@ export default function RegisterPage() {
                                 disabled={isLoading}
                             >
                                 <span className="relative z-10 flex items-center gap-2">
-                                    {isLoading ? "Synchronizing..." : "Create Account"}
+                                    {isLoading ? "Proses..." : "Gas Mulai Belajar"}
                                     {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
                                 </span>
                                 {/* Glitch/Hover Effect Overlay */}

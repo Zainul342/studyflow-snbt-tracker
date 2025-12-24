@@ -46,9 +46,9 @@ export function CreatorsSection() {
     );
 }
 
-export function UpdatesSection() {
+export function SuccessStoriesSection() {
     return (
-        <section id="updates" className="py-32 px-4">
+        <section id="updates" className="py-32 px-4 bg-gradient-to-b from-transparent to-primary/5">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
@@ -57,47 +57,51 @@ export function UpdatesSection() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-black tracking-tight mb-4 text-foreground">
-                        Fresh from the
+                        Dari "Hampir Nyerah"
                         <br />
-                        <span className="text-primary">Dev Oven</span>
+                        <span className="text-primary">Jadi Jaket Kuning</span>
                     </h2>
-                    <p className="text-muted-foreground text-lg font-medium">
-                        We ship updates faster than you can say "SNBT".
+                    <p className="text-muted-foreground text-lg font-medium max-w-2xl mx-auto">
+                        Mereka juga dulu overwhelmed, bingung mulai dari mana. Sekarang mereka sudah aman.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
                     {[
-                        { title: "Progress Dashboard", time: "4 days ago", tag: "New Feature", color: "bg-blue-500", icon: Sparkles, desc: "Visualize your mastery." },
-                        { title: "Tryout Analytics", time: "6 days ago", tag: "Update", color: "bg-purple-500", icon: ChevronRight, desc: "Deep dive into your scores." },
-                        { title: "Study Streaks", time: "1 week ago", tag: "Gamification", color: "bg-pink-500", icon: Lock, desc: "Don't break the chain!" },
-                    ].map((update, i) => (
+                        { title: "Lolos STEI ITB", quote: "Dulu gue belajar acak-acakan. Pas pake StudyFlow, gue jadi tau persis apa yang harus gue kerjain tiap hari. Score TO naik 150 poin.", author: "Rizky, 2024", color: "bg-blue-500" },
+                        { title: "Tembus FK UI", quote: "Fitur 'Gigitan Kecil' bantu banget buat mata pelajaran Biologi yang seabrek. Gak kerasa tiba-tiba udah kelar semua materi.", author: "Sarah, 2024", color: "bg-yellow-500" },
+                        { title: "Masuk UGM", quote: "Progress bar-nya bikin ketagihan. Rasanya berdosa kalo gak nyentang progress sehari aja. Konsistensi kunci banget sih.", author: "Dimas, 2024", color: "bg-purple-500" },
+                    ].map((story, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="glass-light rounded-xl p-6 hover:border-primary/50 transition-all cursor-pointer group border border-transparent flex flex-col items-start"
+                            className="glass-light rounded-xl p-8 hover:border-primary/50 transition-all border border-transparent flex flex-col items-start relative overflow-hidden group"
                         >
-                            <div className="flex items-center gap-2 mb-4 w-full">
-                                <span className="text-xs bg-primary/20 text-primary px-3 py-1 rounded-sm font-bold">
-                                    {update.tag}
-                                </span>
-                                <span className="text-muted-foreground text-xs ml-auto">{update.time}</span>
-                            </div>
-
-                            <h3 className="text-2xl font-bold text-foreground mb-2">{update.title}</h3>
-                            <p className="text-sm text-muted-foreground mb-6">{update.desc}</p>
-
-                            {/* Rich Visual Area */}
-                            <div className={`w-full aspect-video rounded-lg ${update.color}/10 border border-${update.color}/20 relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-500 flex items-center justify-center`}>
-                                <div className={`absolute inset-0 bg-${update.color}/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity`} />
-                                <div className="absolute inset-0 bg-grid-white/[0.05] bg-[length:16px_16px]" />
-                                <update.icon className={`w-12 h-12 text-${update.color.replace('bg-', '')} relative z-10 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all`} />
+                            <div className={`absolute top-0 left-0 w-1 h-full ${story.color}`} />
+                            <h3 className="text-xl font-bold text-foreground mb-4">{story.title}</h3>
+                            <p className="text-muted-foreground mb-6 italic">"{story.quote}"</p>
+                            <div className="mt-auto flex items-center gap-3">
+                                <div className={`w-8 h-8 rounded-full ${story.color} opacity-20`} />
+                                <span className="text-sm font-bold text-foreground">{story.author}</span>
                             </div>
                         </motion.div>
                     ))}
+                </div>
+
+                {/* Trust Signals / Logos */}
+                <div className="text-center">
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-8">Alumni kami tersebar di</p>
+                    <div className="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                        {/* Placeholder Logos with text for now, ideally SVGs */}
+                        <span className="text-2xl font-black text-foreground">UI</span>
+                        <span className="text-2xl font-black text-foreground">ITB</span>
+                        <span className="text-2xl font-black text-foreground">UGM</span>
+                        <span className="text-2xl font-black text-foreground">ITS</span>
+                        <span className="text-2xl font-black text-foreground">UNAIR</span>
+                    </div>
                 </div>
             </div>
         </section>

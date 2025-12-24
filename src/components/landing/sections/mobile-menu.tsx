@@ -182,14 +182,6 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
 
                     {/* Footer Links */}
                     <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider backdrop-blur-sm">
-                        <div className="flex gap-4">
-                            {["Licensing", "T&Cs", "Privacy", "Cookies"].map((item) => (
-                                <Link key={item} href="#" className="hover:text-foreground transition-colors bg-background/50 px-2 py-1 rounded-sm">
-                                    {item}
-                                </Link>
-                            ))}
-                        </div>
-
                         <div className="hidden sm:block">
                             © 2026 STUDYFLOW INC.
                         </div>

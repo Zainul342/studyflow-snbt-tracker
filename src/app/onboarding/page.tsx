@@ -134,17 +134,17 @@ export default function OnboardingPage() {
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-indigo-500/10 border border-indigo-500/20 mb-4">
                             <Sparkles className="w-3 h-3 text-indigo-400" />
                             <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400">
-                                Calibration Sequence
+                                Langkah Terakhir
                             </span>
                         </div>
                         <h1 className="text-3xl md:text-3xl font-black text-white uppercase tracking-tighter">
-                            Target<br />
+                            Set<br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
-                                Parameters
+                                Target
                             </span>
                         </h1>
                         <p className="text-zinc-500 text-sm font-medium">
-                            Configure your mission objectives for maximum efficiency.
+                            Kita mulai dari akhir. Mau masuk mana?
                         </p>
                     </div>
 
@@ -154,13 +154,13 @@ export default function OnboardingPage() {
                         {/* Name Input */}
                         <div className="space-y-1.5">
                             <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
-                                Operator Identity
+                                Kode Nama (Display Name)
                             </label>
                             <div className="relative group/input">
                                 <Award className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within/input:text-indigo-400 transition-colors" />
                                 <input
                                     type="text"
-                                    placeholder="Your Code Name"
+                                    placeholder="Zampir"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-4 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-indigo-500 focus:bg-black/60 transition-all font-medium"
@@ -172,7 +172,7 @@ export default function OnboardingPage() {
                         {/* PTN Selection */}
                         <div className="space-y-1.5">
                             <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
-                                Target Sector (PTN)
+                                PTN Impian
                             </label>
                             <div className="relative group/select">
                                 <Target className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within/select:text-indigo-400 transition-colors z-10" />
@@ -181,7 +181,7 @@ export default function OnboardingPage() {
                                     onChange={(e) => setFormData({ ...formData, targetUniversity: e.target.value })}
                                     className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-10 text-sm text-white focus:outline-none focus:border-indigo-500 focus:bg-black/60 transition-all font-medium appearance-none cursor-pointer"
                                 >
-                                    <option value="" disabled className="bg-[#1A1A1A] text-zinc-500">Select University...</option>
+                                    <option value="" disabled className="bg-[#1A1A1A] text-zinc-500">Pilih Kampus...</option>
                                     {PTN_LIST.map(ptn => (
                                         <option key={ptn} value={ptn} className="bg-[#1A1A1A] text-white">{ptn}</option>
                                     ))}
@@ -194,7 +194,7 @@ export default function OnboardingPage() {
                         {/* Major Input */}
                         <div className="space-y-1.5">
                             <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
-                                Specific Mission (Major)
+                                Jurusan (Prodi)
                             </label>
                             <div className="relative group/input">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center text-zinc-600 group-focus-within/input:text-indigo-400 transition-colors font-black text-xs">
@@ -202,7 +202,7 @@ export default function OnboardingPage() {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder="e.g. Informatics Engineering"
+                                    placeholder="Contoh: Teknik Informatika"
                                     value={formData.targetMajor}
                                     onChange={(e) => setFormData({ ...formData, targetMajor: e.target.value })}
                                     className="w-full h-12 bg-black/40 border border-white/10 rounded-sm pl-11 pr-4 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-indigo-500 focus:bg-black/60 transition-all font-medium"
@@ -214,7 +214,7 @@ export default function OnboardingPage() {
                         {/* Date Input */}
                         <div className="space-y-1.5">
                             <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
-                                Operation Deadline
+                                Tanggal Perang (UTBK)
                             </label>
                             <div className="relative group/input">
                                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within/input:text-indigo-400 transition-colors" />
@@ -235,7 +235,7 @@ export default function OnboardingPage() {
                                 disabled={isLoading}
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2">
-                                    {isLoading ? "Calibrating..." : "Initialize System"}
+                                    {isLoading ? "Menyiapkan Markas..." : "Masuk Dashboard"}
                                     {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
                                 </span>
                                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />

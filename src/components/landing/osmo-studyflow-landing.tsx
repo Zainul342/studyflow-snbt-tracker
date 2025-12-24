@@ -17,7 +17,7 @@ import { VideoSection } from "./sections/video-section";
 // Import Middle & Bottom Sections (Grouped)
 import {
     CreatorsSection,
-    UpdatesSection,
+    SuccessStoriesSection,
     PlatformSection,
     ProductsSection,
     BenefitsSection
@@ -99,8 +99,8 @@ export default function OsmoStudyFlowLanding() {
             {/* CREATORS SECTION */}
             <CreatorsSection />
 
-            {/* UPDATES FEED */}
-            <UpdatesSection />
+            {/* SUCCESS STORIES (TRUST) */}
+            <SuccessStoriesSection />
 
             {/* PLATFORM OVERVIEW */}
             <PlatformSection />

@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BarChart3, BrainCircuit, Target, Zap } from "lucide-react";
+import { BarChart3, BrainCircuit, ListTodo, Zap } from "lucide-react";
 
 export function ShowcaseSection() {
     const showcaseItems = [
-        { title: "Progress Tracking", icon: BarChart3, color: "from-blue-500 to-blue-600" },
-        { title: "Smart Analytics", icon: BrainCircuit, color: "from-purple-500 to-purple-600" },
-        { title: "Tryout System", icon: Target, color: "from-pink-500 to-pink-600" },
-        { title: "Study Streaks", icon: Zap, color: "from-orange-500 to-orange-600" },
+        { title: "Materi Gigitan Kecil", icon: ListTodo, color: "from-blue-500 to-blue-600" },
+        { title: "Progress Jujur", icon: BarChart3, color: "from-purple-500 to-purple-600" },
+        { title: "Central Brain", icon: BrainCircuit, color: "from-pink-500 to-pink-600" },
+        { title: "Anti Wacana", icon: Zap, color: "from-orange-500 to-orange-600" },
     ];
 
     return (

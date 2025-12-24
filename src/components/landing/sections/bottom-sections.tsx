@@ -160,14 +160,6 @@ export function Footer() {
 
             {/* Footer Content */}
             <div className="w-full max-w-[95vw] pb-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] sm:text-xs font-bold text-white/40 uppercase tracking-wider backdrop-blur-sm z-10">
-                <div className="flex gap-4">
-                    {["Licensing", "T&Cs", "Privacy", "Cookies"].map((item) => (
-                        <Link key={item} href="#" className="hover:text-white transition-colors bg-white/5 px-2 py-1 rounded-sm">
-                            {item}
-                        </Link>
-                    ))}
-                </div>
-
                 <div className="hidden sm:block">
                     © 2026 STUDYFLOW INC.
                 </div>
