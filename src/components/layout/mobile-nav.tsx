@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LayoutDashboard, BookOpen, BarChart2, Zap, Settings, LogOut } from "lucide-react";
+import { Menu, X, LayoutDashboard, BookOpen, BarChart2, Zap, Settings, LogOut, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/auth-context";
@@ -20,6 +20,11 @@ const navItems = [
         title: "Peta Materi",
         href: "/dashboard/study",
         icon: BookOpen,
+    },
+    {
+        title: "Tryout Tracker",
+        href: "/dashboard/tryout",
+        icon: Target,
     },
     {
         title: "Analitik Progres",

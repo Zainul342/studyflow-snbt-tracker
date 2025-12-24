@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { BarChart3, BrainCircuit, ListTodo, Zap } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function ShowcaseSection() {
     const showcaseItems = [
@@ -22,23 +23,47 @@ export function ShowcaseSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1, duration: 0.6 }}
-                            whileHover={{ scale: 1.05, rotateY: 5 }}
-                            className="group relative aspect-[4/5] rounded-sm overflow-hidden cursor-pointer"
-                            style={{ transformStyle: "preserve-3d" }}
+                            whileHover={{ y: -10 }}
+                            className="group relative aspect-[4/5] rounded-xl overflow-hidden cursor-pointer border border-white/10"
                         >
-                            {/* Animated Gradient Background */}
-                            <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-80 group-hover:opacity-100 transition-opacity`} />
+                            {/* Rich Styles Gradient */}
+                            <div className={cn(
+                                "absolute inset-0 bg-gradient-to-br opacity-90 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110",
+                                item.color
+                            )} />
 
-                            {/* Abstract Pattern Overlay */}
-                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-                            <div className="absolute inset-0 bg-grid-white/[0.1] bg-[length:20px_20px]" />
+                            {/* Floating Glow Orb */}
+                            <motion.div
+                                animate={{
+                                    scale: [1, 1.2, 1],
+                                    opacity: [0.3, 0.6, 0.3],
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                className="absolute -top-10 -right-10 w-40 h-40 bg-white/20 blur-[50px] rounded-full"
+                            />
 
-                            {/* Darker Gradient for text readability */}
-                            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                            {/* Noise Texture */}
+                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-overlay" />
 
-                            <div className="relative h-full p-6 flex flex-col justify-end">
-                                <item.icon className="w-12 h-12 text-white/50 mb-auto group-hover:text-white group-hover:scale-110 transition-all duration-500" />
-                                <h3 className="text-2xl font-bold text-white group-hover:translate-x-2 transition-transform">{item.title}</h3>
+                            {/* Inner Highlight/Glass Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-50 pointer-events-none" />
+
+                            {/* Content */}
+                            <div className="relative h-full p-8 flex flex-col justify-between">
+                                <div className="p-3 bg-white/10 w-fit rounded-lg backdrop-blur-md border border-white/20 group-hover:bg-white/20 transition-colors">
+                                    <item.icon className="w-6 h-6 text-white" />
+                                </div>
+
+                                <div>
+                                    <h3 className="text-2xl font-black text-white mb-2 leading-tight tracking-tight">
+                                        {item.title}
+                                    </h3>
+                                    <div className="h-1 w-12 bg-white/50 rounded-full group-hover:w-full transition-all duration-500" />
+                                </div>
                             </div>
                         </motion.div>
                     ))}

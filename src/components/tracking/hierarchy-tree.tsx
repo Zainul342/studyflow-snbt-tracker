@@ -132,8 +132,13 @@ export function HierarchyTree() {
                                                 <div className="px-4 py-2 bg-zinc-900/80 backdrop-blur-sm border-y border-zinc-800 flex items-center justify-between sticky top-0 z-10">
                                                     <div className="flex items-center gap-2">
                                                         <BookOpen className="w-3.5 h-3.5 text-zinc-600" />
-                                                        <span className="text-xs font-bold text-zinc-300 uppercase tracking-wide">
+                                                        <span className="text-xs font-bold text-zinc-300 uppercase tracking-wide flex items-center gap-2">
                                                             {materi.name}
+                                                            {/* Badges for Shared Subjects */}
+                                                            {(materi as any).isPK && <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">PK</span>}
+                                                            {(materi as any).isPM && <span className="text-[9px] px-1.5 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/20">PM</span>}
+                                                            {materi.id.startsWith("pbm-") && subtes.id === "pbm-ppu" && <span className="text-[9px] px-1.5 py-0.5 rounded bg-pink-500/10 text-pink-400 border border-pink-500/20">PBM</span>}
+                                                            {materi.id.startsWith("ppu-") && subtes.id === "pbm-ppu" && <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">PPU</span>}
                                                         </span>
                                                     </div>
 

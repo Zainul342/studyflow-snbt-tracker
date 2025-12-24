@@ -32,6 +32,11 @@ const sidebarNavItems = [
         icon: BookOpen,
     },
     {
+        title: "Tryout Tracker",
+        href: "/dashboard/tryout",
+        icon: Target,
+    },
+    {
         title: "Analitik Progres",
         href: "/analytics",
         icon: BarChart2,
