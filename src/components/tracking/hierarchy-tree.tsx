@@ -143,7 +143,7 @@ export function HierarchyTree() {
                                                     </div>
 
                                                     {/* Column Headers */}
-                                                    <div className="flex items-center gap-2 text-[9px] font-bold text-zinc-600 uppercase w-[100px] justify-center">
+                                                    <div className="flex items-center gap-2 text-[9px] font-bold text-zinc-600 uppercase w-[110px] md:w-[100px] justify-center">
                                                         <span>B</span>
                                                         <span className="mx-1">•</span>
                                                         <span>L</span>

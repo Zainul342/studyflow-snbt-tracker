@@ -61,8 +61,8 @@ export default function TryoutPage() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-black tracking-tight text-white mb-2 uppercase">Tryout Tracker</h1>
-                    <p className="text-zinc-400">Pantau perkembangan nilai TO kamu dari berbagai platform.</p>
+                    <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white mb-2 uppercase">Tryout Tracker</h1>
+                    <p className="text-sm text-zinc-400">Pantau perkembangan nilai TO kamu dari berbagai platform.</p>
                 </div>
                 <Button
                     onClick={() => setIsDialogOpen(true)}
@@ -122,7 +122,7 @@ function StatsCard({ label, value, trend, icon: Icon, color }: any) {
             <div className="relative flex justify-between items-start">
                 <div>
                     <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-1">{label}</p>
-                    <h2 className="text-3xl font-black text-white">{value}</h2>
+                    <h2 className="text-2xl md:text-3xl font-black text-white">{value}</h2>
                 </div>
                 <div className={`p-2 rounded-sm bg-white/5 ${color}`}>
                     <Icon className="w-4 h-4" />

@@ -4,17 +4,17 @@ import { Zap } from 'lucide-react';
 
 export default function DailyPage() {
     return (
-        <div className="min-h-screen bg-black text-white p-6 md:p-12 font-sans">
-            <div className="max-w-3xl mx-auto space-y-8">
+        <div className="bg-black text-white p-4 md:p-8 font-sans">
+            <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
 
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
                     <div>
-                        <h1 className="text-3xl font-bold flex items-center gap-3">
-                            <Zap className="w-8 h-8 text-yellow-400 fill-yellow-400" />
+                        <h1 className="text-2xl md:text-3xl font-black flex items-center gap-3 md:gap-4 uppercase tracking-tight">
+                            <Zap className="w-7 h-7 md:w-8 md:h-8 text-yellow-400 fill-yellow-400" />
                             Latihan Harian
                         </h1>
-                        <p className="text-zinc-400 mt-2 text-lg">
+                        <p className="text-zinc-400 mt-2 text-sm md:text-lg">
                             Tantangan harianmu untuk menjaga konsistensi belajar.
                         </p>
                     </div>

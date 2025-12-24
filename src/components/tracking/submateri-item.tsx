@@ -129,7 +129,7 @@ function ActionToggle({ active, onClick, icon: Icon, activeClass, inactiveClass,
             onClick={onClick}
             title={tooltip}
             className={cn(
-                "w-7 h-7 rounded-sm flex items-center justify-center transition-all",
+                "w-8 h-8 md:w-7 md:h-7 rounded-sm flex items-center justify-center transition-all",
                 active ? activeClass : inactiveClass
             )}
         >

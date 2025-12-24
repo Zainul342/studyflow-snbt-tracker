@@ -189,6 +189,17 @@
 - [x] **The Checkmark**: Ensure the core action (checking a box) feels incredibly satisfying (haptics/sound/visual).
 - [/] **Mobile Thumb Zone**: Verify dashboard controls are bottom-aligned or reachable.
 
+### E. Kocak & Real-time Integration
+- [x] **Real-time Engine**: Connect Dashboards & Tryouts to Firestore `onSnapshot`.
+- [x] **Kocak Personalization**: Implement humorous fallbacks for incomplete profiles.
+- [x] **Landing Sync**: Update Landing Page preview code to match new UI.
+
+### F. Mobile Polish & Optimization
+- [x] **Navigation**: Implement "Back Button" in Header for deep pages.
+- [x] **Adaptive UI**: Refine typography and grid stacking on small screens.
+- [x] **Performance**: Audit for "heavy" animations and optimize layout shift.
+- [x] **Unified Spacing**: Ensure consistent `p-4` on mobile vs `p-8` on desktop.
+
 ---
 
 ## 📝 Notes & Learnings

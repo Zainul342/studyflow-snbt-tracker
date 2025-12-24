@@ -87,29 +87,30 @@ function TopBar() {
 }
 
 const DashboardScene = ({ progress }: { progress: number }) => (
-    <div className="w-full h-full bg-[#09090b] text-white p-8 overflow-hidden font-sans">
+    <div className="w-full h-full bg-[#09090b] text-white p-4 md:p-8 overflow-hidden font-sans flex flex-col">
         {/* Welcome Header */}
-        <div className="flex justify-between items-end mb-8">
-            <div className="space-y-2">
-                <h1 className="text-3xl font-black tracking-tight">
-                    Selamat Pagi, <span className="text-[#BFFF0B]">Pejuang PTN Jalur Langit</span> 👋
+        <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-4 md:mb-8 gap-4">
+            <div className="space-y-1 md:space-y-2">
+                <h1 className="text-xl md:text-3xl font-black tracking-tight leading-tight">
+                    Selamat Pagi, <br className="md:hidden" />
+                    <span className="text-[#BFFF0B]">Pejuang PTN Jalur Langit</span> 👋
                 </h1>
-                <p className="text-zinc-400 text-sm">
+                <p className="text-zinc-400 text-[10px] md:text-sm line-clamp-2 md:line-clamp-none">
                     Siap untuk mengejar target <span className="text-white font-bold">Universitas Impian Mertua - Teknik Mengejar Restu</span> hari ini?
                 </p>
             </div>
-            <div className="flex gap-3">
-                <button className="px-4 py-2 rounded-lg border border-white/10 bg-zinc-900 hover:bg-zinc-800 text-sm font-bold transition-colors flex items-center gap-2">
-                    <BookOpen className="w-4 h-4" /> Materi
+            <div className="flex gap-2 md:gap-3 hidden sm:flex">
+                <button className="px-3 md:px-4 py-1.5 md:py-2 rounded-lg border border-white/10 bg-zinc-900 hover:bg-zinc-800 text-xs md:text-sm font-bold transition-colors flex items-center gap-2">
+                    <BookOpen className="w-3 h-3 md:w-4 md:h-4" /> Materi
                 </button>
-                <button className="px-4 py-2 rounded-lg bg-[#BFFF0B] text-black text-sm font-bold hover:shadow-[0_0_20px_-5px_#BFFF0B] transition-all flex items-center gap-2">
+                <button className="px-3 md:px-4 py-1.5 md:py-2 rounded-lg bg-[#BFFF0B] text-black text-xs md:text-sm font-bold hover:shadow-[0_0_20px_-5px_#BFFF0B] transition-all flex items-center gap-2">
                     🚀 Lanjut Belajar
                 </button>
             </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 mb-4 md:mb-8 shrink-0">
             <StatCard
                 icon={TrendingUp} iconColor="text-[#BFFF0B]" iconBg="bg-[#BFFF0B]/10"
                 value="68%" label="TOTAL PROGRESS"
@@ -133,27 +134,27 @@ const DashboardScene = ({ progress }: { progress: number }) => (
         </div>
 
         {/* Main Content Split */}
-        <div className="grid grid-cols-3 gap-6 h-[280px]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 h-full min-h-0">
             {/* Activity Graph */}
-            <div className="col-span-2 bg-zinc-900/40 border border-white/5 rounded-2xl p-6 relative overflow-hidden group">
-                <div className="flex justify-between items-start mb-6">
+            <div className="col-span-1 lg:col-span-2 bg-zinc-900/40 border border-white/5 rounded-xl md:rounded-2xl p-4 md:p-6 relative overflow-hidden group flex flex-col justify-between">
+                <div className="flex justify-between items-start mb-2 md:mb-6">
                     <div>
-                        <div className="flex items-center gap-3 mb-1">
+                        <div className="flex items-center gap-2 md:gap-3 mb-1">
                             <div className="p-1.5 rounded-md bg-[#BFFF0B]/10">
-                                <TrendingUp className="w-4 h-4 text-[#BFFF0B]" />
+                                <TrendingUp className="w-3 h-3 md:w-4 md:h-4 text-[#BFFF0B]" />
                             </div>
-                            <h3 className="font-bold">Aktivitas Belajar</h3>
+                            <h3 className="font-bold text-sm md:text-base">Aktivitas Belajar</h3>
                         </div>
-                        <p className="text-xs text-zinc-500">7 HARI TERAKHIR</p>
+                        <p className="text-[10px] md:text-xs text-zinc-500">7 HARI TERAKHIR</p>
                     </div>
                     <div className="text-right">
-                        <div className="text-2xl font-black">41.9 jam</div>
-                        <div className="text-xs font-bold text-[#BFFF0B]">+12% VS MINGGU LALU</div>
+                        <div className="text-lg md:text-2xl font-black">41.9 jam</div>
+                        <div className="text-[10px] md:text-xs font-bold text-[#BFFF0B]">+12% VS MINGGU LALU</div>
                     </div>
                 </div>
 
                 {/* SVG Graph Simulation */}
-                <div className="absolute bottom-0 left-0 right-0 h-32 px-4">
+                <div className="absolute bottom-0 left-0 right-0 h-20 md:h-32 px-4 opacity-50 md:opacity-100">
                     <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
                         <path d="M0,40 L0,30 C10,25 20,35 30,28 C40,20 50,15 60,25 C70,35 80,20 90,25 L100,28 L100,40 Z" fill="url(#gradient)" opacity="0.2" />
                         <path d="M0,30 C10,25 20,35 30,28 C40,20 50,15 60,25 C70,35 80,20 90,25 L100,28" fill="none" stroke="#BFFF0B" strokeWidth="0.5" />
@@ -167,13 +168,13 @@ const DashboardScene = ({ progress }: { progress: number }) => (
                 </div>
 
                 {/* X-Axis Labels */}
-                <div className="absolute bottom-4 left-6 right-6 flex justify-between text-[10px] text-zinc-600 font-medium">
+                <div className="relative z-10 flex justify-between text-[8px] md:text-[10px] text-zinc-600 font-medium pt-4 md:pt-0">
                     <span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
                 </div>
             </div>
 
-            {/* Today's Target */}
-            <div className="bg-zinc-900/40 border border-white/5 rounded-2xl p-6 flex flex-col">
+            {/* Today's Target (Hidden on very small screens to save space if needed, or condensed) */}
+            <div className="hidden lg:flex bg-zinc-900/40 border border-white/5 rounded-2xl p-6 flex-col">
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h3 className="font-bold flex items-center gap-2">
@@ -182,19 +183,12 @@ const DashboardScene = ({ progress }: { progress: number }) => (
                         </h3>
                         <p className="text-xs text-zinc-500 uppercase mt-1">SENIN, 22 DES 2025</p>
                     </div>
-                    <button className="w-8 h-8 rounded-lg border border-white/10 flex items-center justify-center hover:bg-white/5">
-                        <ChevronRight className="w-4 h-4 text-zinc-400" />
-                    </button>
                 </div>
 
                 <div className="space-y-3 flex-1">
                     <TaskItem title="Latsol Penalaran Umum" sub="Paket 3 - 20 Soal" time="09:00 - 10:30" />
                     <TaskItem title="Review Materi PPU" sub="Kalimat Efektif & Ejaan" time="13:00 - 14:30" />
                     <TaskItem title="Drill Kuantitatif" sub="Aljabar Dasar" time="19:30 - 21:00" />
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-white/5 text-[10px] text-zinc-500 italic text-center">
-                    "Konsistensi adalah kunci kemenangan." 🔥
                 </div>
             </div>
         </div>
@@ -203,18 +197,18 @@ const DashboardScene = ({ progress }: { progress: number }) => (
 
 function StatCard({ icon: Icon, iconColor, iconBg, value, label, badge, badgeColor }: any) {
     return (
-        <div className="bg-zinc-900/40 border border-white/5 p-5 rounded-2xl flex flex-col justify-between h-32 group hover:border-white/10 transition-colors">
+        <div className="bg-zinc-900/40 border border-white/5 p-3 md:p-5 rounded-xl md:rounded-2xl flex flex-col justify-between h-20 md:h-32 group hover:border-white/10 transition-colors">
             <div className="flex justify-between items-start">
-                <div className={`p-2 rounded-lg ${iconBg}`}>
-                    <Icon className={`w-5 h-5 ${iconColor}`} />
+                <div className={`p-1.5 md:p-2 rounded-lg ${iconBg}`}>
+                    <Icon className={`w-3 h-3 md:w-5 md:h-5 ${iconColor}`} />
                 </div>
-                <div className={`px-2 py-1 rounded text-[10px] font-bold ${badgeColor}`}>
+                <div className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded text-[8px] md:text-[10px] font-bold ${badgeColor}`}>
                     {badge}
                 </div>
             </div>
             <div>
-                <div className="text-2xl font-black text-white tracking-tight mb-1">{value}</div>
-                <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">{label}</div>
+                <div className="text-lg md:text-2xl font-black text-white tracking-tight mb-0.5 md:mb-1">{value}</div>
+                <div className="text-[8px] md:text-[10px] font-bold text-zinc-500 uppercase tracking-wider truncate">{label}</div>
             </div>
         </div>
     );

@@ -42,17 +42,20 @@ export default function DashboardPage() {
                         <motion.h1
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="text-3xl md:text-4xl font-black tracking-tight text-white mb-2"
+                            className="text-2xl md:text-4xl font-black tracking-tight text-white mb-2 leading-tight"
                         >
-                            Selamat Pagi, <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">{displayName}</span> 👋
+                            Selamat Pagi, <br className="md:hidden" />
+                            <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent break-words">
+                                {displayName}
+                            </span> 👋
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-zinc-400 text-lg font-medium"
+                            className="text-zinc-400 text-sm md:text-lg font-medium leading-relaxed max-w-2xl"
                         >
-                            Siap untuk mengejar target <span className="text-white font-semibold">{targetPTN} - {targetMajor}</span> hari ini?
+                            Siap untuk mengejar target <span className="text-white font-semibold block md:inline mt-1 md:mt-0">{targetPTN} - {targetMajor}</span> hari ini?
                         </motion.p>
                     </div>
 
