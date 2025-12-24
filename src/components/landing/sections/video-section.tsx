@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { VideoPlayerPreview } from "@/components/landing/video-player-preview";
 
 export function VideoSection() {
-    const [isPlaying, setIsPlaying] = useState(false);
 
     return (
         <section className="py-32 px-4">
@@ -31,20 +29,9 @@ export function VideoSection() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="relative aspect-video rounded-sm overflow-hidden glass-light"
+                    className="relative aspect-video rounded-xl overflow-hidden glass-light shadow-2xl border border-border"
                 >
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900/50 to-blue-900/50">
-                        <button
-                            onClick={() => setIsPlaying(!isPlaying)}
-                            className="w-20 h-20 rounded-sm bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:scale-110 transition-transform"
-                        >
-                            <Play className="w-8 h-8 text-white fill-white ml-1" />
-                        </button>
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
-                        <span className="text-white font-bold">StudyFlow in use</span>
-                        <span className="text-white/60">00:48</span>
-                    </div>
+                    <VideoPlayerPreview />
                 </motion.div>
 
                 {/* User Avatars */}

@@ -4,16 +4,28 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, LayoutDashboard, Sparkles, BookOpen, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ComingSoonModal } from "@/components/coming-soon-modal";
 
 export function MobileMenu({ onClose }: { onClose: () => void }) {
     const [mounted, setMounted] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [activeFeature, setActiveFeature] = useState({ name: "", desc: "" });
 
     useEffect(() => {
         setMounted(true);
         return () => setMounted(false);
     }, []);
+
+    const handleFeatureClick = (name: string, desc: string, isAvailable: boolean) => {
+        if (!isAvailable) {
+            setActiveFeature({ name, desc });
+            setModalOpen(true);
+        } else {
+            onClose();
+        }
+    };
 
     if (!mounted) return null;
 
@@ -24,6 +36,13 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex flex-col pointer-events-auto"
         >
+            <ComingSoonModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                featureName={activeFeature.name}
+                description={activeFeature.desc}
+            />
+
             {/* Menu Container */}
             <motion.div
                 initial={{ y: "-100%" }}
@@ -68,24 +87,31 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                                 <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Our Toolkit</h4>
                                 <ul className="space-y-4">
                                     {[
-                                        { name: "Progress Tracker", isNew: false, link: "/dashboard" },
-                                        { name: "Tryout System", isNew: true, link: "/tryout" },
-                                        { name: "Icon Library", isNew: false, link: "#" },
-                                        { name: "Community", isNew: false, link: "#" },
+                                        { name: "Progress Tracker", link: "/dashboard", available: true, icon: LayoutDashboard },
+                                        { name: "Tryout System", link: "#", available: false, desc: "Computer Based Test (CBT) simulation with IRT scoring.", icon: Sparkles },
+                                        { name: "Material Bank", link: "#", available: false, desc: "Comprehensive summary of SNBT subjects.", icon: BookOpen },
+                                        { name: "Community", link: "#", available: false, desc: "Join thousands of other SNBT fighters.", icon: Users },
                                     ].map((item, i) => (
                                         <li key={i}>
-                                            <Link
-                                                href={item.link}
-                                                onClick={onClose}
-                                                className="group flex items-center gap-3 text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                                            <div
+                                                onClick={() => handleFeatureClick(item.name, item.desc || "", item.available)}
+                                                className="group flex items-center gap-3 text-2xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer"
                                             >
-                                                {item.name}
-                                                {item.isNew && (
-                                                    <span className="text-[10px] bg-primary text-black px-1.5 py-0.5 rounded-sm font-bold">
-                                                        NEW
+                                                {item.available ? (
+                                                    <Link href={item.link} className="flex items-center gap-2 w-full">
+                                                        {item.name}
+                                                    </Link>
+                                                ) : (
+                                                    <span className="flex items-center gap-2 w-full">
+                                                        {item.name}
+                                                        {!item.available && (
+                                                            <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded-sm font-bold border border-border">
+                                                                SOON
+                                                            </span>
+                                                        )}
                                                     </span>
                                                 )}
-                                            </Link>
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>
@@ -97,10 +123,10 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                             <div>
                                 <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Explore</h4>
                                 <ul className="space-y-4">
-                                    <li><Link href="/showcase" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Success Stories</Link></li>
-                                    <li><Link href="/updates" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Updates</Link></li>
-                                    <li><Link href="/pricing" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Pricing</Link></li>
-                                    <li><Link href="/about" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">About Us</Link></li>
+                                    <li><Link href="#creators" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Success Stories</Link></li>
+                                    <li><Link href="#updates" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Updates</Link></li>
+                                    <li><Link href="#products" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Roadmap</Link></li>
+                                    <li><Link href="#benefits" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Why StudyFlow?</Link></li>
                                 </ul>
                             </div>
 
@@ -120,25 +146,25 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                 <span className="inline-block px-3 py-1 bg-primary rounded-full text-[10px] font-bold text-black mb-6">
-                                    MILESTONE
+                                    START NOW
                                 </span>
 
                                 <h3 className="text-4xl font-black text-foreground mb-6 tracking-tight">
-                                    We hit 1,600
+                                    Your Dream PTN
                                     <br />
-                                    Members!
+                                    Awaits.
                                 </h3>
 
-                                <Link href="/register" onClick={onClose}>
+                                <Link href="/dashboard" onClick={onClose}>
                                     <Button className="bg-foreground text-background hover:bg-foreground/90 font-bold px-8 rounded-sm mb-8">
-                                        Join them
+                                        Go to Dashboard
                                     </Button>
                                 </Link>
 
-                                <div className="flex -space-x-3">
-                                    {[1, 2, 3, 4].map((i) => (
-                                        <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-zinc-800" />
-                                    ))}
+                                <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium">
+                                    <span>Free Forever.</span>
+                                    <span className="w-1 h-1 rounded-full bg-muted-foreground" />
+                                    <span>No Credit Card.</span>
                                 </div>
                             </div>
                         </div>

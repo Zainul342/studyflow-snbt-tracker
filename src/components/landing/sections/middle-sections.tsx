@@ -11,7 +11,7 @@ import { DashboardPreview } from "@/components/landing/dashboard-preview";
 
 export function CreatorsSection() {
     return (
-        <section className="py-32 px-4 relative overflow-hidden">
+        <section id="creators" className="py-32 px-4 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
 
             <div className="max-w-6xl mx-auto text-center relative z-10">
@@ -48,7 +48,7 @@ export function CreatorsSection() {
 
 export function UpdatesSection() {
     return (
-        <section className="py-32 px-4">
+        <section id="updates" className="py-32 px-4">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
@@ -106,7 +106,7 @@ export function UpdatesSection() {
 
 export function PlatformSection() {
     return (
-        <section className="py-32 px-4 bg-card/30 border-y border-border/50">
+        <section id="platform" className="py-32 px-4 bg-card/30 border-y border-border/50">
             <div className="max-w-7xl mx-auto">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <motion.div
@@ -241,7 +241,7 @@ export function ProductsSection() {
 
 export function BenefitsSection() {
     return (
-        <section className="py-32 px-4 bg-card/30 border-t border-border/50">
+        <section id="benefits" className="py-32 px-4 bg-card/30 border-t border-border/50">
             <div className="max-w-6xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
