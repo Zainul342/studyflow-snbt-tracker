@@ -185,9 +185,9 @@
 - [x] **Functional Verification**: Ensure Register -> Onboarding -> Dashboard flow works.ure Firestore data is clean.
 
 ### D. The First Win (Dashboard Focus)
-- [ ] **Focus Mode UI**: Create a "Today Only" view. Hide complex analytics initially.
-- [ ] **"The Checkmark"**: Ensure the primary action (completing a task) is satisfying and instant.
-- [ ] **Mobile Thumb Zone**: Verify dashboard controls on mobile.
+- [x] **Focus Mode UI**: Create a "Today Only" view. Hide complex analytics initially.
+- [x] **The Checkmark**: Ensure the core action (checking a box) feels incredibly satisfying (haptics/sound/visual).
+- [/] **Mobile Thumb Zone**: Verify dashboard controls are bottom-aligned or reachable.
 
 ---
 

@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { TrendingUp } from "lucide-react";
-import { motion } from "framer-motion";
+import { TrendingUp, Eye, EyeOff } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const data = [
     { name: "Mon", hours: 4.5 },
@@ -15,13 +16,43 @@ const data = [
 ];
 
 export function ActivityChart() {
+    const [isFocusMode, setIsFocusMode] = useState(true);
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="lg:col-span-2 group bg-zinc-900/50 border border-zinc-800 rounded-xl p-8 hover:border-white/10 transition-all duration-300 min-h-[350px] flex flex-col justify-between"
+            className={`lg:col-span-2 group bg-zinc-900/50 border border-zinc-800 rounded-xl p-8 hover:border-white/10 transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${isFocusMode ? 'min-h-[120px]' : 'min-h-[350px]'}`}
         >
+            {/* Focus Mode Overlay */}
+            <AnimatePresence>
+                {isFocusMode && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-10 bg-zinc-950/80 backdrop-blur-md flex items-center justify-between px-8 border-zinc-800"
+                    >
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center border border-zinc-800">
+                                <EyeOff className="w-5 h-5 text-zinc-500" />
+                            </div>
+                            <div className="text-left">
+                                <h3 className="text-sm font-black text-white uppercase tracking-tight">
+                                    Focus Mode Active
+                                </h3>
+                                <p className="text-zinc-500 text-xs font-medium max-w-[200px] hidden md:block">
+                                    Statistik disembunyikan.
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => setIsFocusMode(false)}
+                            className="bg-zinc-900 border border-zinc-800 hover:border-[#BFFF0B] hover:text-[#BFFF0B] text-white px-4 py-2 rounded-sm text-[10px] font-bold uppercase tracking-widest transition-all"
+                        >
+                            Buka Data
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-sm bg-zinc-900 flex items-center justify-center border border-zinc-800">

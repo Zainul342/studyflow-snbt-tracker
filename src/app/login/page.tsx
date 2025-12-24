@@ -87,14 +87,14 @@ export default function LoginPage() {
                                 System Standby
                             </span>
                         </motion.div>
-                        <h1 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">
-                            Welcome Back,<br />
+                        <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">
+                            Lanjut Perjuangan,<br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600">
-                                Operator
+                                Pejuang.
                             </span>
                         </h1>
                         <p className="text-zinc-500 text-sm font-medium">
-                            Enter your credentials to resume the mission.
+                            Masuk untuk melihat progress hari ini.
                         </p>
                     </div>
 
@@ -106,9 +106,9 @@ export default function LoginPage() {
                             </div>
                         )}
                         <AuthInput
-                            label="Email Address"
+                            label="Email Terdaftar"
                             type="email"
-                            placeholder="operator@studyflow.id"
+                            placeholder="pejuang@studyflow.id"
                             icon={Mail}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -126,7 +126,7 @@ export default function LoginPage() {
                         {/* Forgot Password Link */}
                         <div className="flex justify-end">
                             <Link href="/forgot-password" className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 hover:text-[#BFFF0B] transition-colors">
-                                Lost Access?
+                                Lupa Password?
                             </Link>
                         </div>
 
@@ -137,7 +137,7 @@ export default function LoginPage() {
                             disabled={isLoading}
                         >
                             <span className="relative z-10 flex items-center gap-2">
-                                {isLoading ? "Authenticating..." : "Initiate Protocol"}
+                                {isLoading ? "Memuat..." : "Masuk Markas"}
                                 {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
                             </span>
                             {/* Glitch/Hover Effect Overlay */}
@@ -151,7 +151,7 @@ export default function LoginPage() {
                             </div>
                             <div className="relative flex justify-center text-xs uppercase">
                                 <span className="bg-[#0A0A0A] px-2 text-zinc-700 font-bold tracking-widest">
-                                    Or Continue With
+                                    Atau Masuk Dengan
                                 </span>
                             </div>
                         </div>
@@ -192,9 +192,9 @@ export default function LoginPage() {
                     {/* D. The Switch */}
                     <div className="text-center pt-2">
                         <Link href="/register" className="group">
-                            <span className="text-zinc-500 text-xs">Don't have an account? </span>
+                            <span className="text-zinc-500 text-xs">Belum punya akun? </span>
                             <span className="text-white font-bold text-xs uppercase tracking-wide group-hover:text-[#BFFF0B] transition-colors border-b border-transparent group-hover:border-[#BFFF0B]">
-                                Access Protocol
+                                Daftar Sekarang
                             </span>
                         </Link>
                     </div>
