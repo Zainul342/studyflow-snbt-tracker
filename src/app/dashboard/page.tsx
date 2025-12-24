@@ -12,9 +12,14 @@ export default function DashboardPage() {
     const { user, userData } = useAuth();
 
     // Default Fallback
-    const displayName = userData?.displayName || user?.displayName || "Accessing Protocol...";
-    const targetPTN = userData?.targetPTN || "Target Universitas";
-    const targetMajor = userData?.targetMajor || "Target Jurusan";
+    // Default Fallback - Kocak & Menarik Mode
+    const displayName = userData?.displayName || user?.displayName || "Pejuang PTN Jalur Langit";
+
+    // Handle specific legacy placeholders that might be saved in DB
+    const isTargetValid = (val: string) => val && val !== "Target Universitas" && val !== "Target Jurusan";
+
+    const targetPTN = isTargetValid(userData?.targetPTN) ? userData.targetPTN : "Universitas Impian Mertua";
+    const targetMajor = isTargetValid(userData?.targetMajor) ? userData.targetMajor : "Teknik Mengejar Restu";
 
     return (
         // Main container match landing page bg-[#09090b] and selection color

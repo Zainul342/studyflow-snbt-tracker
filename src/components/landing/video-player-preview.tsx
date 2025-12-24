@@ -44,10 +44,10 @@ function Sidebar({ activeTab }: { activeTab: string }) {
 
             <div className="mt-auto bg-zinc-900/50 rounded-xl p-3 border border-white/5 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
-                    AC
+                    PP
                 </div>
                 <div>
-                    <div className="text-sm font-bold text-white">AKUN</div>
+                    <div className="text-sm font-bold text-white">PEJUANG PTN</div>
                     <div className="text-[10px] text-yellow-500 font-bold flex items-center gap-1">
                         ⚡ WARRIOR
                     </div>
@@ -92,10 +92,10 @@ const DashboardScene = ({ progress }: { progress: number }) => (
         <div className="flex justify-between items-end mb-8">
             <div className="space-y-2">
                 <h1 className="text-3xl font-black tracking-tight">
-                    Selamat Pagi, <span className="text-[#BFFF0B]">akun chrome</span> 👋
+                    Selamat Pagi, <span className="text-[#BFFF0B]">Pejuang PTN Jalur Langit</span> 👋
                 </h1>
                 <p className="text-zinc-400 text-sm">
-                    Siap untuk mengejar target <span className="text-white font-bold">Target Universitas - Target Jurusan</span> hari ini?
+                    Siap untuk mengejar target <span className="text-white font-bold">Universitas Impian Mertua - Teknik Mengejar Restu</span> hari ini?
                 </p>
             </div>
             <div className="flex gap-3">
@@ -112,22 +112,22 @@ const DashboardScene = ({ progress }: { progress: number }) => (
         <div className="grid grid-cols-4 gap-4 mb-8">
             <StatCard
                 icon={TrendingUp} iconColor="text-[#BFFF0B]" iconBg="bg-[#BFFF0B]/10"
-                value="45%" label="TOTAL PROGRESS"
-                badge="+12.5%" badgeColor="text-[#BFFF0B] bg-[#BFFF0B]/10"
+                value="68%" label="TOTAL PROGRESS"
+                badge="+KONSISTEN" badgeColor="text-[#BFFF0B] bg-[#BFFF0B]/10"
             />
             <StatCard
                 icon={CheckCircle} iconColor="text-blue-500" iconBg="bg-blue-500/10"
-                value="28/146" label="MATERI SELESAI"
+                value="42/146" label="MATERI SELESAI"
                 badge="TARGET: 50" badgeColor="text-zinc-400 bg-zinc-800"
             />
             <StatCard
                 icon={Target} iconColor="text-purple-500" iconBg="bg-purple-500/10"
-                value="645" label="RATA-RATA TO"
-                badge="+28 POIN" badgeColor="text-purple-400 bg-purple-500/10"
+                value="725" label="RATA-RATA TO"
+                badge="+80 POIN" badgeColor="text-purple-400 bg-purple-500/10"
             />
             <StatCard
                 icon={BookOpen} iconColor="text-orange-500" iconBg="bg-orange-500/10"
-                value="42.5h" label="JAM BELAJAR"
+                value="58.5h" label="JAM BELAJAR"
                 badge="MINGGU INI" badgeColor="text-yellow-500 bg-yellow-500/10"
             />
         </div>

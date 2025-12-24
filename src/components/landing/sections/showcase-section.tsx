@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 
 export function ShowcaseSection() {
     const showcaseItems = [
-        { title: "Materi Gigitan Kecil", icon: ListTodo, color: "from-blue-500 to-blue-600" },
-        { title: "Progress Jujur", icon: BarChart3, color: "from-purple-500 to-purple-600" },
-        { title: "Central Brain", icon: BrainCircuit, color: "from-pink-500 to-pink-600" },
-        { title: "Anti Wacana", icon: Zap, color: "from-orange-500 to-orange-600" },
+        { title: "Materi Gigitan Kecil", icon: ListTodo, color: "from-blue-600 via-indigo-500 to-cyan-400" },
+        { title: "Progress Jujur", icon: BarChart3, color: "from-violet-600 via-purple-500 to-fuchsia-400" },
+        { title: "Central Brain", icon: BrainCircuit, color: "from-rose-600 via-pink-500 to-orange-400" },
+        { title: "Anti Wacana", icon: Zap, color: "from-orange-600 via-amber-500 to-yellow-400" },
     ];
 
     return (

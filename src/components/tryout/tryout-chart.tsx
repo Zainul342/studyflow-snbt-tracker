@@ -2,19 +2,28 @@
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
-    { name: 'TO 1', score: 520 },
-    { name: 'TO 2', score: 580 },
-    { name: 'TO 3', score: 550 },
-    { name: 'TO 4', score: 630 },
-];
+export function TryoutChart({ data }: { data?: any[] }) {
+    if (!data || data.length === 0) {
+        return (
+            <div className="h-[300px] w-full flex items-center justify-center border border-dashed border-zinc-800 rounded-sm">
+                <p className="text-zinc-500 text-sm">Belum ada data grafik.</p>
+            </div>
+        );
+    }
 
-export function TryoutChart() {
+    // Format data for chart
+    // We want chronological order
+    const chartData = data.map((item, index) => ({
+        name: `TO ${index + 1}`,
+        score: item.score,
+        date: item.date, // optional context
+    }));
+
     return (
         <div className="h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart
-                    data={data}
+                    data={chartData}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
                     <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
@@ -32,7 +41,7 @@ export function TryoutChart() {
                         tickLine={false}
                         axisLine={false}
                         dx={-10}
-                        domain={[400, 1000]}
+                        domain={[0, 1000]}
                     />
                     <Tooltip
                         contentStyle={{

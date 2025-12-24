@@ -1,14 +1,60 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus, TrendingUp, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AddTryoutDialog } from "@/components/tryout/add-tryout-dialog";
 import { TryoutHistory } from "@/components/tryout/tryout-history";
 import { TryoutChart } from "@/components/tryout/tryout-chart";
+import { useAuth } from "@/contexts/auth-context";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase/config";
 
 export default function TryoutPage() {
+    const { user } = useAuth();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [tryouts, setTryouts] = useState<any[]>([]);
+    const [stats, setStats] = useState({
+        average: 0,
+        count: 0,
+        best: 0,
+        lastScore: 0
+    });
+
+    // Real-time listener
+    useEffect(() => {
+        if (!user) return;
+
+        const q = query(collection(db, "users", user.uid, "tryouts"), orderBy("date", "asc"));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setTryouts(data);
+
+            // Calculate Stats
+            if (data.length > 0) {
+                const total = data.reduce((acc, curr: any) => acc + (curr.score || 0), 0);
+                const avg = Math.round(total / data.length);
+                const max = Math.max(...data.map((d: any) => d.score || 0));
+                const last = data[data.length - 1].score || 0;
+
+                setStats({
+                    average: avg,
+                    count: data.length,
+                    best: max,
+                    lastScore: last
+                });
+            } else {
+                setStats({ average: 0, count: 0, best: 0, lastScore: 0 });
+            }
+        });
+
+        return () => unsubscribe();
+    }, [user]);
+
+    // Target PTN (Hardcoded or from User Profile if available)
+    // We can assume a standard target of 700 for now or fetch from userData
+    const TARGET_ESCORE = 700;
+    const gap = stats.average - TARGET_ESCORE;
 
     return (
         <div className="flex flex-col gap-6 max-w-5xl mx-auto pb-10">
@@ -29,21 +75,39 @@ export default function TryoutPage() {
 
             {/* Stats Overview */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <StatsCard label="Rata-rata Skor" value="643" trend="+12" icon={TrendingUp} color="text-[#BFFF0B]" />
-                <StatsCard label="Total Tryout" value="4" trend="Kali" icon={Calendar} color="text-blue-400" />
-                <StatsCard label="Target PTN" value="720" trend="Gap: -77" icon={TrendingUp} color="text-pink-400" />
+                <StatsCard
+                    label="Rata-rata Skor"
+                    value={stats.average || "-"}
+                    trend={stats.count > 0 ? (stats.average >= 650 ? "Bagus" : "Perlu ditingkatkan") : "Belum ada data"}
+                    icon={TrendingUp}
+                    color="text-[#BFFF0B]"
+                />
+                <StatsCard
+                    label="Total Tryout"
+                    value={stats.count}
+                    trend="Kali Percobaan"
+                    icon={Calendar}
+                    color="text-blue-400"
+                />
+                <StatsCard
+                    label="Target PTN"
+                    value={TARGET_ESCORE}
+                    trend={`Gap: ${gap > 0 ? "+" + gap : gap}`}
+                    icon={TrendingUp}
+                    color="text-pink-400"
+                />
             </div>
 
             {/* Chart Section */}
             <div className="w-full bg-zinc-900 border border-zinc-800 rounded-sm p-6">
                 <h3 className="text-lg font-bold text-white mb-6">Grafik Progress</h3>
-                <TryoutChart />
+                <TryoutChart data={tryouts} />
             </div>
 
             {/* History List */}
             <div className="w-full">
                 <h3 className="text-lg font-bold text-white mb-4">Riwayat TO</h3>
-                <TryoutHistory />
+                <TryoutHistory data={tryouts} />
             </div>
 
             <AddTryoutDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
@@ -65,7 +129,7 @@ function StatsCard({ label, value, trend, icon: Icon, color }: any) {
                 </div>
             </div>
             <p className="text-xs font-mono text-zinc-500 mt-2">
-                <span className={color}>{trend}</span> dari TO terakhir
+                <span className={color}>{trend}</span>
             </p>
         </div>
     );
