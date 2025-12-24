@@ -3,6 +3,7 @@
 import { Search, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { MobileNav } from "./mobile-nav";
 
 export function Header() {
     return (
@@ -24,11 +25,13 @@ export function Header() {
                     <Video className="mr-2 h-3.5 w-3.5" />
                     Tutorial
                 </Button>
-                <div className="w-7 h-7 rounded-sm bg-gradient-to-br from-[#BFFF0B] to-emerald-400 p-0.5 md:hidden">
+                <div className="w-7 h-7 rounded-sm bg-gradient-to-br from-[#BFFF0B] to-emerald-400 p-0.5 md:hidden hidden">
                     <div className="w-full h-full rounded-sm bg-black flex items-center justify-center text-[9px] font-black text-[#BFFF0B]">
                         ZN
                     </div>
                 </div>
+
+                <MobileNav />
             </div>
         </header>
     );

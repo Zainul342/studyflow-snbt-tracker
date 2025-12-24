@@ -8,27 +8,27 @@ import { cn } from "@/lib/utils";
 const INITIAL_AGENDA = [
     {
         id: 1,
-        title: "Latsol Penalaran Umum",
-        subtitle: "Paket 3 - 20 Soal",
-        time: "09:00 - 10:30",
-        type: "latsol",
-        icon: Calendar,
-        completed: false
-    },
-    {
-        id: 2,
-        title: "Review Materi PPU",
-        subtitle: "Kalimat Efektif & Ejaan",
-        time: "13:00 - 14:30",
+        title: "Eksplorasi Markas",
+        subtitle: "Cek fitur-fitur dashboard",
+        time: "5 Menit",
         type: "review",
         icon: BookOpen,
         completed: false
     },
     {
+        id: 2,
+        title: "Set Target Pemanasan",
+        subtitle: "Pilih 1 materi termudah",
+        time: "10 Menit",
+        type: "latsol",
+        icon: Calendar,
+        completed: false
+    },
+    {
         id: 3,
-        title: "Drill Kuantitatif",
-        subtitle: "Aljabar Dasar",
-        time: "19:30 - 21:00",
+        title: "Mulai Fokus",
+        subtitle: "Matikan notifikasi HP",
+        time: "Sekarang",
         type: "drill",
         icon: Clock,
         completed: false

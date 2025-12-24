@@ -10,16 +10,16 @@ const iconBoxStyle = "w-12 h-12 rounded-sm flex items-center justify-center mb-4
 const stats = [
     {
         label: "Total Progress",
-        value: "45%",
-        change: "+12.5%",
-        trend: "up",
+        value: "0%",
+        change: "Mulai Hari Ini",
+        trend: "neutral", // changed to neutral for new users
         icon: TrendingUp,
-        color: "text-[#BFFF0B]",
-        bg: "bg-[#BFFF0B]/10",
+        color: "text-zinc-400", // Start neutral
+        bg: "bg-zinc-400/10",
     },
     {
         label: "Materi Selesai",
-        value: "28/146",
+        value: "0/146",
         change: "Target: 50",
         trend: "neutral",
         icon: CheckCircle2,
@@ -28,18 +28,18 @@ const stats = [
     },
     {
         label: "Rata-rata TO",
-        value: "645",
-        change: "+28 poin",
-        trend: "up",
+        value: "-",
+        change: "Belum Ada Data",
+        trend: "neutral",
         icon: Target,
         color: "text-purple-500",
         bg: "bg-purple-500/10",
     },
     {
         label: "Jam Belajar",
-        value: "42.5h",
+        value: "0h",
         change: "Minggu ini",
-        trend: "up",
+        trend: "neutral",
         icon: BookOpen,
         color: "text-amber-400",
         bg: "bg-amber-400/10",
@@ -61,16 +61,9 @@ export function ProgressOverview() {
                         <div className={`${iconBoxStyle} ${stat.bg}`}>
                             <stat.icon className={`w-6 h-6 ${stat.color}`} />
                         </div>
-                        {stat.trend === "up" && (
-                            <span className="flex items-center text-[10px] font-bold tracking-wider uppercase text-[#BFFF0B] bg-[#BFFF0B]/10 px-2 py-1 rounded-sm border border-[#BFFF0B]/20">
-                                {stat.change}
-                            </span>
-                        )}
-                        {stat.trend === "neutral" && (
-                            <span className="flex items-center text-[10px] font-bold tracking-wider uppercase text-zinc-400 bg-zinc-400/10 px-2 py-1 rounded-sm border border-zinc-400/20">
-                                {stat.change}
-                            </span>
-                        )}
+                        <span className="flex items-center text-[10px] font-bold tracking-wider uppercase text-zinc-500 bg-zinc-500/10 px-2 py-1 rounded-sm border border-zinc-500/20">
+                            {stat.change}
+                        </span>
                     </div>
 
                     <div>

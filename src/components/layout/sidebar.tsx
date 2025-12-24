@@ -27,14 +27,9 @@ const sidebarNavItems = [
         icon: LayoutDashboard,
     },
     {
-        title: "Materi Belajar",
+        title: "Peta Materi",
         href: "/dashboard/study",
         icon: BookOpen,
-    },
-    {
-        title: "Cek Progress",
-        href: "/dashboard/progress",
-        icon: Target,
     },
     {
         title: "Analitik Progres",

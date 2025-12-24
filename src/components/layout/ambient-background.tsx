@@ -8,7 +8,7 @@ export function AmbientBackground() {
             {/* Base Gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-purple-950/20 via-[#0A0A0A] to-[#0A0A0A]" />
 
-            {/* Moving Orbs */}
+            {/* Moving Orbs - Hidden on mobile for performance */}
             <motion.div
                 animate={{
                     opacity: [0.3, 0.5, 0.3],
@@ -19,7 +19,7 @@ export function AmbientBackground() {
                     repeat: Infinity,
                     ease: "easeInOut",
                 }}
-                className="absolute -top-[10%] left-[20%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]"
+                className="hidden md:block absolute -top-[10%] left-[20%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px]"
             />
 
             <motion.div
@@ -33,7 +33,7 @@ export function AmbientBackground() {
                     ease: "easeInOut",
                     delay: 2,
                 }}
-                className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px]"
+                className="hidden md:block absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px]"
             />
 
             {/* Grid Texture */}

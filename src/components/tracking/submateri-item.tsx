@@ -72,75 +72,68 @@ export function SubmateriItem({ id, name }: SubmateriItemProps) {
     };
 
     return (
-        <div className="group flex items-center justify-between p-3 rounded-sm bg-zinc-900 border border-zinc-800/50 hover:border-zinc-700 hover:bg-zinc-800 transition-all">
+        <div className="group flex items-center justify-between py-2.5 px-4 border-b border-zinc-800/50 last:border-0 hover:bg-white/[0.02] transition-colors">
             <div className="flex items-center gap-3 min-w-0 flex-1">
-                {/* Status Indicator Dot */}
+                {/* Status Indicator Dot - Subtle now */}
                 <div className={cn(
-                    "w-2 h-2 rounded-full transition-colors shrink-0",
-                    status.review ? "bg-[#BFFF0B] shadow-[0_0_8px_rgba(191,255,11,0.5)]" :
+                    "w-1.5 h-1.5 rounded-full transition-colors shrink-0",
+                    status.review ? "bg-[#BFFF0B]" :
                         status.latsol ? "bg-orange-400" :
-                            status.belajar ? "bg-blue-400" : "bg-zinc-700 group-hover:bg-zinc-600"
+                            status.belajar ? "bg-blue-400" : "bg-zinc-800"
                 )} />
 
                 <span className={cn(
                     "text-xs font-medium truncate transition-colors cursor-default",
-                    (status.belajar || status.latsol || status.review) ? "text-zinc-200" : "text-zinc-400 group-hover:text-zinc-300"
+                    (status.belajar || status.latsol || status.review) ? "text-zinc-300" : "text-zinc-500 group-hover:text-zinc-400"
                 )}>
                     {name}
                 </span>
             </div>
 
-            {/* Checkbox Actions */}
-            <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity ml-3">
-                {/* Belajar Toggle */}
+            {/* Checkbox Actions - Fixed Width for Spreadsheet alignment */}
+            <div className="flex items-center gap-2 ml-4">
                 <ActionToggle
                     active={status.belajar}
                     onClick={() => toggleStatus("belajar")}
                     icon={BookOpen}
-                    activeClass="bg-blue-400/20 text-blue-400 border-blue-400/30 hover:bg-blue-400/30"
-                    inactiveClass="text-zinc-600 hover:text-blue-400 hover:bg-blue-400/10"
-                    tooltip="Selesai Belajar"
-                    label="B"
+                    activeClass="text-blue-400 bg-blue-400/10"
+                    inactiveClass="text-zinc-700 hover:text-zinc-500"
+                    tooltip="Status: Sudah Belajar Materi"
                 />
 
-                {/* Latsol Toggle */}
                 <ActionToggle
                     active={status.latsol}
                     onClick={() => toggleStatus("latsol")}
                     icon={Clock}
-                    activeClass="bg-orange-400/20 text-orange-400 border-orange-400/30 hover:bg-orange-400/30"
-                    inactiveClass="text-zinc-600 hover:text-orange-400 hover:bg-orange-400/10"
-                    tooltip="Selesai Latsol"
-                    label="L"
+                    activeClass="text-orange-400 bg-orange-400/10"
+                    inactiveClass="text-zinc-700 hover:text-zinc-500"
+                    tooltip="Status: Sudah Latihan Soal"
                 />
 
-                {/* Review Toggle */}
                 <ActionToggle
                     active={status.review}
                     onClick={() => toggleStatus("review")}
                     icon={Trophy}
-                    activeClass="bg-[#BFFF0B]/20 text-[#BFFF0B] border-[#BFFF0B]/30 hover:bg-[#BFFF0B]/30"
-                    inactiveClass="text-zinc-600 hover:text-[#BFFF0B] hover:bg-[#BFFF0B]/10"
-                    tooltip="Selesai Review"
-                    label="R"
+                    activeClass="text-[#BFFF0B] bg-[#BFFF0B]/10"
+                    inactiveClass="text-zinc-700 hover:text-zinc-500"
+                    tooltip="Status: Sudah Review / Mastered"
                 />
             </div>
         </div>
     );
 }
 
-function ActionToggle({ active, onClick, icon: Icon, activeClass, inactiveClass, tooltip, label }: any) {
+function ActionToggle({ active, onClick, icon: Icon, activeClass, inactiveClass, tooltip }: any) {
     return (
         <button
             onClick={onClick}
             title={tooltip}
             className={cn(
-                "w-7 h-7 rounded-sm flex items-center justify-center border border-transparent transition-all text-[10px] font-black uppercase",
+                "w-7 h-7 rounded-sm flex items-center justify-center transition-all",
                 active ? activeClass : inactiveClass
             )}
         >
-            {/* Show Icon on Hover, Label otherwise? Or just Label? Let's use Label for compact "B L R" look, looks cleaner for devs */}
-            {label}
+            <Icon className="w-3.5 h-3.5" />
         </button>
     );
 }

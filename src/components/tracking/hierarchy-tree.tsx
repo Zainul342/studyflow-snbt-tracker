@@ -15,7 +15,7 @@ export function HierarchyTree() {
     const [progressMap, setProgressMap] = useState<Record<string, { current: number; total: number; percentage: number }>>({});
 
     // Independent state for each subtes expansion
-    const [expandedSubtes, setExpandedSubtes] = useState<string[]>(["pu"]); // Default open PU
+    const [expandedSubtes, setExpandedSubtes] = useState<string[]>([]); // Default all collapsed
 
     const toggleSubtes = (id: string) => {
         setExpandedSubtes(prev =>
@@ -124,18 +124,31 @@ export function HierarchyTree() {
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
                                 >
                                     <div className="border-t border-zinc-800 bg-zinc-950/30">
+                                        {/* Table Header - Visible once per Subtes? No, per Materi group usually better for context */}
+
                                         {subtes.materi.map((materi) => (
-                                            <div key={materi.id} className="border-b border-zinc-800/50 last:border-0">
-                                                {/* Level 2: Materi Header */}
-                                                <div className="px-4 py-3 bg-white/[0.02] flex items-center gap-3">
-                                                    <BookOpen className="w-4 h-4 text-zinc-600" />
-                                                    <span className="text-sm font-semibold text-zinc-300">
-                                                        {materi.name}
-                                                    </span>
+                                            <div key={materi.id}>
+                                                {/* Sticky Header for Materi Group */}
+                                                <div className="px-4 py-2 bg-zinc-900/80 backdrop-blur-sm border-y border-zinc-800 flex items-center justify-between sticky top-0 z-10">
+                                                    <div className="flex items-center gap-2">
+                                                        <BookOpen className="w-3.5 h-3.5 text-zinc-600" />
+                                                        <span className="text-xs font-bold text-zinc-300 uppercase tracking-wide">
+                                                            {materi.name}
+                                                        </span>
+                                                    </div>
+
+                                                    {/* Column Headers */}
+                                                    <div className="flex items-center gap-2 text-[9px] font-bold text-zinc-600 uppercase w-[100px] justify-center">
+                                                        <span>B</span>
+                                                        <span className="mx-1">•</span>
+                                                        <span>L</span>
+                                                        <span className="mx-1">•</span>
+                                                        <span>R</span>
+                                                    </div>
                                                 </div>
 
-                                                {/* Level 3: Submateri List */}
-                                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-4 pt-2">
+                                                {/* Rows List */}
+                                                <div className="flex flex-col border-b border-zinc-800/50 last:border-0">
                                                     {materi.submateri.map((sub) => (
                                                         <SubmateriItem
                                                             key={sub.id}
