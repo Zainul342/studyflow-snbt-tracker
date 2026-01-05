@@ -72,9 +72,21 @@ export default function RegisterPage() {
         try {
             await signInWithGoogle();
             router.push("/onboarding");
-        } catch (err) {
-            console.error(err);
-            setError("Google Sign-In failed.");
+        } catch (err: unknown) {
+            console.error("Google Sign-In Error:", err);
+            // Show more specific error messages
+            const firebaseError = err as { code?: string; message?: string };
+            if (firebaseError.code === "auth/unauthorized-domain") {
+                setError("Domain tidak ter-authorize. Tambahkan domain ini di Firebase Console.");
+            } else if (firebaseError.code === "auth/popup-blocked") {
+                setError("Popup diblokir. Izinkan popup untuk login dengan Google.");
+            } else if (firebaseError.code === "auth/cancelled-popup-request") {
+                setError("Login dibatalkan. Silakan coba lagi.");
+            } else if (firebaseError.code === "auth/network-request-failed") {
+                setError("Koneksi gagal. Periksa internet Anda.");
+            } else {
+                setError(`Google Sign-In failed: ${firebaseError.code || firebaseError.message || "Unknown error"}`);
+            }
             setIsLoading(false);
         }
     };
