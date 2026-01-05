@@ -459,7 +459,7 @@ export const getAllSubmateri = () => {
                     materiId: materi.id,
                     subtesId: subtes.id,
                     order: submateri.order,
-                    isAdvanced: submateri.isAdvanced || false,
+                    isAdvanced: (submateri as any).isAdvanced || false,
                     isPK: (materi as any).isPK || false,
                     isPM: (materi as any).isPM || false
                 });

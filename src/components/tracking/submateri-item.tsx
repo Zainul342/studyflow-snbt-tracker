@@ -15,6 +15,8 @@ interface SubmateriItemProps {
 }
 
 export function SubmateriItem({ id, name }: SubmateriItemProps) {
+    const { user } = useAuth();
+
     // Local state for optimistic UI updates
     const [status, setStatus] = useState<ProgressStatus>({
         belajar: false,

@@ -35,7 +35,7 @@ export default function TryoutPage() {
                 const total = data.reduce((acc, curr: any) => acc + (curr.score || 0), 0);
                 const avg = Math.round(total / data.length);
                 const max = Math.max(...data.map((d: any) => d.score || 0));
-                const last = data[data.length - 1].score || 0;
+                const last = (data[data.length - 1] as any).score || 0;
 
                 setStats({
                     average: avg,
