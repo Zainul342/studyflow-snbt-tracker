@@ -14,7 +14,8 @@ import {
     Save,
     MapPin,
     Shield,
-    Loader2
+    Loader2,
+    ArrowLeft
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -24,6 +25,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 // --- Types ---
 interface FormData {
@@ -152,6 +154,11 @@ export default function SettingsPage() {
                             className="space-y-2"
                         >
                             <div className="flex items-center gap-3">
+                                <Link href="/dashboard">
+                                    <Button variant="ghost" size="icon" className="mr-2 text-zinc-400 hover:text-white hover:bg-white/10">
+                                        <ArrowLeft className="w-6 h-6" />
+                                    </Button>
+                                </Link>
                                 <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase">
                                     Account<br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-700">Settings</span>

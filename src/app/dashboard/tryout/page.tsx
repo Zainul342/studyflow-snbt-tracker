@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Plus, TrendingUp, Calendar } from "lucide-react";
+import { Plus, TrendingUp, Calendar, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AddTryoutDialog } from "@/components/tryout/add-tryout-dialog";
 import { TryoutHistory } from "@/components/tryout/tryout-history";
@@ -60,9 +61,16 @@ export default function TryoutPage() {
         <div className="flex flex-col gap-6 max-w-5xl mx-auto pb-10">
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white mb-2 uppercase">Tryout Tracker</h1>
-                    <p className="text-sm text-zinc-400">Pantau perkembangan nilai TO kamu dari berbagai platform.</p>
+                <div className="flex items-center gap-2">
+                    <Link href="/dashboard">
+                        <Button variant="ghost" size="icon" className="text-zinc-400 hover:text-white hover:bg-white/10">
+                            <ArrowLeft className="w-6 h-6" />
+                        </Button>
+                    </Link>
+                    <div>
+                        <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white mb-1 uppercase">Tryout Tracker</h1>
+                        <p className="text-sm text-zinc-400">Pantau perkembangan nilai TO kamu dari berbagai platform.</p>
+                    </div>
                 </div>
                 <Button
                     onClick={() => setIsDialogOpen(true)}
