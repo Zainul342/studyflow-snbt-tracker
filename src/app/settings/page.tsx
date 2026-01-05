@@ -13,12 +13,120 @@ import {
     LogOut,
     Save,
     MapPin,
-    Shield
+    Shield,
+    Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
+import { useState, useEffect } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase/config";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+// --- Types ---
+interface FormData {
+    displayName: string;
+    targetPTN: string;
+    targetMajor: string;
+    targetScore: string;
+    dailyReminders: boolean;
+}
 
 export default function SettingsPage() {
+    const { user, userData, logout, loading } = useAuth();
+    const router = useRouter();
+    const [isSaving, setIsSaving] = useState(false);
+    const [saveSuccess, setSaveSuccess] = useState(false);
+
+    const [formData, setFormData] = useState<FormData>({
+        displayName: '',
+        targetPTN: '',
+        targetMajor: '',
+        targetScore: '700+',
+        dailyReminders: true,
+    });
+
+    // Sync form with userData when loaded
+    useEffect(() => {
+        if (userData) {
+            setFormData({
+                displayName: userData.displayName || user?.displayName || '',
+                targetPTN: userData.targetPTN || '',
+                targetMajor: userData.targetMajor || '',
+                targetScore: userData.targetScore || '700+',
+                dailyReminders: userData.preferences?.dailyReminders ?? true,
+            });
+        }
+    }, [userData, user]);
+
+    // Get initials from display name
+    const getInitials = (name: string) => {
+        if (!name) return "??";
+        const parts = name.trim().split(" ");
+        if (parts.length >= 2) {
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+        return name.slice(0, 2).toUpperCase();
+    };
+
+    // Handle input changes
+    const handleInputChange = (field: keyof FormData, value: string | boolean) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+        setSaveSuccess(false);
+    };
+
+    // Save to Firestore
+    const handleSave = async () => {
+        if (!user) return;
+
+        setIsSaving(true);
+        try {
+            await updateDoc(doc(db, "users", user.uid), {
+                displayName: formData.displayName,
+                targetPTN: formData.targetPTN,
+                targetMajor: formData.targetMajor,
+                targetScore: formData.targetScore,
+                "preferences.dailyReminders": formData.dailyReminders,
+            });
+            setSaveSuccess(true);
+            setTimeout(() => setSaveSuccess(false), 2000);
+        } catch (error) {
+            console.error("Failed to save settings:", error);
+        } finally {
+            setIsSaving(false);
+        }
+    };
+
+    // Handle logout
+    const handleLogout = async () => {
+        await logout();
+        router.push("/login");
+    };
+
+    // Calculate member since year
+    const getMemberSince = () => {
+        if (userData?.createdAt) {
+            const date = new Date(userData.createdAt);
+            return date.getFullYear();
+        }
+        return new Date().getFullYear();
+    };
+
+    // Split display name into first/last
+    const nameParts = formData.displayName.trim().split(" ");
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ") || "";
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+                <Loader2 className="w-8 h-8 text-[#BFFF0B] animate-spin" />
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-[#0A0A0A] text-white font-sans selection:bg-[#BFFF0B] selection:text-black overflow-x-hidden">
             <Sidebar />
@@ -60,7 +168,7 @@ export default function SettingsPage() {
                             transition={{ delay: 0.1 }}
                         >
                             <span className="px-4 py-2 rounded-sm bg-zinc-900/50 border border-white/10 text-xs font-bold uppercase tracking-widest text-[#BFFF0B] shadow-[0_0_20px_rgba(191,255,11,0.1)]">
-                                Member Since 2025
+                                Member Since {getMemberSince()}
                             </span>
                         </motion.div>
                     </header>
@@ -77,10 +185,25 @@ export default function SettingsPage() {
                                     {/* Avatar */}
                                     <div className="relative group shrink-0">
                                         <div className="w-32 h-32 rounded-sm bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
-                                            {/* Placeholder Avatar */}
-                                            <span className="text-4xl font-black text-white/20">ZN</span>
+                                            {user?.photoURL ? (
+                                                <Image
+                                                    src={user.photoURL}
+                                                    alt="Profile"
+                                                    width={128}
+                                                    height={128}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <span className="text-4xl font-black text-white/20">
+                                                    {getInitials(formData.displayName)}
+                                                </span>
+                                            )}
                                         </div>
-                                        <button className="absolute bottom-2 right-2 p-2 rounded-sm bg-[#BFFF0B] text-black hover:bg-white transition-colors shadow-lg">
+                                        <button
+                                            className="absolute bottom-2 right-2 p-2 rounded-sm bg-[#BFFF0B] text-black hover:bg-white transition-colors shadow-lg cursor-not-allowed opacity-60"
+                                            title="Profile image upload coming soon"
+                                            disabled
+                                        >
                                             <User className="w-4 h-4" />
                                         </button>
                                     </div>
@@ -90,23 +213,26 @@ export default function SettingsPage() {
                                         <div className="grid grid-cols-2 gap-4">
                                             <SettingsInput
                                                 label="First Name"
-                                                defaultValue="Zain"
+                                                value={firstName}
+                                                onChange={(val) => handleInputChange('displayName', `${val} ${lastName}`.trim())}
                                                 icon={User}
                                             />
                                             <SettingsInput
                                                 label="Last Name"
-                                                defaultValue="Ardiansyah"
+                                                value={lastName}
+                                                onChange={(val) => handleInputChange('displayName', `${firstName} ${val}`.trim())}
                                                 icon={User}
                                             />
                                         </div>
                                         <SettingsInput
                                             label="Username"
-                                            defaultValue="@zain_2025"
+                                            value={userData?.handle || `@${user?.email?.split('@')[0] || 'user'}`}
                                             icon={AtSign}
+                                            disabled
                                         />
                                         <SettingsInput
                                             label="Email Address"
-                                            defaultValue="zain.study@example.com"
+                                            value={user?.email || ''}
                                             icon={Mail}
                                             disabled
                                         />
@@ -117,7 +243,10 @@ export default function SettingsPage() {
                             {/* Preferences */}
                             <SettingsSection delay={0.4} title="Preferences">
                                 <div className="space-y-4">
-                                    <div className="flex items-center justify-between p-4 rounded-sm bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors group cursor-pointer">
+                                    <div
+                                        className="flex items-center justify-between p-4 rounded-sm bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors group cursor-pointer"
+                                        onClick={() => handleInputChange('dailyReminders', !formData.dailyReminders)}
+                                    >
                                         <div className="flex items-center gap-4">
                                             <div className="p-2 rounded-sm bg-purple-500/10 text-purple-400 group-hover:text-purple-300 transition-colors">
                                                 <Bell className="w-5 h-5" />
@@ -127,9 +256,21 @@ export default function SettingsPage() {
                                                 <p className="text-xs text-zinc-500">Get notified for daily study missions</p>
                                             </div>
                                         </div>
-                                        <div className="w-10 h-5 rounded-sm bg-[#BFFF0B] relative cursor-pointer">
-                                            <div className="absolute top-1 right-1 w-3 h-3 bg-black rounded-sm shadow-sm" />
-                                        </div>
+                                        <button
+                                            className={cn(
+                                                "w-10 h-5 rounded-sm relative transition-colors",
+                                                formData.dailyReminders ? "bg-[#BFFF0B]" : "bg-zinc-800"
+                                            )}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleInputChange('dailyReminders', !formData.dailyReminders);
+                                            }}
+                                        >
+                                            <div className={cn(
+                                                "absolute top-1 w-3 h-3 bg-black rounded-sm shadow-sm transition-all",
+                                                formData.dailyReminders ? "right-1" : "left-1"
+                                            )} />
+                                        </button>
                                     </div>
 
                                     <div className="flex items-center justify-between p-4 rounded-sm bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors group cursor-not-allowed opacity-60">
@@ -175,27 +316,49 @@ export default function SettingsPage() {
 
                                     <SettingsInput
                                         label="Target University (PTN)"
-                                        defaultValue="Institut Teknologi Bandung"
+                                        value={formData.targetPTN}
+                                        onChange={(val) => handleInputChange('targetPTN', val)}
+                                        placeholder="e.g., Institut Teknologi Bandung"
                                         icon={MapPin}
                                         className="bg-[#0A0A0A]/50 border-white/10 focus:border-[#BFFF0B]/50"
                                     />
                                     <SettingsInput
                                         label="Dream Major (Jurusan)"
-                                        defaultValue="Teknik Informatika"
+                                        value={formData.targetMajor}
+                                        onChange={(val) => handleInputChange('targetMajor', val)}
+                                        placeholder="e.g., Teknik Informatika"
                                         icon={GraduationCap}
                                         className="bg-[#0A0A0A]/50 border-white/10 focus:border-[#BFFF0B]/50"
                                     />
                                     <div className="grid grid-cols-2 gap-4">
                                         <SettingsInput
                                             label="Target Score"
-                                            defaultValue="750+"
+                                            value={formData.targetScore}
+                                            onChange={(val) => handleInputChange('targetScore', val)}
                                             icon={Trophy}
                                             className="bg-[#0A0A0A]/50 border-white/10 focus:border-[#BFFF0B]/50 font-mono text-[#BFFF0B]"
                                         />
                                         <div className="flex items-end">
-                                            <Button className="w-full bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-bold h-10 rounded-sm uppercase tracking-wide text-xs">
-                                                <Save className="w-4 h-4 mr-2" />
-                                                Save
+                                            <Button
+                                                className={cn(
+                                                    "w-full h-10 rounded-sm uppercase tracking-wide text-xs font-bold transition-all",
+                                                    saveSuccess
+                                                        ? "bg-green-500 hover:bg-green-600 text-white"
+                                                        : "bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black"
+                                                )}
+                                                onClick={handleSave}
+                                                disabled={isSaving}
+                                            >
+                                                {isSaving ? (
+                                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                                ) : saveSuccess ? (
+                                                    "Saved!"
+                                                ) : (
+                                                    <>
+                                                        <Save className="w-4 h-4 mr-2" />
+                                                        Save
+                                                    </>
+                                                )}
                                             </Button>
                                         </div>
                                     </div>
@@ -217,6 +380,7 @@ export default function SettingsPage() {
                                         <Button
                                             variant="outline"
                                             className="border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white rounded-sm h-8 text-xs font-bold uppercase tracking-wide bg-transparent"
+                                            onClick={handleLogout}
                                         >
                                             <LogOut className="w-3 h-3 mr-2" />
                                             Log Out
@@ -270,14 +434,18 @@ function SettingsSection({
 
 function SettingsInput({
     label,
-    defaultValue,
+    value,
+    onChange,
+    placeholder,
     icon: Icon,
     disabled = false,
     className = ""
 }: {
     label: string,
-    defaultValue?: string,
-    icon?: any,
+    value?: string,
+    onChange?: (value: string) => void,
+    placeholder?: string,
+    icon?: React.ComponentType<{ className?: string }>,
     disabled?: boolean,
     className?: string
 }) {
@@ -294,7 +462,9 @@ function SettingsInput({
                 )}
                 <input
                     type="text"
-                    defaultValue={defaultValue}
+                    value={value || ''}
+                    onChange={(e) => onChange?.(e.target.value)}
+                    placeholder={placeholder}
                     disabled={disabled}
                     className={cn(
                         "w-full bg-black/20 border border-white/10 rounded-sm py-2.5 px-4 text-sm font-medium text-white transition-all focus:outline-none focus:border-[#BFFF0B] focus:bg-black/40 placeholder:text-zinc-700",
