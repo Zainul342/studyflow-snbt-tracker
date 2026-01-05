@@ -48,10 +48,11 @@ export function MobileNav() {
             <Button
                 variant="ghost"
                 size="sm"
-                className="text-zinc-400 hover:text-white"
+                className="text-white bg-white/5 hover:bg-white/10 gap-2 border border-white/10 px-3 h-9"
                 onClick={() => setIsOpen(true)}
             >
-                <Menu className="w-5 h-5" />
+                <Menu className="w-4 h-4" />
+                <span className="text-[10px] font-black tracking-widest uppercase">Menu</span>
             </Button>
 
             <AnimatePresence>
@@ -74,8 +75,8 @@ export function MobileNav() {
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             className="fixed right-0 top-0 bottom-0 z-50 w-[280px] bg-[#09090b] border-l border-white/10 p-6 flex flex-col"
                         >
-                            <div className="flex items-center justify-between mb-8">
-                                <span className="text-lg font-black tracking-tight text-white">MENU</span>
+                            <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+                                <span className="text-xl font-black tracking-widest text-[#BFFF0B]">STUDYFLOW</span>
                                 <Button
                                     variant="ghost"
                                     size="sm"
@@ -94,13 +95,13 @@ export function MobileNav() {
                                         onClick={() => setIsOpen(false)}
                                     >
                                         <div className={cn(
-                                            "flex items-center gap-3 px-4 py-3 rounded-sm transition-all mb-1",
+                                            "flex items-center gap-4 px-4 py-4 rounded-sm transition-all mb-2",
                                             pathname === item.href
-                                                ? "bg-[#6B4FFF]/10 text-[#6B4FFF] border border-[#6B4FFF]/20"
-                                                : "text-zinc-400 hover:text-white hover:bg-white/5"
+                                                ? "bg-[#6B4FFF] text-white shadow-[0_0_20px_-5px_#6B4FFF]"
+                                                : "text-zinc-200 hover:text-white hover:bg-white/10"
                                         )}>
-                                            <item.icon className="w-4 h-4" />
-                                            <span className="text-sm font-bold uppercase tracking-wide">
+                                            <item.icon className={cn("w-5 h-5", pathname === item.href ? "text-white" : "text-[#6B4FFF]")} />
+                                            <span className="text-[11px] font-bold uppercase tracking-widest">
                                                 {item.title}
                                             </span>
                                         </div>
@@ -110,9 +111,9 @@ export function MobileNav() {
 
                             <div className="pt-6 border-t border-white/10 space-y-2">
                                 <Link href="/settings" onClick={() => setIsOpen(false)}>
-                                    <div className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white">
-                                        <Settings className="w-4 h-4" />
-                                        <span className="text-sm font-bold uppercase">Settings</span>
+                                    <div className="flex items-center gap-4 px-4 py-3 text-zinc-300 hover:text-white transition-colors">
+                                        <Settings className="w-5 h-5" />
+                                        <span className="text-sm font-black uppercase tracking-wider">Settings</span>
                                     </div>
                                 </Link>
                                 <button

@@ -13,7 +13,7 @@ export function Header() {
     const isDashboard = pathname === "/dashboard";
 
     return (
-        <header className="flex h-14 items-center gap-2 md:gap-4 border-b border-white/5 bg-[#0A0A0A]/50 backdrop-blur-xl px-3 md:px-4 sticky top-0 z-20">
+        <header className="flex h-14 items-center gap-2 md:gap-4 border-b border-white/5 bg-[#0A0A0A] md:bg-[#0A0A0A]/50 md:backdrop-blur-xl px-3 md:px-4 sticky top-0 z-30">
             {/* Back Button for mobile navigation */}
             {!isDashboard && (
                 <Button
@@ -39,7 +39,7 @@ export function Header() {
                 </form>
                 {/* Mobile Page Title if search is hidden */}
                 {!isDashboard && (
-                    <div className="sm:hidden font-black text-[10px] uppercase tracking-widest text-zinc-500">
+                    <div className="sm:hidden font-black text-[11px] uppercase tracking-widest text-zinc-300 ml-2">
                         {pathname.split('/').pop()?.replace('-', ' ')}
                     </div>
                 )}

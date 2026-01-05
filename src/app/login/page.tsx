@@ -13,11 +13,18 @@ import { auth } from "@/lib/firebase/config";
 
 export default function LoginPage() {
     const router = useRouter();
-    const { signInWithGoogle } = useAuth();
+    const { signInWithGoogle, user, loading, isAuthenticating } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    // Auto-redirect if already logged in
+    useEffect(() => {
+        if (user && !loading && !isAuthenticating) {
+            router.push("/dashboard");
+        }
+    }, [user, loading, isAuthenticating, router]);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -39,10 +46,14 @@ export default function LoginPage() {
         setError("");
         try {
             await signInWithGoogle();
-            router.push("/dashboard");
-        } catch (err) {
+            // If it's desktop (popup), it will continue here. 
+            // If it's mobile (redirect), the page will reload soon.
+            if (window.innerWidth > 768) {
+                router.push("/dashboard");
+            }
+        } catch (err: any) {
             console.error(err);
-            setError("Google Sign-In failed.");
+            setError(err.message || "Google Sign-In failed.");
             setIsLoading(false);
         }
     };
@@ -70,6 +81,25 @@ export default function LoginPage() {
             >
                 {/* Monolith Card */}
                 <div className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 rounded-sm shadow-2xl" />
+
+                {/* Loading Overlay for Auth System */}
+                <AnimatePresence>
+                    {(isAuthenticating || (user && loading)) && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 z-50 bg-[#0A0A0A] flex flex-col items-center justify-center text-center p-6 border border-white/10 rounded-sm"
+                        >
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                className="w-8 h-8 border-2 border-[#BFFF0B] border-t-transparent rounded-full mb-4"
+                            />
+                            <p className="text-xs font-black uppercase tracking-widest text-zinc-400">Menghubungkan Syaraf...</p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Content Container */}
                 <div className="relative z-20 space-y-8">
