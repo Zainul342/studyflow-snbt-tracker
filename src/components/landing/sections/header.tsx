@@ -18,16 +18,16 @@ export function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOp
                 {/* Menu Trigger */}
                 <button
                     onClick={() => setMenuOpen(!menuOpen)}
-                    className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group"
+                    className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group relative z-10"
                 >
                     <Menu className="w-4 h-4 group-hover:text-[#BFFF0B] transition-colors" />
                     <span className="text-xs font-bold uppercase tracking-wider hidden sm:inline">Menu</span>
                 </button>
 
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 group absolute left-1/2 -translate-x-1/2">
+                <Link href="/" className="flex items-center gap-2 group absolute left-1/2 -translate-x-1/2 z-0">
                     <div className="relative w-6 h-6 rounded-sm overflow-hidden border border-white/20">
-                        <Image src="/logo.png" alt="StudyFlow" fill className="object-cover" />
+                        <Image src="/logo.png" alt="StudyFlow" fill sizes="24px" className="object-cover" />
                     </div>
                     <div className="text-sm font-black tracking-tight text-white group-hover:text-[#BFFF0B] transition-colors">
                         STUDYFLOW
@@ -35,7 +35,7 @@ export function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOp
                 </Link>
 
                 {/* Actions */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 relative z-10">
                     <Link href="/login" className="hidden sm:block">
                         <span className="text-xs font-bold text-zinc-400 hover:text-white transition-colors cursor-pointer">
                             Login
