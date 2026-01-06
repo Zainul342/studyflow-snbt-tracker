@@ -8,7 +8,9 @@ import {
     signInWithRedirect,
     getRedirectResult,
     GoogleAuthProvider,
-    signOut
+    signOut,
+    browserLocalPersistence,
+    setPersistence
 } from "firebase/auth";
 import { doc, onSnapshot, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase/config";
@@ -61,13 +63,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     streak: 0
                 },
                 targetPTN: null,
-                targetMajor: null
+                targetMajor: null,
+                onboardingCompleted: false // Flag to track onboarding status
             });
         }
     };
 
     // 1. Auth Listener & Redirect Result Handler
     useEffect(() => {
+        // Set persistence to LOCAL - survives browser close
+        setPersistence(auth, browserLocalPersistence)
+            .then(() => {
+                console.log("Auth System: Persistence set to LOCAL");
+            })
+            .catch((err) => {
+                console.error("Auth System: Failed to set persistence:", err);
+            });
+
         setIsAuthenticating(true);
         console.log("Auth System: Checking for redirect result...");
 

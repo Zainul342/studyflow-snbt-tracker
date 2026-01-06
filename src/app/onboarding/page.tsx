@@ -5,17 +5,11 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, Target, Calendar, Award, Sparkles, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { mockDB } from "@/lib/data/mock-db";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/auth-context";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
-
-// PTN List
-const PTN_LIST = [
-    "ITB", "UI", "UGM", "ITS", "IPB", "UNPAD", "UNDIP", "UNAIR",
-    "UB", "UNHAS", "USU", "UNSRI", "UNAND", "UNS", "UDAYANA"
-];
+import { PTN_LIST, POPULAR_MAJORS } from "@/lib/data/ptn-data";
 
 interface FormErrors {
     name?: string;
@@ -87,11 +81,12 @@ export default function OnboardingPage() {
             if (user?.uid) {
                 const userRef = doc(db, "users", user.uid);
                 await updateDoc(userRef, {
-                    displayName: formData.name.trim(), // Update name definition if changed
+                    displayName: formData.name.trim(),
                     targetPTN: formData.targetUniversity,
                     targetMajor: formData.targetMajor.trim(),
                     targetDate: formData.targetDate,
-                    "stats.dailyGoal": dailyGoal
+                    "stats.dailyGoal": dailyGoal,
+                    onboardingCompleted: true // Mark onboarding as done
                 });
             }
 

@@ -13,18 +13,27 @@ import { auth } from "@/lib/firebase/config";
 
 export default function LoginPage() {
     const router = useRouter();
-    const { signInWithGoogle, user, loading, isAuthenticating } = useAuth();
+    const { signInWithGoogle, user, loading, isAuthenticating, userData } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+    // Helper to determine redirect destination
+    const getRedirectPath = () => {
+        // If user hasn't completed onboarding, send them there
+        if (userData && userData.onboardingCompleted === false) {
+            return "/onboarding";
+        }
+        return "/dashboard";
+    };
+
     // Auto-redirect if already logged in
     useEffect(() => {
-        if (user && !loading && !isAuthenticating) {
-            router.push("/dashboard");
+        if (user && !loading && !isAuthenticating && userData !== null) {
+            router.push(getRedirectPath());
         }
-    }, [user, loading, isAuthenticating, router]);
+    }, [user, loading, isAuthenticating, userData, router]);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,7 +42,7 @@ export default function LoginPage() {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            router.push("/dashboard");
+            // Redirect handled by useEffect based on onboardingCompleted status
         } catch (err: any) {
             console.error(err);
             setError("Invalid credentials. Please try again.");
@@ -46,11 +55,8 @@ export default function LoginPage() {
         setError("");
         try {
             await signInWithGoogle();
-            // If it's desktop (popup), it will continue here. 
-            // If it's mobile (redirect), the page will reload soon.
-            if (window.innerWidth > 768) {
-                router.push("/dashboard");
-            }
+            // Desktop popup: redirect handled by useEffect
+            // Mobile redirect: page reloads and useEffect handles it
         } catch (err: any) {
             console.error(err);
             setError(err.message || "Google Sign-In failed.");

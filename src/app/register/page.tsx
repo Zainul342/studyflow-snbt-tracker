@@ -48,7 +48,8 @@ export default function RegisterPage() {
                     streak: 0
                 },
                 targetPTN: null,
-                targetMajor: null
+                targetMajor: null,
+                onboardingCompleted: false
             });
 
             // 4. Redirect
