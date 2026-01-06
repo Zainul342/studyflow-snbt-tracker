@@ -209,7 +209,7 @@ export default function OnboardingPage() {
                         {/* Date Input */}
                         <div className="space-y-1.5">
                             <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest ml-1">
-                                Tanggal Perang (UTBK)
+                                Target Tanggal UTBK
                             </label>
                             <div className="relative group/input">
                                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 group-focus-within/input:text-indigo-400 transition-colors" />
