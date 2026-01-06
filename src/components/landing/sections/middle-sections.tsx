@@ -46,55 +46,10 @@ export function CreatorsSection() {
     );
 }
 
+// SuccessStoriesSection dihapus karena mengandung testimoni fiktif
+// Akan ditambahkan kembali jika sudah ada testimoni asli dari user nyata
 export function SuccessStoriesSection() {
-    return (
-        <section id="updates" className="py-32 px-4 bg-gradient-to-b from-transparent to-primary/5">
-            <div className="max-w-7xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-black tracking-tight mb-4 text-foreground">
-                        Dari "Hampir Nyerah"
-                        <br />
-                        <span className="text-primary">Jadi Jaket Kuning</span>
-                    </h2>
-                    <p className="text-muted-foreground text-lg font-medium max-w-2xl mx-auto">
-                        Mereka juga dulu overwhelmed, bingung mulai dari mana. Sekarang mereka sudah aman.
-                    </p>
-                </motion.div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-                    {[
-                        { title: "Lolos STEI ITB", quote: "Dulu gue belajar acak-acakan. Pas pake StudyFlow, gue jadi tau persis apa yang harus gue kerjain tiap hari. Score TO naik 150 poin.", author: "Rizky, 2024", color: "bg-blue-500" },
-                        { title: "Tembus FK UI", quote: "Fitur 'Gigitan Kecil' bantu banget buat mata pelajaran Biologi yang seabrek. Gak kerasa tiba-tiba udah kelar semua materi.", author: "Sarah, 2024", color: "bg-yellow-500" },
-                        { title: "Masuk UGM", quote: "Progress bar-nya bikin ketagihan. Rasanya berdosa kalo gak nyentang progress sehari aja. Konsistensi kunci banget sih.", author: "Dimas, 2024", color: "bg-purple-500" },
-                    ].map((story, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="glass-light rounded-xl p-8 hover:border-primary/50 transition-all border border-transparent flex flex-col items-start relative overflow-hidden group"
-                        >
-                            <div className={`absolute top-0 left-0 w-1 h-full ${story.color}`} />
-                            <h3 className="text-xl font-bold text-foreground mb-4">{story.title}</h3>
-                            <p className="text-muted-foreground mb-6 italic">"{story.quote}"</p>
-                            <div className="mt-auto flex items-center gap-3">
-                                <div className={`w-8 h-8 rounded-full ${story.color} opacity-20`} />
-                                <span className="text-sm font-bold text-foreground">{story.author}</span>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-
-
-            </div>
-        </section>
-    );
+    return null;
 }
 
 export function PlatformSection() {
