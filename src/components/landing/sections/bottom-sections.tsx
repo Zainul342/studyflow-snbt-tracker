@@ -18,7 +18,7 @@ export function PricingSection() {
             <div className="max-w-5xl mx-auto">
                 <div className="border border-white/10 rounded-sm p-4 bg-[#0A0A0A]">
                     <div className="bg-[#1A1A1A] rounded-sm p-12 text-center">
-                        <h2 className="text-4xl font-black mb-8">Harga Simpel</h2>
+                        <h2 className="text-4xl font-black mb-8">Harganya?</h2>
                         <div className="text-6xl font-black mb-2">Gratis</div>
                         <p className="text-white/60 mb-12">selama masa Beta</p>
 
@@ -35,7 +35,7 @@ export function PricingSection() {
 
                         <Link href="/register">
                             <Button className="w-full max-w-md bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-black py-6 rounded-sm">
-                                Mulai Gratis
+                                Gas Sekarang
                             </Button>
                         </Link>
                     </div>
@@ -61,11 +61,11 @@ export function FinalCTA() {
                     <Star className="inline w-[0.3em] h-[0.3em] text-[#BFFF0B] fill-[#BFFF0B] align-top ml-4" />
                 </h2>
                 <p className="text-white/60 text-xl max-w-2xl mx-auto mb-12">
-                    Gabung jadi member dan buka full akses ke <span className="text-white font-bold">Arsenal Belajarmu</span>. Jangan sampai nyesel pas hari-H.
+                    Gabung jadi member dan buka full akses ke <span className="text-white font-bold">Senjata Tempur</span>. Jangan sampai nyesel pas hari-H.
                 </p>
                 <Link href="/register">
                     <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black text-xl font-black px-12 py-8 rounded-sm">
-                        Amankan Tempatmu
+                        Daftar Sekarang
                     </Button>
                 </Link>
             </div>

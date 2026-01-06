@@ -9,7 +9,7 @@ export function MarqueeBanner() {
                 <div className="flex whitespace-nowrap animate-[marquee_20s_linear_infinite]">
                     {[...Array(10)].map((_, i) => (
                         <div key={i} className="flex items-center gap-4 px-4 h-full">
-                            <span className="text-black font-bold text-[10px] tracking-wider leading-none">JELAJAHI SHOWCASE STUDYFLOW</span>
+                            <span className="text-black font-bold text-[10px] tracking-wider leading-none">SHOWCASE STUDYFLOW • GRATIS</span>
                             <Star className="w-3 h-3 text-black fill-black" />
                         </div>
                     ))}

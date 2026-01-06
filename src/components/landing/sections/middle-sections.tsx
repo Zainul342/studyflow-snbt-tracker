@@ -20,7 +20,7 @@ export function CreatorsSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <p className="text-primary text-sm font-bold mb-4 uppercase tracking-widest">Dibuat oleh Siswa</p>
+                    <p className="text-primary text-sm font-bold mb-4 uppercase tracking-widest">Dibuat Sama Anak Kelas 12</p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-12 mb-8">
                         <div className="text-center group cursor-pointer">
@@ -37,7 +37,7 @@ export function CreatorsSection() {
                     </div>
 
                     <div className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer group">
-                        <span className="font-medium">Baca cerita kami</span>
+                        <span className="font-medium">Baca cerita kita</span>
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                 </motion.div>
@@ -107,16 +107,16 @@ export function PlatformSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                     >
-                        <p className="text-primary text-sm font-bold mb-2 uppercase tracking-wide">Pusat Kendali</p>
+                        <p className="text-primary text-sm font-bold mb-2 uppercase tracking-wide">Dashboard</p>
                         <h2 className="text-[clamp(2.5rem,6vw,4rem)] font-black tracking-tight mb-6 text-foreground">
-                            Markas Operasimu
+                            Cockpit Perjuanganmu
                         </h2>
                         <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                            Berhenti menebak apa yang harus dipelajari. Dashboard kami memberikan antarmuka <span className="text-foreground font-bold">Mission Control</span> yang jelas untuk melacak setiap bab, skor, dan deadline.
+                            Gak perlu bingung mau belajar apa. Dashboard kita kasih kamu <span className="text-foreground font-bold">peta perang</span> yang jelas — track semua progress, deadline, dan target mu.
                         </p>
                         <Link href="/dashboard">
                             <Button className="bg-foreground text-background hover:bg-foreground/90 rounded-sm px-8 py-6 font-bold group text-lg">
-                                Masuk Dashboard
+                                Coba Sekarang
                                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Button>
                         </Link>
@@ -175,11 +175,11 @@ export function ProductsSection() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-black tracking-tight mb-4 text-foreground">
-                        Arsenal
-                        <span className="text-primary ml-4">Belajarmu</span>
+                        Senjata
+                        <span className="text-primary ml-4">Tempur</span>
                     </h2>
                     <p className="text-muted-foreground text-lg">
-                        Melengkapimu dengan senjata terbaik untuk setiap tahap pertempuran.
+                        Tools yang bakal nemenin kamu sampai hari H.
                     </p>
                 </motion.div>
 
@@ -242,27 +242,27 @@ export function BenefitsSection() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <p className="text-primary text-sm font-bold mb-4 uppercase tracking-widest">Kenapa Kami?</p>
+                    <p className="text-primary text-sm font-bold mb-4 uppercase tracking-widest">Kenapa Harus Pake?</p>
                     <h2 className="text-[clamp(2.5rem,6vw,4rem)] font-black tracking-tight mb-6 text-foreground">
-                        Berhenti belajar keras.
+                        Gak usah belajar keras.
                         <br />
-                        Mulai belajar <i className="text-primary">cerdas</i>.
+                        Belajar <i className="text-primary">pinter</i> aja.
                     </h2>
                 </motion.div>
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {[
                         {
-                            title: "Input Tanpa Ribet",
-                            description: "Catat sesi belajarmu dalam hitungan detik. Kami yang urus datanya, kamu fokus belajar.",
+                            title: "Input Gak Ribet",
+                            description: "Log sesi belajar cuma butuh detik doang. Kamu tinggal fokus belajar, sisanya kita yang urus.",
                         },
                         {
-                            title: "Analisis Tajam",
-                            description: "AI kami langsung identifikasi kelemahanmu. Tidak ada lagi buang waktu di materi yang sudah kamu kuasai.",
+                            title: "Tau Kelemahanmu",
+                            description: "Sistem kita langsung kasih tau mana yang masih bolong. Gak usah buang waktu di materi yang udah bisa.",
                         },
                         {
-                            title: "Toolkit yang Berkembang",
-                            description: "Kami update mingguan berdasarkan feedback siswa NYATA. Platform ini berkembang bersamamu.",
+                            title: "Update Terus",
+                            description: "Kita update mingguan based on feedback dari user. Platform ini ikut berkembang bareng kamu.",
                         },
                     ].map((benefit, i) => (
                         <motion.div

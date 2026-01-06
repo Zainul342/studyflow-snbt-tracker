@@ -84,7 +84,7 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                         {/* Column 1: Feature Links */}
                         <div className="md:col-span-3 space-y-8">
                             <div>
-                                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Toolkit Kami</h4>
+                                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Fitur</h4>
                                 <ul className="space-y-4">
                                     {[
                                         { name: "Progress Tracker", link: "/dashboard", available: true, icon: LayoutDashboard },
@@ -121,7 +121,7 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                         {/* Column 2: Explore & Socials */}
                         <div className="md:col-span-4 space-y-8">
                             <div>
-                                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Jelajahi</h4>
+                                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Menu</h4>
                                 <ul className="space-y-4">
                                     <li><Link href="#creators" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Cerita Sukses</Link></li>
                                     <li><Link href="#updates" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Pembaruan</Link></li>

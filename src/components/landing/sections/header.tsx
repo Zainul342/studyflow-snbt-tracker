@@ -46,7 +46,7 @@ export function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOp
                             size="sm"
                             className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black text-xs font-black rounded-sm h-8 px-5"
                         >
-                            Gabung
+                            Daftar
                         </Button>
                     </Link>
                 </div>
