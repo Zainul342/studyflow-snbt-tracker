@@ -32,14 +32,19 @@ const sidebarNavItems = [
         icon: BookOpen,
     },
     {
+        title: "Latihan Soal",
+        href: "/dashboard/latihan",
+        icon: Target,
+    },
+    {
         title: "Tryout Tracker",
         href: "/dashboard/tryout",
-        icon: Target,
+        icon: BarChart2,
     },
     {
         title: "Analitik Progres",
         href: "/analytics",
-        icon: BarChart2,
+        icon: Sparkles,
     },
     {
         title: "Agenda Harian",
