@@ -82,9 +82,18 @@ export const useQuizSession = ({ questions, config }: UseQuizSessionProps) => {
 
     const finishQuiz = () => {
         setIsFinished(true);
-        // Here we would typically calculate final stats and push to DB
-        // For now, we just redirect or show modal
-        // router.push('/dashboard/latihan/result?session=...');
+        // Build query params with session results
+        const params = new URLSearchParams({
+            correct: correctCount.toString(),
+            wrong: wrongCount.toString(),
+            total: questions.length.toString(),
+            xp: xp.toString(),
+            hearts: hearts.toString(),
+            time: elapsedSeconds.toString(),
+            mode: config.mode,
+            subject: config.subjectId,
+        });
+        router.push(`/dashboard/latihan/result?${params.toString()}`);
     };
 
     return {
