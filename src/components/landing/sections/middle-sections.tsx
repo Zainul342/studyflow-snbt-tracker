@@ -20,7 +20,7 @@ export function CreatorsSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <p className="text-primary text-sm font-bold mb-4 uppercase tracking-widest">Built by Students</p>
+                    <p className="text-primary text-sm font-bold mb-4 uppercase tracking-widest">Dibuat oleh Siswa</p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-12 mb-8">
                         <div className="text-center group cursor-pointer">
@@ -37,7 +37,7 @@ export function CreatorsSection() {
                     </div>
 
                     <div className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer group">
-                        <span className="font-medium">Read our story</span>
+                        <span className="font-medium">Baca cerita kami</span>
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                 </motion.div>
@@ -91,18 +91,7 @@ export function SuccessStoriesSection() {
                     ))}
                 </div>
 
-                {/* Trust Signals / Logos */}
-                <div className="text-center">
-                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-8">Alumni kami tersebar di</p>
-                    <div className="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                        {/* Placeholder Logos with text for now, ideally SVGs */}
-                        <span className="text-2xl font-black text-foreground">UI</span>
-                        <span className="text-2xl font-black text-foreground">ITB</span>
-                        <span className="text-2xl font-black text-foreground">UGM</span>
-                        <span className="text-2xl font-black text-foreground">ITS</span>
-                        <span className="text-2xl font-black text-foreground">UNAIR</span>
-                    </div>
-                </div>
+
             </div>
         </section>
     );
@@ -118,16 +107,16 @@ export function PlatformSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                     >
-                        <p className="text-primary text-sm font-bold mb-2 uppercase tracking-wide">The Command Center</p>
+                        <p className="text-primary text-sm font-bold mb-2 uppercase tracking-wide">Pusat Kendali</p>
                         <h2 className="text-[clamp(2.5rem,6vw,4rem)] font-black tracking-tight mb-6 text-foreground">
-                            Your Base of Operations
+                            Markas Operasimu
                         </h2>
                         <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                            Stop guessing what to study. Our dashboard gives you a clear <span className="text-foreground font-bold">Mission Control</span> interface to track every chapter, score, and deadline.
+                            Berhenti menebak apa yang harus dipelajari. Dashboard kami memberikan antarmuka <span className="text-foreground font-bold">Mission Control</span> yang jelas untuk melacak setiap bab, skor, dan deadline.
                         </p>
                         <Link href="/dashboard">
                             <Button className="bg-foreground text-background hover:bg-foreground/90 rounded-sm px-8 py-6 font-bold group text-lg">
-                                Launch Dashboard
+                                Masuk Dashboard
                                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Button>
                         </Link>
@@ -186,11 +175,11 @@ export function ProductsSection() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-black tracking-tight mb-4 text-foreground">
-                        The
-                        <span className="text-primary ml-4">Armory</span>
+                        Arsenal
+                        <span className="text-primary ml-4">Belajarmu</span>
                     </h2>
                     <p className="text-muted-foreground text-lg">
-                        Equipping you with improved tools for every stage of battle.
+                        Melengkapimu dengan senjata terbaik untuk setiap tahap pertempuran.
                     </p>
                 </motion.div>
 
@@ -253,27 +242,27 @@ export function BenefitsSection() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <p className="text-primary text-sm font-bold mb-4 uppercase tracking-widest">Why Us?</p>
+                    <p className="text-primary text-sm font-bold mb-4 uppercase tracking-widest">Kenapa Kami?</p>
                     <h2 className="text-[clamp(2.5rem,6vw,4rem)] font-black tracking-tight mb-6 text-foreground">
-                        Stop studying hard.
+                        Berhenti belajar keras.
                         <br />
-                        Start studying <i className="text-primary">smart</i>.
+                        Mulai belajar <i className="text-primary">cerdas</i>.
                     </h2>
                 </motion.div>
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {[
                         {
-                            title: "Frictionless Input",
-                            description: "Log your study sessions in seconds. We handle the data, you handle the learning.",
+                            title: "Input Tanpa Ribet",
+                            description: "Catat sesi belajarmu dalam hitungan detik. Kami yang urus datanya, kamu fokus belajar.",
                         },
                         {
-                            title: "Ruthless Analytics",
-                            description: "Our AI identifies your weak spots immediately. No more wasting time on what you already know.",
+                            title: "Analisis Tajam",
+                            description: "AI kami langsung identifikasi kelemahanmu. Tidak ada lagi buang waktu di materi yang sudah kamu kuasai.",
                         },
                         {
-                            title: "Living Toolkit",
-                            description: "We push updates weekly based on REAL student feedback. This platform evolves with you.",
+                            title: "Toolkit yang Berkembang",
+                            description: "Kami update mingguan berdasarkan feedback siswa NYATA. Platform ini berkembang bersamamu.",
                         },
                     ].map((benefit, i) => (
                         <motion.div

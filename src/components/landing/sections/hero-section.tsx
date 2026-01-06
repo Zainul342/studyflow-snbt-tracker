@@ -53,7 +53,7 @@ export function HeroSection() {
                         Mulai Centang Pertamamu
                     </a>
                     <p className="mt-4 text-sm text-muted-foreground">
-                        Gratis selamanya untuk 100 User pertama.
+                        Gratis selamanya.
                     </p>
                 </motion.div>
             </motion.div>

@@ -58,7 +58,7 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                         className="flex items-center gap-2 text-foreground hover:text-foreground/70 transition-colors"
                     >
                         <X className="w-5 h-5" />
-                        <span className="font-bold text-sm">Close</span>
+                        <span className="font-bold text-sm">Tutup</span>
                     </button>
 
                     <div className="text-xl font-black tracking-tighter text-foreground">
@@ -67,11 +67,11 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
 
                     <div className="flex items-center gap-3">
                         <Link href="/login" onClick={onClose} className="text-sm font-bold text-muted-foreground hover:text-foreground transition-colors">
-                            Login
+                            Masuk
                         </Link>
                         <Link href="/register" onClick={onClose}>
                             <Button size="sm" className="bg-primary hover:bg-primary/90 text-black font-bold h-8 text-xs rounded-sm">
-                                Join
+                                Gabung
                             </Button>
                         </Link>
                     </div>
@@ -84,13 +84,13 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                         {/* Column 1: Feature Links */}
                         <div className="md:col-span-3 space-y-8">
                             <div>
-                                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Our Toolkit</h4>
+                                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Toolkit Kami</h4>
                                 <ul className="space-y-4">
                                     {[
                                         { name: "Progress Tracker", link: "/dashboard", available: true, icon: LayoutDashboard },
-                                        { name: "Tryout System", link: "#", available: false, desc: "Computer Based Test (CBT) simulation with IRT scoring.", icon: Sparkles },
-                                        { name: "Material Bank", link: "#", available: false, desc: "Comprehensive summary of SNBT subjects.", icon: BookOpen },
-                                        { name: "Community", link: "#", available: false, desc: "Join thousands of other SNBT fighters.", icon: Users },
+                                        { name: "Sistem Tryout", link: "#", available: false, desc: "Simulasi CBT dengan sistem penilaian IRT.", icon: Sparkles },
+                                        { name: "Bank Materi", link: "#", available: false, desc: "Rangkuman lengkap materi SNBT.", icon: BookOpen },
+                                        { name: "Komunitas", link: "#", available: false, desc: "Gabung ribuan pejuang SNBT lainnya.", icon: Users },
                                     ].map((item, i) => (
                                         <li key={i}>
                                             <div
@@ -106,7 +106,7 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                                                         {item.name}
                                                         {!item.available && (
                                                             <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded-sm font-bold border border-border">
-                                                                SOON
+                                                                SEGERA
                                                             </span>
                                                         )}
                                                     </span>
@@ -121,12 +121,12 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                         {/* Column 2: Explore & Socials */}
                         <div className="md:col-span-4 space-y-8">
                             <div>
-                                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Explore</h4>
+                                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-6">Jelajahi</h4>
                                 <ul className="space-y-4">
-                                    <li><Link href="#creators" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Success Stories</Link></li>
-                                    <li><Link href="#updates" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Updates</Link></li>
+                                    <li><Link href="#creators" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Cerita Sukses</Link></li>
+                                    <li><Link href="#updates" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Pembaruan</Link></li>
                                     <li><Link href="#products" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Roadmap</Link></li>
-                                    <li><Link href="#benefits" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Why StudyFlow?</Link></li>
+                                    <li><Link href="#benefits" onClick={onClose} className="text-lg font-medium text-foreground/70 hover:text-foreground">Kenapa StudyFlow?</Link></li>
                                 </ul>
                             </div>
 
@@ -146,25 +146,25 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
                                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                 <span className="inline-block px-3 py-1 bg-primary rounded-full text-[10px] font-bold text-black mb-6">
-                                    START NOW
+                                    MULAI SEKARANG
                                 </span>
 
                                 <h3 className="text-4xl font-black text-foreground mb-6 tracking-tight">
-                                    Your Dream PTN
+                                    PTN Impianmu
                                     <br />
-                                    Awaits.
+                                    Menunggu.
                                 </h3>
 
                                 <Link href="/dashboard" onClick={onClose}>
                                     <Button className="bg-foreground text-background hover:bg-foreground/90 font-bold px-8 rounded-sm mb-8">
-                                        Go to Dashboard
+                                        Masuk Dashboard
                                     </Button>
                                 </Link>
 
                                 <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium">
-                                    <span>Free Forever.</span>
+                                    <span>Gratis Selamanya.</span>
                                     <span className="w-1 h-1 rounded-full bg-muted-foreground" />
-                                    <span>No Credit Card.</span>
+                                    <span>Tanpa Kartu Kredit.</span>
                                 </div>
                             </div>
                         </div>

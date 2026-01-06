@@ -15,9 +15,9 @@ export function VideoSection() {
                     className="mb-16"
                 >
                     <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-black tracking-tight mb-6">
-                        Everything You Need
+                        Semua yang Kamu Butuhkan
                         <br />
-                        <span className="gradient-text-green">In One Place</span>
+                        <span className="gradient-text-green">Dalam Satu Tempat</span>
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
                         Dapetin akses eksklusif ke sistem tracking, analitik, dan strategi belajar dari para <span className="text-foreground font-bold">top scorer</span>. Tiru cara main mereka.
@@ -44,7 +44,7 @@ export function VideoSection() {
                             />
                         ))}
                     </div>
-                    <span className="text-muted-foreground font-medium">Join 500+ others</span>
+                    <span className="text-muted-foreground font-medium">Belajar bersama</span>
                 </div>
             </div>
         </section>

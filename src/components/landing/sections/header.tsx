@@ -38,7 +38,7 @@ export function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOp
                 <div className="flex items-center gap-3 relative z-10">
                     <Link href="/login" className="hidden sm:block">
                         <span className="text-xs font-bold text-zinc-400 hover:text-white transition-colors cursor-pointer">
-                            Login
+                            Masuk
                         </span>
                     </Link>
                     <Link href="/register">
@@ -46,7 +46,7 @@ export function Header({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOp
                             size="sm"
                             className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black text-xs font-black rounded-sm h-8 px-5"
                         >
-                            Join
+                            Gabung
                         </Button>
                     </Link>
                 </div>

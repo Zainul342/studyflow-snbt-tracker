@@ -4,62 +4,12 @@ import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
+
+// TestimonialsSection dihapus karena mengandung testimoni fiktif
+// Akan ditambahkan kembali jika sudah ada testimoni asli
 
 export function TestimonialsSection() {
-    const testimonials = [
-        {
-            name: "Ahmad Rizki",
-            role: "ITB 2025",
-            quote: "StudyFlow helped me track my progress systematically. Got into my dream university!",
-        },
-        {
-            name: "Siti Nurhaliza",
-            role: "UI 2025",
-            quote: "The analytics feature is a game-changer. I could see exactly where I needed to improve.",
-        },
-    ];
-
-    return (
-        <section className="py-32 px-4">
-            <div className="max-w-7xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-[clamp(2.5rem,6vw,4rem)] font-black tracking-tight">
-                        StudyFlow's Global
-                        <br />
-                        <span className="gradient-text-green">Community</span>
-                    </h2>
-                </motion.div>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                    {testimonials.map((testimonial, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="glass-light rounded-sm p-8"
-                        >
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 rounded-sm bg-gradient-to-br from-purple-500 to-pink-500" />
-                                <div>
-                                    <h4 className="font-bold text-white">{testimonial.name}</h4>
-                                    <p className="text-white/60 text-sm">{testimonial.role}</p>
-                                </div>
-                            </div>
-                            <p className="text-white/80 text-lg leading-relaxed">{testimonial.quote}</p>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+    return null; // Section dihapus sementara
 }
 
 export function PricingSection() {
@@ -68,12 +18,12 @@ export function PricingSection() {
             <div className="max-w-5xl mx-auto">
                 <div className="border border-white/10 rounded-sm p-4 bg-[#0A0A0A]">
                     <div className="bg-[#1A1A1A] rounded-sm p-12 text-center">
-                        <h2 className="text-4xl font-black mb-8">Simple Pricing</h2>
-                        <div className="text-6xl font-black mb-2">Free</div>
-                        <p className="text-white/60 mb-12">during Beta period</p>
+                        <h2 className="text-4xl font-black mb-8">Harga Simpel</h2>
+                        <div className="text-6xl font-black mb-2">Gratis</div>
+                        <p className="text-white/60 mb-12">selama masa Beta</p>
 
                         <div className="flex flex-col gap-4 max-w-md mx-auto mb-12 text-left">
-                            {["Full Access to Dashboard", "Unlimited Progress Tracking", "Tryout System", "Community Access"].map((item, i) => (
+                            {["Akses Penuh ke Dashboard", "Progress Tracking Unlimited", "Sistem Tryout", "Akses Komunitas"].map((item, i) => (
                                 <div key={i} className="flex items-center gap-4">
                                     <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
                                         <Check className="w-3 h-3 text-green-500" />
@@ -85,7 +35,7 @@ export function PricingSection() {
 
                         <Link href="/register">
                             <Button className="w-full max-w-md bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black font-black py-6 rounded-sm">
-                                Start Free Trial
+                                Mulai Gratis
                             </Button>
                         </Link>
                     </div>
@@ -95,23 +45,9 @@ export function PricingSection() {
     );
 }
 
+// ShowcaseGallery dihapus karena menggunakan placeholder image eksternal yang gagal load
 export function ShowcaseGallery() {
-    return (
-        <section className="py-32 px-0 overflow-hidden">
-            <div className="flex gap-4 animate-[marquee_40s_linear_infinite]">
-                {[...Array(10)].map((_, i) => (
-                    <div key={i} className="relative w-[400px] aspect-video rounded-sm overflow-hidden flex-shrink-0 bg-white/5">
-                        <Image
-                            src={`https://placehold.co/800x450/1e1e1e/FFF?text=Dashboard+Preview`}
-                            alt="Showcase"
-                            fill
-                            className="object-cover opacity-50 hover:opacity-100 transition-opacity duration-700"
-                        />
-                    </div>
-                ))}
-            </div>
-        </section>
-    );
+    return null; // Section dihapus
 }
 
 export function FinalCTA() {
@@ -119,17 +55,17 @@ export function FinalCTA() {
         <section className="py-40 px-4 text-center">
             <div className="max-w-4xl mx-auto">
                 <h2 className="text-[clamp(3.5rem,10vw,8rem)] leading-[0.8] font-black tracking-tighter mb-12">
-                    Ready to
+                    Siap
                     <br />
-                    Dominate?
+                    Mendominasi?
                     <Star className="inline w-[0.3em] h-[0.3em] text-[#BFFF0B] fill-[#BFFF0B] align-top ml-4" />
                 </h2>
                 <p className="text-white/60 text-xl max-w-2xl mx-auto mb-12">
-                    Gabung jadi member dan buka full akses ke <span className="text-white font-bold">The Armory</span>. Jangan sampai nyesel pas hari-H.
+                    Gabung jadi member dan buka full akses ke <span className="text-white font-bold">Arsenal Belajarmu</span>. Jangan sampai nyesel pas hari-H.
                 </p>
                 <Link href="/register">
                     <Button className="bg-[#BFFF0B] hover:bg-[#BFFF0B]/90 text-black text-xl font-black px-12 py-8 rounded-sm">
-                        Secure Your Spot
+                        Amankan Tempatmu
                     </Button>
                 </Link>
             </div>
@@ -173,3 +109,4 @@ export function Footer() {
         </div>
     );
 }
+
