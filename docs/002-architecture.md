@@ -314,7 +314,7 @@ service cloud.firestore {
 
 ## 9. References
 
-- [prd.md](./prd.md) - Product requirements
-- [firebase-schema.md](./firebase-schema.md) - Database schema details
-- [data-paths.md](./data-paths.md) - Data optimization strategy
-- [latihan-soal-architecture.md](./latihan-soal-architecture.md) - Quiz system design
+- [001-prd.md](./001-prd.md) - Product requirements
+- [003-database-schema.md](./003-database-schema.md) - Database schema details
+- [004-data-optimization.md](./004-data-optimization.md) - Data optimization strategy
+- [006-quiz-system.md](./006-quiz-system.md) - Quiz system design
